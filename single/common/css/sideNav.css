@@ -1,0 +1,395 @@
+#sideNav .broadside-nav {
+  width: 99px;
+  height: 100%;
+  float: left;
+  font-size: 16px;
+  text-align: center;
+  background: #dddddd;
+  position: absolute;
+  cursor: pointer;
+  top: 0px;
+  left: 0px;
+  padding-top: 50px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#sideNav ul li {
+  padding: 30px 0px 15px 0px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+#sideNav ul li p {
+  font-size: 20px;
+}
+
+#sideNav ul li:nth-child(1):hover {
+  color: #4dbdc8;
+}
+
+#sideNav ul li:nth-child(1):hover .img-box {
+  background: url('../../images/home.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+#sideNav ul li:nth-child(1) .img-box {
+  background: url('../../images/home-dark\ .png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+#sideNav ul li:nth-child(2):hover {
+  color: #4dbdc8;
+}
+
+#sideNav ul li:nth-child(2):hover .img-box {
+  background: url('../../images/side-check-light.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+
+/* 已改 */
+
+#sideNav ul li:nth-child(2) .img-box {
+  background: url('../../images/side-check-dark.png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+
+/* ul li:nth-child(1):hover {
+  color: #4dbdc8;
+} */
+
+#sideNav ul li:nth-child(3):hover {
+  color: #4dbdc8;
+}
+
+#sideNav ul li:nth-child(3):hover .img-box {
+  background: url('../../images/side-analyze-light.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+#sideNav ul li:nth-child(3) .img-box {
+  background: url('../../images/side-analyze-dark.png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+#sideNav ul li:nth-child(4):hover {
+  color: #4dbdc8;
+}
+
+#sideNav ul li:nth-child(4):hover .img-box {
+  background: url('../../images/side-more-light.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+#sideNav ul li:nth-child(4) .img-box {
+  background: url('../../images/side-more.png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+#sideNav ul li:nth-child(4):hover {
+  color: #4dbdc8;
+}
+
+#sideNav ul li:nth-child(4):hover .img-box {
+  background: url('../../images/side-more-light.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+#sideNav ul li:nth-child(4) .img-box {
+  background: url('../../images/side-more.png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+#sideNav ul li .circle {
+  background-color: red;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 12px;
+  height: 26px;
+  width: 26px;
+  line-height: 27px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 50%;
+  position: absolute;
+  top: -9px;
+  right: -6px;
+  display: none;
+}
+
+#sideNav ul li .img-box {
+  width: 42px;
+  height: 45px;
+  margin: 0 auto;
+  margin-bottom: 22px;
+}
+
+.broadside-nav ul li .img-box img {
+  width: 100%;
+  height: 100%;
+}
+
+#sideNav .bottom-opt {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background: #c0c0c0;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+#sideNav .bottom-opt img {
+  width: 12px;
+  height: 12px;
+  margin-right: 3px;
+}
+
+#sideNav .bottom-opt .opt-left,
+#sideNav .bottom-opt .opt-right {
+  float: left;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sideNav .bottom-opt .opt-left { 
+  margin-left: 5px;
+}
+
+#sideNav .bottom-opt .opt-right {
+  margin-left: 8px;
+}
+
+
+/* 设置弹框样式 */
+
+#popLayer {
+  display: none;
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  -moz-opacity: 0.6;
+  opacity: .6;
+  filter: alpha(opacity=60);
+  /* 只支持IE6、7、8、9 */
+}
+
+#wx-code-box {
+  display: none;
+  z-index: 11;
+  width: 300px;
+  height: 400px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+  border: 2px solid white;
+  padding: 12px;
+  overflow: hidden;
+}
+
+#wx-code-box .code-wapper {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+#wx-code-box .code-wapper .title {
+  font-size: 20px;
+  text-align: center;
+  color: #00a4b3;
+  line-height: 50px;
+  font-weight: bold;
+  position: relative;
+}
+
+#wx-code-box .code-wapper .title .close {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 5px;
+  top: -5px;
+  cursor: pointer;
+}
+
+#wx-code-box .code-wapper .wx-img-box {
+  width: 210px;
+  height: 210px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+#wx-code-box .code-wapper .wx-img-box img {
+  width: 100%;
+  height: 100%;
+}
+
+#wx-code-box .code-wapper p {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#wx-code-box .code-wapper p span {
+  color: red;
+}
+
+.config-wapper {
+  display: none;
+  width: 80px;
+  background: #fff;
+  position: absolute;
+  bottom: 60px;
+  left: 28px;
+  z-index: 1;
+}
+
+.tooltip {
+  position: relative;
+  background-color: silver;
+  width: 80px;
+  text-align: center;
+  padding: 5px 0px;
+}
+
+.tooltip p {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.triangle {
+  display: block;
+  height: 0px;
+  width: 0px;
+  border: 10px solid transparent;
+  border-top-color: silver;
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 10px);
+}
+
+.tooltip p:hover {
+  background: #ddd;
+}
+
+
+/* 信息修改弹框 */
+
+#msg-pop {
+  display: none;
+  z-index: 11;
+  width: 500px;
+  height: 310px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+  background: #fff;
+  overflow: hidden;
+}
+
+#msg-pop .title,
+#plugIn .title {
+  height: 40px;
+  line-height: 40px;
+  background: #34A8E4;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+}
+
+#msg-pop .msg-middle {
+  margin: 15px 0px;
+  padding: 0px 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+#msg-pop .msg-middle .msg-input-box {
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#msg-pop .msg-middle .msg-input-box span {
+  width: 100px;
+  text-align: right;
+  margin-right: 20px;
+}
+
+#msg-pop .msg-middle .msg-input-box input,
+#msg-pop .msg-middle .msg-input-box select {
+  width: 250px;
+  height: 25px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+}
+
+#msg-pop .msg-footer {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#msg-pop .msg-footer div {
+  float: left;
+  width: 110px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background: #34A8E4;
+  color: #fff;
+  cursor: pointer;
+}
+
+#msg-pop .msg-footer div:first-child {
+  margin-right: 20px;
+}
+
+
+/* 下载插件弹框 */
+
+#plugIn {
+  display: none;
+  z-index: 11;
+  width: 350px;
+  height: 170px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+  background: #fff;
+  overflow: hidden;
+}
+
+#plugIn .plug-content {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+#plugIn .plug-content span {
+  display: inline-block;
+  width: 150px;
+  margin-left: 30px;
+  margin-right: 90px;
+}

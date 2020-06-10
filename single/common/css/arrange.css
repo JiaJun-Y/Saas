@@ -1,0 +1,29 @@
+.arrange-wapper {
+  height: 100%;
+  width: 100%;
+  padding-top: 50px;
+  position: relative;
+}
+
+#top-header {
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  background: #dddddd;
+  position: absolute;
+  top: 0px;
+  font-size: 20px;
+  padding: 0px 10px;
+}
+
+#top-header .doc-name {
+  float: left;
+}
+
+#top-header #time {
+  float: right;
+}
+
+#top-header .doc-name div {
+  float: left;
+}

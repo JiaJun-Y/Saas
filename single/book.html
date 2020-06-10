@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./common/css/reset.css">
+  <link rel="stylesheet" href="./common/css/header.css">
+  <link rel="stylesheet" href="./common/css/sideNav.css">
+  <link rel="stylesheet" href="./common/css/order.css">
+  <link rel="stylesheet" href="./common/css/table.css">
+  <link rel="stylesheet" href="./common/css/reponse.css">
+  <link rel="stylesheet" href="./common/css/datepicker.css">
+  <link rel="stylesheet" href="./common/css/print.css">
+
+  <!-- <link rel="stylesheet" href="./common/css/pdf.css"> -->
+  <!-- <link rel="stylesheet" href="./common/js/viewer/viewer.css"> -->
+
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="./common/js/jquery-migrate-1.2.1.min.js"></script>
+  <script src="./common/js/reponsetable.js"></script>
+  <script src="./common/js/jquery.jqprint-0.3.js"></script>
+  <script src="./common/js/paging.js"></script>
+  <script src="./common/js/lodash.min.js"></script>
+  <script src="./common/header.js"></script>
+  <script src="./common/sideNav.js"></script>
+  <script src="./common/js/data.js"></script>
+  <script src="./common/js/protocolcheck.js"></script>
+  <script src="./common/js/md5.js"></script>
+
+  <!-- mockData need delete-->
+
+  <title>预约管理</title>
+</head>
+
+<body>
+  <!-- 顶部导航条 -->
+  <div id="topNav">
+    <div class='top-nav'>
+      <div class='time'>
+        <div class='img-box'>
+          <img src='./images/calendar.png' />
+        </div>
+        <div id='time'></div>
+      </div>
+      <div class='user'>
+        <div id='name'>连花清瘟胶囊</div>
+        <div class='sub-title'>医生，欢迎使用分规心电</div>
+        <span class='line'></span>
+        <div class='img-box'>
+          <img src='./images/quit.png' />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="order-wapper"> -->
+  <!-- 侧边栏 -->
+  <div id="sideNav">
+    <div class='broadside-nav'>
+      <ul>
+        <!-- 已改 -->
+        <li onclick='jump(this)' id='app'>
+          <div class='img-box'>
+            <div class="circle">0</div>
+          </div>
+          <p>主页</p>
+
+        </li>
+        <li onclick='jump(this)' id='book'>
+          <div class='img-box'>
+            <div class="circle">1</div>
+          </div>
+          <p>检查接待</p>
+
+        </li>
+
+        <li onclick='jump(this)'>
+          <div class='img-box'>
+            <div class="circle">22</div>
+          </div>
+          <p>分析诊断</p>
+        </li>
+
+        <li onclick='jump(this)'>
+          <div class='img-box'>
+            <div class="circle">
+              99+
+            </div>
+          </div>
+          <p>更多功能</p>
+        </li>
+
+        <!-- <div id="newMessage">111</div> -->
+        <!-- <audio src="./11.wav" muted autoplay id="myaudio" style="display: none"></audio> -->
+      </ul>
+
+      <div class='bottom-opt'>
+        <div class='opt-left' onclick='help()'>
+          <img src='./images/help.png' />
+          <span>帮助</span>
+        </div>
+
+        <div class='opt-right' id="setting">
+          <img src='./images/config.png' />
+          <span>设置</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 帮助弹框 -->
+    <div class='wx-code-wapper'>
+      <div id='popLayer'></div>
+      <div id='wx-code-box'>
+        <div class='code-wapper'>
+          <div class='title'>操作遇到问题？
+            <span class='close' id='close'>
+                  <img src='./images/guanbi.png' alt=''>
+                </span>
+          </div>
+          <div class='wx-img-box'>
+            <img src='./images/qr_gzh.png' alt=''>
+          </div>
+          <p>扫一扫</p>
+          <p>关注分规心电公众号</p>
+          <p>回复
+            <span>“帮助”</span> 获取操作说明
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 设置tooltip -->
+    <div class='config-wapper'>
+      <div class='tooltip'>
+        <p onclick='changeMsg()'>信息修改</p>
+        <p onclick="downPlug()">插件下载</p>
+        <p onclick="handleConfig()">预约设置</p>
+        <span class='triangle'></span>
+      </div>
+    </div>
+
+    <!-- 信息修改弹框 -->
+    <div class='msg-wapper'>
+      <div id='popLayer'></div>
+      <div id='msg-pop'>
+        <div class='title'>信息修改</div>
+        <div class='msg-middle' id='msg-middle'>
+          <div class='msg-input-box'>
+            <span class='input-title'>姓名：</span>
+            <input type='text' value='' name='name'>
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>性别：</span>
+            <select name='gender' value='0'>
+                  <option value='0'>男</option>
+                  <option value='1'>女</option>
+                </select>
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>旧密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="oldPwd">
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>新密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="newPwd">
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>确认密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="comfirePwd">
+          </div>
+
+        </div>
+        <div class='msg-footer'>
+          <div onclick='getPopMsg()'>确认</div>
+          <div id='closeMsgPop'>取消</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下载插件弹框 -->
+    <div class='plugIn-wapper'>
+      <div id='popLayer'></div>
+      <div id='plugIn'>
+        <div class='title'>插件下载</div>
+        <div class='plug-content'>
+          <span>院内采集端</span>
+          <a href=''>下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-content" id="noPrint">
+    <!-- 筛选框部分 -->
+    <div class="search-wapper">
+      <div class="adorn">
+        <p class="first-p"><span class="span-left" data-index="1">今日已检查登记：<i>0</i>人</span> <span class="span-right" data-index="5">昨日已佩戴设备： <i>0</i>人</span></p>
+        <p class="first-p"><span class="span-left" id="today-wear" data-index="2">今日应佩戴设备：<i>0</i>人</span> <span class="span-right" data-index="6">今日已录入数据：<i>0</i>人</span></p>
+        <!-- 529 -->
+        <p class="first-p"><span class="span-left" data-index="3">今日已佩戴设备：<i>0</i>人</span> <span class="span-right" data-index="7">今日未录入数据： <i>0</i>人</span></p>
+        <p><span class="span-left" data-index="4">今日未佩戴设备：<i>0</i>人</span> <span class="span-right" data-index="8">今日已分析数据： <i>0</i>人</span></p>
+      </div>
+
+      <div class="base-info">
+        <p class="first-p m-b-17"><span>登记号</span><input type="text" id="RegistrationNo" /></p>
+        <p class="m-b-17"><span>姓&nbsp;&nbsp;&nbsp;名</span><input type="text" id="Name" /></p>
+      </div>
+
+      <div class="base-info">
+        <p class="first-p m-b-17"><span>申请号</span><input type="text" id="applyNumber" /></p>
+        <p class="m-b-17"><span>状&nbsp;&nbsp;&nbsp;态</span>
+          <select name="status" id="Status">
+              <option value="0">不限</option>
+              <option value="1">已预约</option>
+              <option value="2">已佩戴</option>
+              <option value="3">已录入</option>
+              <option value="4">已打印</option>
+            </select>
+        </p>
+      </div>
+
+      <div class="base-info time-select">
+        <div class="top-time first-p m-b-17">
+          <span>检查时间</span>
+          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+            <input type="text" autocomplete="off" name="check-start-time" class="c-datepicker-data-input only-date" value="">
+          </div>
+          <span class="time-margin">~</span>
+          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+            <input type="text" autocomplete="off" name="check-end-time" class="c-datepicker-data-input only-date" value="">
+          </div>
+        </div>
+
+        <div class="top-time m-b-17">
+          <span>戴机时间</span>
+          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+            <input type="text" autocomplete="off" name="wear-start-time" class="c-datepicker-data-input only-date" value="">
+          </div>
+          <span class="time-margin">~</span>
+          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+            <input type="text" autocomplete="off" name="wear-end-time" class="c-datepicker-data-input only-date" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 单行工具栏 -->
+    <div class="tool-wapper">
+      <div class="record-date">
+        <span>登记日期：</span>
+        <input type="radio" name="date" value="1" /><i class="m-l-7"></i>今天<i class="m-r-20"></i>
+        <input type="radio" name="date" value="2" /><i class="m-l-7"></i>昨天<i class="m-r-20"></i>
+        <input type="radio" name="date" value="3" /><i class="m-l-7"></i>前天
+      </div>
+
+      <div class="examine">
+        <span>检查待机：</span>
+        <input type="radio" name="date" value="4" /><i class="m-l-7"></i>今天<i class="m-r-20"></i>
+        <input type="radio" name="date" value="5" /><i class="m-l-7"></i>昨天<i class="m-r-20"></i>
+        <input type="radio" name="date" value="6" /><i class="m-l-7"></i>明天<i class="m-r-20"></i>
+      </div>
+
+      <div class="check-in">
+        <div class="img-box m-l-30" onclick="checkD()">
+          <img src="./images/order-check.png" alt="">
+          <span>检查登记</span>
+        </div>
+      </div>
+
+      <div class="img-box m-l-30 filtration">
+        <input type="checkbox" name="checkbox" id="cancellation" />
+        <span>过滤作废</span>
+      </div>
+
+      <div class="img-box m-l-30" onclick="handleExportCase()">
+        <img src="./images/order-export.png" alt="">
+        <span>导出病例薄</span>
+      </div>
+
+      <div class="img-box m-l-30" onclick="handleSearch()">
+        <img src="./images/order-search.png" alt="">
+        <span>查询</span>
+      </div>
+
+      <div class="img-box m-l-30" onclick="handleReset(true)">
+        <img src="./images/order-reset.png" alt="">
+        <span>重置</span>
+      </div>
+    </div>
+
+    <!-- 表格 -->
+
+    <div class="table-wapper">
+      <div class="layui-fluid layadmin-homepage-fluid" style="background: #fff;width:100%;margin:0 auto;">
+        <div id="page">
+          <table id="table" class="reponsetable"></table>
+          <script type="text/html" id="editer">
+            <span style="display: none" onclick="wearMachine(this)" data-label="1"><img src="./images/wear.png" />戴机</span>
+            <span style="display: none" onclick="toEntry(this)" data-label="2"><img src="./images/order-check.png" />录入</span>
+            <span style="display: none" onclick="rewear(this)" data-label="3"><img src="./images/again.png" />重背</span>
+            <span style="display: none" onclick="handlerReport(this)" data-label="4"><img src="./images/report.png" />报告</span>
+            <span onclick="toDetail(this)" data-label="-1"><img src="./images/detail.png" />详情</span>
+            <div class="more " data-label="-1">
+              <img src="./images/more.png" alt=""> 更多
+              <div class="dropdown-content">
+                <p onclick="toEdit(this, true)">编辑</p>
+                <p onclick="toDetail(this, true)" tag="p">详情</p>
+                <p onclick="wearMachine(this, true)">戴机</p>
+                <p onclick="toVoid(this, true)">作废</p>
+                <p onclick="handlerReport(this, true)">报告</p>
+                <p onclick="toEntry(this, true)">录入</p>
+                <p onclick="rewear(this, true)">重背</p>
+              </div>
+            </div>
+          </script>
+        </div>
+      </div>
+      <div id="page_bottom" class="page_div"></div>
+    </div>
+  </div>
+  <!-- </div> -->
+
+  <!-- 设置弹框内容 -->
+  <div class="config-pop-wapper">
+    <div id="popLayer"></div>
+    <div id="config-pop">
+      <div class="title">设置</div>
+      <div class="from-box">
+        <p>设备数量上限<input type="text" id="count"></p>
+        <div class="info">
+          <div class="info-title">录入信息配置</div>
+          <div class="info-input-box">
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="1" />申请单号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="2" />住院号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="3" />门诊号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="4" />病人ID</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="5" />身份证号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="6" />手机号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="7" />住址</div>
+          </div>
+        </div>
+        <div class="button-groups">
+          <div class="comfire" onclick="handleConfigComfire()">确定</div>
+          <div class="cancel" onclick="cancel()">取消</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 导出病例 -->
+  <div class="export-case">
+    <div id="popLayer"></div>
+    <div id="case-pop">
+      <div class="title">导出病历簿</div>
+      <div class="case-time case-input-box">
+        <span>日期</span>
+        <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+          <input type="text" autocomplete="off" name="case-start-time" class="c-datepicker-data-input only-date" value="">
+        </div>
+        <span class="time-margin">~</span>
+        <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+          <input type="text" autocomplete="off" name="case-end-time" class="c-datepicker-data-input only-date" value="">
+        </div>
+      </div>
+      <div class="data-button-groups">
+        <button onclick="getLastMonthDays()">上个月</button>
+        <button onclick="getCurrMonthDays()">本月</button>
+        <button onclick="getCurrQuarter()">近三月</button>
+        <button onclick="getRemove()">清空</button>
+      </div>
+      <div class="button-groups">
+        <div class="comfire" onclick="handleCaseComfire()">确定</div>
+        <div class="cancel" onclick="cancelCase()">取消</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 详情弹框 -->
+  <div class="detail-wapper">
+    <div id="popLayer"></div>
+    <div id="detail-pop">
+      <div class="title"></div>
+      <div class="sub-time"></div>
+      <div id="from-wapper">
+        <!-- 登记预约 -->
+        <form action="" method="" id="forms" name="forms">
+          <div class="select-person" style="margin-left: 100px; cursor: pointer;"></div>
+
+          <div class="input-line">
+            <span class="sub-title">登记时间：</span>
+            <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepickerTime-single" id="data-wapper">
+              <input type="text" autocomplete="off" name="time-of-appointment" class="c-datepicker-data-input" value="" id="mark" data-label="CreateTime">
+            </div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">姓名：</span>
+            <div id="data-wapper"><input type="text" name="username" value="" data-label="Name"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">性别：</span>
+            <div id="data-wapper">
+              <select name="gender" value="0" data-label="Gender">
+                  <option value="0">男</option>
+                  <option value="1">女</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">年龄：</span>
+            <div id="data-wapper"><input type="text" name="age" value="" data-label="Age"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">申请单号：</span>
+            <div id="data-wapper"><input type="text" name="applyId" value="" data-label="ReqID"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">病人ID：</span>
+            <div id="data-wapper"><input type="text" name="patientId" value="" data-label="PID"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">门诊号：</span>
+            <div id="data-wapper"><input type="text" name="outpatientNo" value="" data-label="WardID"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">住院号：</span>
+            <div id="data-wapper"><input type="text" name="inpatientNo" value="" data-label="InHospitalID"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">身份证号：</span>
+            <div id="data-wapper"><input type="text" name="id" value="" data-label="IDCard"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">手机号：</span>
+            <div id="data-wapper"><input type="text" name="phone" value="" data-label="Phone"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">住址：</span>
+            <div id="data-wapper"><input type="text" name="address" value="" data-label="Address"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">申请科室：</span>
+            <div id="data-wapper"><input type="text" name="department" value="" data-label="ReqDepartment"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">申请医生：</span>
+            <div id="data-wapper"><input type="text" name="doctor" value="" data-label="ReqDoctorPhone"></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">&nbsp;</span>
+            <div id="data-wapper">
+              <select name="visit" value="0">
+                  <option value="0">初诊</option>
+                  <option value="1">复诊</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <span class="sub-title">病状体征：</span>
+            <div id="data-wapper"><textarea rows="5" name="Symptom" value="" data-label="Symptom"></textarea></div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">治疗手段</span>
+            <div id="data-wapper">
+              <select name="ways" value="0" data-label="TreatMethod">
+                  <option value="0">中医</option>
+                  <option value="1">中西</option>
+                  <option value="2">西医手术</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">有无起搏器</span>
+            <div id="data-wapper">
+              <select name="ways" value="0" data-label="PM">
+                  <option value="0">无</option>
+                  <option value="1">有</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="input-line">
+            <span class="sub-title">备注：</span>
+            <div id="data-wapper"><input type="Info" name="Info" value="" data-label="Info"></div>
+          </div>
+
+
+          <div class="opt-groups" id="checkIn">
+            <div class="comfire" onclick="getFormInfo()">提交</div>
+            <div class="comfire middle" onclick="toPrint()">确认并打印</div>
+            <div class="comfire cancel" onclick="cancelDetail()">取消</div>
+          </div>
+
+          <div class="opt-groups" id="edit">
+            <div class="comfire" onclick="toSave()">保存</div>
+            <div class="comfire cancel" onclick="saveCancel()">取消</div>
+          </div>
+        </form>
+
+        <!-- 详情|结论 -->
+        <div id="readonly-wapper">
+          <div class="readonly-left-box">
+            <div class="detail-line">
+              <span class="sub-title">预约号：</span>
+              <div class="input-value" data-label="RUID">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">预约时间：</span>
+              <div class="input-value" data-label="AppointTime">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">姓名：</span>
+              <div class="input-value" data-label="Name">111</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">性别：</span>
+              <div class="input-value" data-label="Gender">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">年龄：</span>
+              <div class="input-value" data-label="Age">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">申请单号：</span>
+              <div class="input-value" data-label="ReqID">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">身份证号：</span>
+              <div class="input-value" data-label="IDCard">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">手机号：</span>
+              <div class="input-value" data-label="Phone">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">住址：</span>
+              <div class="input-value" data-label="Address">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">预约科室：</span>
+              <div class="input-value" data-label="ReqDepartment">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">预约医生：</span>
+              <div class="input-value" data-label="ReqDoctor">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">症状体征：</span>
+              <div class="input-value" data-label="Symptom">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">治疗手段：</span>
+              <div class="input-value" data-label="TreatMethod">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">设备编号：</span>
+              <div class="input-value" data-label="DevID">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">有无起搏器：</span>
+              <div class="input-value" data-label="PM">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">担保方式：</span>
+              <div class="input-value" data-label="cash">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">备注：</span>
+              <div class="input-value" data-label="Info">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">状态：</span>
+              <div class="input-value" data-label="Status">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">登记时间：</span>
+              <div class="input-value" data-label="CreateTime">aaa</div>
+            </div>
+
+            <div class="detail-line">
+              <span class="sub-title">报告医生：</span>
+              <div class="input-value" data-label="ReportID">aaa</div>
+            </div>
+          </div>
+
+          <div class="readonly-right-box">
+            <div class="detail-line">
+              <span class="sub-title">结论：</span>
+              <div class="input-value" data-label="DGSResult" id="copy">
+              </div>
+            </div>
+          </div>
+
+          <div class="opt-groups">
+            <!-- <div class="comfire" onclick="toPrint()">打印</div> -->
+            <div class="copy comfire middle" id="btn_Share">复制结论</div>
+            <div class="cancel comfire" onclick="cancelReadOnly()">关闭</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="detail-wapper"></div>
+    </div>
+  </div>
+
+  <!-- 戴机弹框 -->
+  <div class="wear-wapper">
+    <div id="popLayer"></div>
+    <div id="wear-pop">
+      <div class="title">佩戴记录</div>
+      <div class="wear-box">
+        <div class="wear-input">
+          <span>姓名：</span>
+          <input type="text" name="Name" value="">
+        </div>
+
+        <div class="wear-input">
+          <span>身份证号：</span>
+          <input type="text" name="IDCard" value="">
+        </div>
+
+        <div class="wear-input">
+          <span>记录时间：</span>
+          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepickerTime-single">
+            <input type="text" autocomplete="off" name="WearTime" class="c-datepicker-data-input" value="">
+          </div>
+        </div>
+
+        <div class="wear-input">
+          <span>设备编号：</span>
+          <input type="text" name="DevID" value="">
+        </div>
+
+        <!-- 已改 -->
+        <div class="wear-input">
+          <span>担保方式：</span>
+          <select name="cash" value="0">
+            <option value="0">无</option>
+            <option value="1">有</option>
+          </select>
+        </div>
+
+        <div class="wear-button-groups">
+          <div class="comfire" onclick="toWear()">佩戴确认</div>
+          <div class="cancel" onclick="wearCancel()">取消</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入打印页面 -->
+
+  <div id="printP" class="printPage">
+    <iframe src="print.html" frameborder="0" width="100%" height="100%"></iframe>
+  </div>
+
+  <!-- 查看PDF -->
+  <div id="PDF" class="pdf-wapper"></div>
+</body>
+<script src="./common/js/moment.min.js"></script>
+<script src="./common/js/datepicker.all.js"></script>
+<script src="./common/js/datepicker.en.js"></script>
+<script src="./common/js/utils.js"></script>
+<script src="./common/js/layer/layer.js"></script>
+<script src="./common/js/clipboard.min.js"></script>
+<script>
+  var tablePage = 1
+  var tableParams = {}
+  var orangeData = []
+  var redData = []
+  var configTime = '' // 配置的时间，时分
+  var _protoco = ''
+  var isWearPopShow = false
+  var isShowSearchInput = true
+  var checkPerson = []
+
+  // 左1
+  $('.adorn p span').on('click', function() {
+    handleReset(false)
+    $('input:radio[name="date"]').attr("checked", false)
+
+
+    tableParams = {}
+    tableParams.pg = 1
+    tableParams.cnt = Number($(this)[0].getAttribute('data-index'))
+    $(this)[0].style.background = '#e6e6e6'
+
+    console.log(tableParams)
+    getTableList(1, false, tableParams)
+  })
+
+
+  var _input = '<div class="input-line"><div class="search-box"><input type="text" placeholder="请输入申请单号/住院号/患者号进行查询"><div class="button">查询</div></div></div>'
+  if (isShowSearchInput) {
+    $('#from-wapper form').prepend(_input)
+  } else {
+    $('#from-wapper .search-box').remove()
+  }
+
+  $('#from-wapper .search-box .button').on('click', function() {
+    console.log(TABLEDATA)
+    renderCheckTable(TABLEDATA)
+      //   var HisKeykords = $('#from-wapper .search-box input').val();
+      //   if (!HisKeykords) {
+      //     layer.msg("请输入查询内容", {
+      //       icon: 2,
+      //       time: 1000
+      //     });
+      //     return false;
+      //   }
+      //   var loading = layer.load(0);
+      //   // var url = "http://" + document.domain + ":8006/his/QueryFromHIS";
+      //   var url = "http://192.199.198.22:8006/his/QueryFromHIS"
+      //   $.post(url, {
+      //     KeyWords: HisKeykords
+      //   }, function(ret) {
+      //     layer.close(loading);
+      //     console.log(ret.PatientInfo);
+      //     renderCheckTable(ret.PatientInfo)
+      //     if (ret.RepCode != 0) {
+      //       layer.msg(ret.RepMsg, {
+      //         icon: 2,
+      //         time: 1500
+      //       });
+      //       return false;
+      //     }
+
+    //   var len = ret.PatientInfo.length;
+    //   if (len == 0) {
+    //     layer.msg("未查询到数据", {
+    //       icon: 2,
+    //       time: 1000
+    //     });
+    //     return false;
+    //   } else if (len == 1) {
+
+    //   } else {
+
+    //   }
+
+    // });
+  });
+
+  // 渲染登记检查表格
+  function renderCheckTable(data) {
+    checkPerson = data
+    if (checkPerson.length === 1) {
+      formatterCKData(checkPerson[0])
+    } else {
+      var _domP = ''
+      _.find(checkPerson, function(val, index) {
+        _domP = '<p data-index="' + index + '" class="select-person-p"><span>' + val.Name + ':' + '</span>' + val.IDCard + '</p>'
+        $('#from-wapper .select-person').append(_domP)
+      })
+    }
+  }
+
+  $('#from-wapper .select-person').click(function(e) {
+    var _index = Number($(e.target).attr('data-index'))
+    formatterCKData(checkPerson[_index])
+  })
+
+  // 处理检查表格数据
+  function formatterCKData(data) {
+    var _type = ''
+    for (var i = 0; i < 3; i++) {
+      if (i === 0) {
+        putMsg('input', data)
+      } else if (i === 1) {
+        putMsg('select', data)
+      } else {
+        putMsg('textarea', data)
+      }
+    }
+  }
+
+  // 给input放值
+  function putMsg(type, data) {
+    _.find($('#forms ' + type + ''), function(value, index) {
+      var _attrs = $(value).attr('data-label') ? $(value).attr('data-label') : null
+      for (var key in data) {
+        if (key === _attrs) {
+          $(value).val(data[key])
+        }
+      }
+    })
+  }
+
+  // document.onkeydown = function(event) {
+  //   console.log(event)
+  // }
+
+  // console.log(window)
+  // var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  // var _dom = document.getElementById("PDF");
+
+  // var observer = new MutationObserver(function(mutations) {
+  //   mutations.forEach(function(mutation) {
+  //     if (mutation.type == "attributes") {
+  //       if (mutation.target.style.display === 'none') {
+  //         console.log('打印结束')
+  //       }
+  //     }
+  //   });
+  // });
+  // observer.observe(_dom, {
+  //   attributes: true, //configure it to listen to attribute changes,
+  //   attributeFilter: ['style']
+  // });
+
+  // 已改
+  setTimeout(function() {
+    orangeData = ['2020-05-10', '2020-05-14']
+    redData = ['2020-05-13', '2020-05-16', '2020-05-18']
+    renderDate()
+
+    // 519
+
+  }, 200)
+
+  $(function() {
+    if (_protoco.length > 0) {
+      window.protocolCheck(_protoco, function() {
+        alert("协议未注册");
+      });
+    }                    
+    $("#popLayer").click(function(e) {
+      $("#popLayer").hide();
+      $('#detail-pop').hide()
+      $('#detail-pop .title').hide()
+      $('#detail-pop .sub-time').hide()
+      $('.c-datepicker-picker').hide()
+      $('#case-pop').hide()
+      $('#config-pop').hide()
+      $('#wear-pop').hide()
+      isWearPopShow = false
+      renderDate()
+      e.stopPropagation();
+      resetForm('wear-pop')
+      $('select.select').select();
+
+      $('input:radio[name="date"]').val('') // 519
+
+      $('.readonly-left-box').scrollTop(0)
+    })
+
+    // getTableList(1, true) // 获取表格数据
+
+    // getUntreatedCount() // 获取未分析病例数
+
+    // 519开始
+    $('input:radio[name="date"]').click(function() {
+      handleReset(false)
+      var val = $('input:radio[name="date"]:checked').val();
+      console.log(val)
+      tableParams = {}
+      tableParams.pg = 1
+      tableParams.type = val
+      getTableList(1, false, tableParams)
+    });
+
+    $('.base-info input').blur(function() {
+      $('input:radio[name="date"]').attr("checked", false);
+    })
+
+    $('.base-info select').change(function() {
+      $('input:radio[name="date"]').attr("checked", false);
+    });
+
+    $('.base-info select').val(0).trigger('change');
+    // 519结束
+
+    goPage(1, 15, 68, 5)
+
+    $("#table").reponsetable({
+      "id": "table",
+      "operation": "editer",
+      "type": "numbers",
+      "colum": [{
+        "field": "Name",
+        "title": "姓名"
+      }, {
+        "field": "Age",
+        "title": "年龄"
+      }, {
+        "field": "Gender",
+        "title": "性别"
+      }, {
+        "field": "RUID",
+        "title": "预约号"
+      }, {
+        "field": "Phone",
+        "title": "手机"
+      }, {
+        "field": "CreateTime",
+        "title": "预约时间"
+      }, {
+        "field": "WearTime",
+        "title": "戴机时间"
+      }, {
+        "field": "DevID",
+        "title": "设备编号"
+      }, {
+        "field": "cash",
+        "title": "担保方式"
+      }, {
+        "field": "Status",
+        "title": "状态"
+      }, {
+        "field": "Info",
+        "title": "备注"
+      }, {
+        "field": "ID"
+      }, {
+        "field": "ReqID"
+      }, {
+        "field": "PID"
+      }, {
+        "field": "WardID"
+      }, {
+        "field": "InHospitalID"
+      }, {
+        "field": "IDCard"
+      }, {
+        "field": "ReqDepartment"
+      }, {
+        "field": "ReqDoctorPhone"
+      }, {
+        "field": "Symptom"
+      }, {
+        "field": "TreatMethod"
+      }, {
+        "field": "PM"
+      }],
+      "data": data()
+    });
+    tableStatus()
+    setTimeout(function() {
+      initDropDown()
+
+      $("tbody").scrollTop(1);
+      if ($("tbody").scrollTop() > 0) {
+        console.log("有滚动条");
+        $('#page table thead').css('width', 'calc(100% - 5px)')
+      } else {
+        console.log("没有滚动条");
+      }
+    }, 0)
+
+  })
+
+  // 表格操作判断   521 tag
+  function tableStatus() {
+    _.forEach($('.editer'), function(val, index) {
+      if (val.className.indexOf("-data-status") > -1) {
+        var status = Number($(val).attr("data-status")) ? Number($(val).attr("data-status")) : -1;
+        _.forEach(val.children, function(child, _index) {
+
+          if (status === 1) {
+            if (Number($(child).attr('data-label')) === 1) {
+              $(child).css('display', 'block');
+            }
+          } else if (status === 2) {
+            if (Number($(child).attr('data-label')) === 2) {
+              $(child).css('display', 'block');
+            }
+          } else if (status === 3) {
+            if (Number($(child).attr('data-label')) === 3) {
+              $(child).css('display', 'block');
+            }
+          } else if (status >= 4) {
+            if (Number($(child).attr('data-label')) === 4) {
+              $(child).css('display', 'block');
+            }
+          }
+        })
+      }
+    })
+  }
+
+  // 已改
+  function renderDate() {
+    // 时分秒年月日单个
+    $('.J-datepicker').datePicker({
+      hasShortcut: true,
+      min: '2018-01-01 04:00:00',
+      max: '2019-04-29 20:59:59',
+      shortcutOptions: [{
+        name: '今天',
+        day: '0'
+      }, {
+        name: '昨天',
+        day: '-1',
+        time: '00:00:00'
+      }, {
+        name: '一周前',
+        day: '-7'
+      }],
+      hide: function() {
+        console.info(this)
+      }
+    });
+
+    //年月日单个
+    $('.J-datepicker-day').datePicker({
+      hasShortcut: true,
+      format: 'YYYY-MM-DD',
+      shortcutOptions: [{
+        name: '今天',
+        day: '0'
+      }, {
+        name: '昨天',
+        day: '-1'
+      }, {
+        name: '一周前',
+        day: '-7'
+      }]
+    });
+
+    //十分年月日单个
+    $('.J-datepickerTime-single').datePicker({
+      format: 'YYYY-MM-DD HH:mm'
+    });
+  }
+
+  setTimeout(function() {
+
+  }, 400)
+
+
+
+  // 信息修改 today
+  function getPopMsg() {
+    var params = {}
+    params.name = $('.msg-input-box input[name="name"]').val().toString()
+    params.gender = Number($('.msg-input-box select').val());
+    params.oldPwd = hex_md5($('.msg-input-box input[name="oldPwd"]').val());
+    params.newPwd = hex_md5($('.msg-input-box input[name="newPwd"]').val());
+    if (params.newPwd === hex_md5($('.msg-input-box input[name="comfirePwd"]')).val()) {
+      $.post('/app/editAccount', params, function(res) {
+        if (!res) return
+        console.log(res)
+      })
+    } else {
+      console.log('新密码与确认密码不一致，请确认后重新输入')
+    }
+  }
+
+  // today 获取未分析病例数据
+  function getUntreatedCount() {
+
+    setTimeout(getUntreatedCount, 1000 * 10);
+
+    $.get('/app/editAccount', function(res) {
+      if (!res) return
+      console.log(res)
+    })
+  }
+
+
+  function goPage(pno, psize, count, totalPage, isOnce) {
+    // if (!isOnce) {
+    //   tableParams.pg = pno
+    //   getTableList(pno, false, tableParams)
+    // }
+
+    var num = count; // 表格所有行数(所有记录数)
+    var totalPage = totalPage; // 总页数
+    var pageSize = psize; // 每页显示行数
+    $('table tbody').scrollTop(0)
+
+    var currentPage = pno; // 当前页数
+    var startRow = (currentPage - 1) * pageSize + 1;
+    var endRow = currentPage * pageSize;
+    endRow = (endRow > num) ? num : endRow;
+
+    $("#page_bottom").paging({
+      pageNo: pno,
+      totalPage: totalPage,
+      totalSize: count,
+      callback: function(num) {
+        goPage(num, psize, count, totalPage)
+      }
+    })
+  }
+
+  // 获取table数据
+  function getTableList(page, isOnce, params) {
+    // 第二次之后移除table
+    // if (!isOnce) {
+    //   $("#table").children('thead').first().remove()
+    //   $("#table").children('tbody').first().remove()
+    // }
+
+    showLoading()
+
+    $.get('http://192.199.198.22:8005/book/load_reservation_list', params, function(res) {
+
+      if (!res.Data) return
+
+      var tableData = res.Data.list
+      var count = res.Data.totalCount
+      var total = res.Data.pageCount
+      setTimeout(function() {
+        initDropDown()
+
+        $("tbody").scrollTop(1);
+        if ($("tbody").scrollTop() > 0) {
+          console.log("有滚动条");
+          $('#page table thead').css('width', 'calc(100% - 5px)')
+        } else {
+          console.log("没有滚动条");
+        }
+      }, 0)
+
+      var hasPage = isOnce ? 1 : page
+      goPage(page, tableData.length, count, total, true);
+
+      // 表格
+      $("#table").reponsetable({
+        "id": "table",
+        "operation": "editer",
+        "type": "numbers",
+        "colum": [{
+          "field": "Name",
+          "title": "姓名"
+        }, {
+          "field": "Age",
+          "title": "年龄"
+        }, {
+          "field": "Gender",
+          "title": "性别"
+        }, {
+          "field": "RUID",
+          "title": "预约号"
+        }, {
+          "field": "Phone",
+          "title": "手机"
+        }, {
+          "field": "CreateTime",
+          "title": "预约时间"
+        }, {
+          "field": "WearTime",
+          "title": "戴机时间"
+        }, {
+          "field": "DevID",
+          "title": "设备编号"
+        }, {
+          "field": "cash",
+          "title": "担保方式"
+        }, {
+          "field": "Status",
+          "title": "状态"
+        }, {
+          "field": "Info",
+          "title": "备注"
+        }, {
+          "field": "ID"
+        }, {
+          "field": "ReqID"
+        }, {
+          "field": "PID"
+        }, {
+          "field": "WardID"
+        }, {
+          "field": "InHospitalID"
+        }, {
+          "field": "IDCard"
+        }, {
+          "field": "ReqDepartment"
+        }, {
+          "field": "ReqDoctorPhone"
+        }, {
+          "field": "Symptom"
+        }, {
+          "field": "TreatMethod"
+        }, {
+          "field": "PM"
+        }],
+        "data": tableData
+      });
+      tableStatus()
+      completeLoading()
+    })
+  }
+
+  // 打印
+  function toPrint() {
+    $("#printP").removeClass('printPage')
+    $("#printP").jqprint();
+    $("#printP").addClass('printPage')
+  }
+
+
+  // 获取表单内容
+  function getFormInfo() {
+    var params = serializeForm('forms');
+    resetForm('forms', 'time-of-appointment')
+  }
+
+  // 打开设置弹框
+  function handleConfig() {
+    $('#popLayer').show()
+    $('#config-pop').show()
+  }
+
+  // 获取设置弹框信息
+  function handleConfigComfire() {
+    $("input[name='selectedRow']:checked").each(function(index, item) {
+      console.log($(this).val())
+    });
+    console.log($('#count').val())
+  }
+
+  // 关闭设置弹框
+  function cancel() {
+    $('#popLayer').hide()
+    $('#config-pop').hide()
+    $('input:checkbox[name="selectedRow"]').removeAttr('checked');
+    $('input').val('');
+  }
+
+  // 打开导出病例弹框
+  function handleExportCase() {
+    $('#popLayer').show()
+    $('#case-pop').show()
+  }
+
+  // 关闭导出病例弹框
+  function cancelCase() {
+    $('#popLayer').hide()
+    $('#case-pop').hide()
+    $(" input[ name='case-start-time']").val('')
+    $(" input[ name='case-end-time']").val('')
+  }
+
+  // 获取导出病例时间
+  function handleCaseComfire() {
+    if ($(" input[ name='case-start-time']").val().length > 0 && $(" input[ name='case-end-time']").val().length > 0) {
+      // XLS 表格
+
+    } else {
+      console.log('时间不能为空')
+    }
+  }
+
+
+  // 获取上个月时间
+  function getLastMonthDays() {
+    let start = moment().month(moment().month() - 1).startOf('month').format('YYYY-MM-DD')
+    let end = moment().month(moment().month() - 1).endOf('month').format('YYYY-MM-DD')
+    $(" input[ name='case-start-time']").val(start)
+    $(" input[ name='case-end-time']").val(end)
+  }
+
+  // 获取当月时间
+
+  function getCurrMonthDays() {
+    let start = moment().startOf('month').format('YYYY-MM-DD')
+    let end = moment().endOf('month').format('YYYY-MM-DD')
+    $(" input[ name='case-start-time']").val(start)
+    $(" input[ name='case-end-time']").val(end)
+  }
+
+  // 获取近三个月
+  function getCurrQuarter() {
+    let start = moment().month(moment().month() - 2).startOf('month').format('YYYY-MM-DD')
+    let end = moment().endOf('month').format('YYYY-MM-DD')
+    $(" input[ name='case-start-time']").val(start)
+    $(" input[ name='case-end-time']").val(end)
+  }
+
+  // 清空时间
+  function getRemove() {
+    $(" input[ name='case-start-time']").val('')
+    $(" input[ name='case-end-time']").val('')
+  }
+
+
+  // 查询
+  function handleSearch() {
+    showLoading()
+    let _checked = document.getElementById("cancellation").checked
+    tableParams.xm = $("#Name").val()
+    tableParams.sqh = $("#applyNumber").val()
+    tableParams.yyzt = $('#Status option:selected').val()
+    tableParams.sRe = $(" input[ name='check-start-time' ] ").val()
+    tableParams.eRe = $(" input[ name='check-end-time' ] ").val()
+    tableParams.sWear = $(" input[ name='wear-start-time']").val()
+    tableParams.eWear = $(" input[ name='wear-end-time']").val()
+    tableParams.date = ''
+    tableParams.cnt = null
+    tableParams.pg = 1
+    getTableList(1, false, tableParams)
+  }
+
+  // 重置  519
+  function handleReset(isGetTableList) {
+    if (isGetTableList) {
+      getTableList(1, false, {})
+    }
+
+    $('.search-wapper input').val('');
+    $('#Status').val(0);
+    $("#cancellation").attr("checked", false);
+  }
+
+  // 检查登记
+  function checkD() {
+    $('#detail-pop').css('width', '550px')
+
+    resetForm('forms', 'time-of-appointment')
+    $('#popLayer').show()
+    $('#detail-pop').show()
+    $('#detail-pop form').show()
+    $('#detail-pop .sub-time').show()
+    $('.c-datepicker-picker').show()
+    $('#detail-pop #checkIn').show()
+    $('#detail-pop .title').hide()
+    $('#detail-pop #edit').hide()
+    $('#detail-pop #readonly-wapper').hide()
+    $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
+
+    var todayTime = moment().format("YYYY-MM-DD")
+    var inputTime = configTime.length > 0 ? todayTime + '  ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+    $("input[ name='time-of-appointment']").val(inputTime)
+
+    if (configTime && configTime.length > 0) {
+      if ($('.c-datePicker__input-time').val().length === 0) {
+        $('.c-datePicker__input-time').val(configTime)
+      }
+    } else {
+      $('.c-datePicker__input-time').val((moment().format("HH:mm")))
+    }
+    renderDate()
+  }
+
+  // 关闭检查登记
+  function cancelDetail() {
+    document.forms.action = "userinfo.shtml";
+    $('#popLayer').hide()
+    $('#detail-pop').hide()
+    $('#detail-pop form').hide()
+    $('#detail-pop .sub-time').hide()
+  }
+
+  // 关闭只读详情弹框
+  function cancelReadOnly() {
+    $('#popLayer').hide()
+    $('#detail-pop').hide()
+    $('#detail-pop .title').hide()
+    $('#detail-pop #readonly-wapper').hide()
+  }
+
+  // 复制结论
+  var clipboard = new ClipboardJS('#btn_Share', {
+    text: function(trigger) {
+      var url = document.getElementById("copy").innerText;
+      console.log(url)
+      if (url.length > 0) {
+        return url
+      } else {
+        return '\xa0'
+      }
+    }
+  });
+
+  clipboard.on('success', function(e) {
+    layer.msg("结论已复制", {
+      icon: 1,
+      time: 1000
+    });
+  });
+
+  // 查看详情
+  function toDetail(a, isTagP, e) {
+    $('#detail-pop').css('width', '1100px')
+
+    // showLoading()
+    var id = isTagP ? Number($(a).parent().parent().parent().attr('data-id')) : Number($(a).parent().attr('data-id'))
+    var tr = $(a).parent().parent();
+    reponse.resiverowdata(tr, "table");
+    var rowdata = $("#table").data("rowdata");
+    console.log(rowdata)
+    var _doms = []
+    $.ajax({
+      url: 'http://192.199.198.22:8005/book/detail',
+      type: 'post',
+      data: {
+        id: id
+      },
+      dataType: 'json',
+      success: function(res) {
+        if (res.Data) {
+          _.forEach(res.Data, function(value, key) {
+            _doms = $('.input-value')
+            for (var i = 0; i < _doms.length; i++) {
+
+              if (key === $(_doms[i]).attr('data-label')) {
+                if ($(_doms[i]).attr('data-label') === 'cash') {
+                  value = cashFormat(value)
+                }
+
+                if ($(_doms[i]).attr('data-label') === 'Status') {
+                  value = statusFormat(value)
+                }
+
+                if ($(_doms[i]).attr('data-label') === 'Gender') {
+                  value = genderFormat(value)
+                }
+                $(_doms[i]).text(value)
+              }
+            }
+          })
+        } else {
+          return
+        }
+
+        completeLoading()
+        $('#popLayer').show()
+        $('#detail-pop').show()
+        $('#detail-pop #readonly-wapper').show()
+        $('#detail-pop .title').show()
+        $('#detail-pop .title').text('详情')
+        $('#detail-pop #from-wapper form').hide()
+      }
+    })
+  }
+
+  // 戴机 （已改）
+  function wearMachine(a) {
+    $('#popLayer').show()
+    $('#wear-pop').show()
+
+    // $('.c-datepicker-picker__body .red').removeClass('red')
+    // $('.c-datepicker-picker__body .orange').removeClass('orange')
+
+    isWearPopShow = true
+    renderDate()
+
+
+    var tr = $(a).parent().parent();
+    reponse.resiverowdata(tr, "table");
+    var rowdata = $("#table").data("rowdata");
+    console.log(rowdata)
+
+    var _domsInput = $('#wear-pop input')
+    var _domsSelect = $('#wear-pop select')
+    $('#wear-pop textarea').val(rowdata.Symptom)
+    _.forEach(rowdata, function(value, key) {
+      for (var i = 0; i < _domsInput.length; i++) {
+        if (key === $(_domsInput[i]).attr('name')) {
+          $(_domsInput[i]).val(value)
+        }
+      }
+
+      for (var j = 0; j < _domsSelect.length; j++) {
+        if (key === $(_domsSelect[j]).attr('name')) {
+
+          if (key === 'cash') {
+            value = value === '无担保方式' ? '0' : '1'
+          }
+          $(_domsSelect[j]).val(value)
+        }
+      }
+    })
+  }
+
+  // 取消戴机
+  function wearCancel() {
+    $('#popLayer').hide()
+    $('#wear-pop').hide()
+  }
+
+  // 确认佩戴
+  function toWear() {
+    var params = serializeForm('wear-pop');
+    console.log(params)
+  }
+
+  // 编辑页面
+  function toEdit(a) {
+    $('#detail-pop').css('width', '550px')
+    $('.search-box').hide()
+
+    var tr = $(a).parent().parent();
+    reponse.resiverowdata(tr, "table");
+    var rowdata = $("#table").data("rowdata");
+    console.log(rowdata)
+    var _domsInput = $('#data-wapper input')
+    var _domsSelect = $('#data-wapper select')
+    $('#data-wapper textarea').val(rowdata.Symptom)
+    _.forEach(rowdata, function(value, key) {
+      for (var i = 0; i < _domsInput.length; i++) {
+        if (key === $(_domsInput[i]).attr('data-label')) {
+          $(_domsInput[i]).val(value)
+        }
+      }
+      for (var j = 0; j < _domsSelect.length; j++) {
+        if (key === $(_domsSelect[j]).attr('data-label')) {
+
+          if (key === 'Gender') {
+            value = value === '男' ? '0' : '1'
+          }
+          $(_domsSelect[j]).val(value)
+        }
+      }
+    })
+
+    renderDate()
+    $('#popLayer').show()
+    $('#detail-pop').show()
+    $('#detail-pop form').show()
+    $('#detail-pop #checkIn').hide()
+    $('#detail-pop #edit').show()
+    $('#detail-pop .sub-time').hide()
+    $('#detail-pop #readonly-wapper').hide()
+    $('#detail-pop .title').show()
+    $('#detail-pop .title').text('编辑信息')
+    $("input[ name='record-time']").val((moment().format("YYYY-MM-DD HH:mm")))
+  }
+
+  // 取消编辑
+  function saveCancel() {
+    $('#popLayer').hide()
+    $('#detail-pop').hide()
+    $('#detail-pop form').hide()
+    $('#detail-pop .t').hide()
+  }
+
+  // 作废
+  function toVoid() {
+    console.log('作废')
+  }
+
+  // 报告 522
+  function handlerReport() {
+    $('#PDF').show()
+    $('#PDF').css('overflow', 'hidden')
+    var _localPath = 'http://127.0.0.1:5500/single/viewer.html'
+    var _getPdfPath = encodeURIComponent('http://85156788.jios.org:8005/file/getReport?ExamUID=2006031122510705')
+    var url = _localPath + '?file=' + _getPdfPath
+    $('#PDF').append('<iframe src="' + url + '" frameborder="0" width="100%" height="100%"></iframe>')
+  }
+
+  // 录入
+  function toEntry() {
+    console.log('录入')
+  }
+
+  // 重背
+  function again() {
+    console.log('重背')
+  }
+
+  function initDropDown() {
+    var index = null
+    var _top = null
+    $(".dropdown-content").hide();
+    $(".more").click(function(e) {
+      index = Number($(this).parent().attr('data-index'))
+      _top = $(e.target).offset().top - $(window).scrollTop()
+      $(".dropdown-content").hide();
+
+      setTimeout(function() {
+        if (_top >= 617) {
+          $(".dropdown-content").eq(index).css('top', '-240px')
+
+        } else {
+          $(".dropdown-content").eq(index).css('top', '20px')
+        }
+        $(".dropdown-content").eq(index).show();
+      }, 0)
+      e.stopPropagation();
+    })
+
+    $(".dropdown-content p").click(function(e) {
+      setTimeout(function() {
+        $(".dropdown-content").eq(index).hide();
+        e.stopPropagation();
+      }, 80)
+    })
+
+    $('body').click(function(e) {
+      $(".dropdown-content").hide();
+      e.stopPropagation();
+    })
+  }
+
+  // 以上是第一次压缩内容
+
+  // 关闭PDF 521
+  function closePDF() {
+    $("#PDF").hide()
+  }
+</script>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="./common/css/reset.css">
+  <link rel="stylesheet" href="./common/css/analysis.css">
+  <!-- <link rel="stylesheet" href="./common/css/layer.css"> -->
+
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script type="text/javascript" src="./CitrixHTML5SDK.js"></script>
+</head>
+
+<body>
+  <div class="analysis-wapper">
+    <!-- 全屏按钮 -->
+    <div class="full-screen-wapper">
+      <div onclick="fullScreen()" id="full" style="display: none"></div>
+      <div onclick="EXfullScreen()" id="reduction" style="display: none;"></div>
+    </div>
+
+    <!-- 关闭 -->
+    <iframe id="sessionIframe" frameborder="0" width="100%" height="100%" scrolling="yes" style="visibility: hidden;"></iframe>
+    <input id="closeFlag" type="hidden" name="closed" value="0">
+    <div class="progress-wapper isHide">
+      <h3>欢迎使用分规<sup>®</sup>心电智能分析系统</h3>
+      <div class="graph">
+        <span>正在启动，请稍后...</span>
+        <strong id="bar" style="width:1%;"></strong>
+      </div>
+      <div class="fail" style="display: none" id="fail">
+        <p></p>
+        <div class="fail-close-btn" onclick="closeWindow()">关闭</div>
+      </div>
+
+      <div class="code-img">
+        <img src="./images/lrwx-img.png" alt="">
+        <p>关注公众号</p>
+        <p>了解更多详细操作</p>
+      </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer isHide">
+      <div class="main-title">成都琅瑞医疗技术股份有限公司&nbsp;&nbsp;&nbsp;&nbsp;版权所有</div>
+      <p>
+        服务电话：028-85156788/15308091011&nbsp;&nbsp;&nbsp;&nbsp;规格型号：FGH&nbsp;&nbsp;&nbsp;&nbsp;版本号：V1.0.0.1&nbsp;&nbsp;&nbsp;&nbsp;发布版本：1
+      </p>
+      <p>心得安<sup>®</sup>、分规<sup>®</sup>、圆规<sup>®</sup>、园规<sup>®</sup>、优部<sup>®</sup>、<img class="logo" src="./images/fg_logo.png" alt=""><sup>®</sup>均为我公司注册商标。&nbsp;&nbsp;&nbsp;&nbsp;<img class="cfda" src="./images/cfda.png" alt=""></p>
+    </div>
+  </div>
+</body>
+
+<script src="./common/js/layer/layer.js"></script>
+<script>
+  var fullHeight = window.screen.height;
+  var fullscreen = false // 是否全屏
+  var bodyTimer = null // 记录检测body
+  var iframe = document.getElementById('sessionIframe') // 要操作的iframe
+  var _dom = document.getElementById('bar') // 操作的进度条
+    // iframe.src = "http://127.0.0.1:5500/single/mock.html";
+
+
+  var barTimer = null // 进度条加载计时器
+  var configTime = 15 // 进度条配置时间 (5S)
+
+  barTimer = setInterval("goIframe()", (configTime * 1000) / 100); // 进度条
+
+  function goIframe(num) {
+    $('#fail').hide()
+    _dom.style.width = parseInt(_dom.style.width) + 1 + "%";
+    if (_dom.style.width == '100%') {
+      clearInterval(barTimer);
+      setTimeout(function() {
+        iframe.style.visibility = 'visible'
+        $('.isHide').hide()
+          // $("#reduction").css("display", "none");
+          // $("#full").css("display", "block");
+        showFullScrMsg()
+        setTimeout(function() { // 5秒后开始, 每隔1秒检测body中是否含有内容
+          bodyTimer = setInterval("hasBodyContents()", '1000');
+        }, 5000)
+      }, 100)
+    }
+  }
+
+  function showFullScrMsg() {
+    layer.confirm('全屏操作体验更好，是否立即全屏？', {
+      btn: ['确定', '取消'], //按钮
+      title: "开启全屏", //窗口标题
+    }, function(index) {
+      layer.close(index);
+
+      fullScreen()
+    });
+  }
+
+  // setTimeout(function() {
+  //   handleFail('启动失败')
+  // }, 4000)
+
+  // 启动失败
+  function handleFail(text) {
+    window.onbeforeunload = null
+    clearInterval(barTimer);
+    setTimeout(function() {
+      $('#fail').show()
+      $('#fail p').text(text)
+    }, 500)
+  }
+
+  // body中是否含有内容
+  function hasBodyContents() {
+    var isExistenceDom = document.getElementById('sessionIframe').contentWindow.document.getElementById('citrixuiElement');
+    var closeFlag = $("#closeFlag").val();
+    if (!isExistenceDom || closeFlag == 1) {
+      barTimer = 0;
+      clearInterval(barTimer);
+
+      iframe.style.visibility = 'hidden'
+      $('.full-screen-wapper').hide()
+
+      window.onbeforeunload = null
+      closeWindow()
+    }
+  }
+
+  window.onresize = function() {
+    var visibleHeight = document.body.clientHeight;
+    $("#sessionIframe").css('height', visibleHeight + 'px');
+  }
+
+  // 关闭页面
+  function closeWindow() {
+    window.close()
+  }
+
+  window.onbeforeunload = function(event) {
+    return '是否确认离开';
+  };
+
+  function handleShowBtn() {
+    var isFull = !!(document.webkitIsFullScreen || document.mozFullScreen ||
+      document.msFullscreenElement || document.fullscreenElement
+    );
+    if (isFull == false) {
+      $("#reduction").css("display", "none");
+      $("#full").css("display", "");
+    } else {
+      $("#reduction").css("display", "");
+      $("#full").css("display", "none");
+    }
+  }
+
+  $(".full-screen-wapper").mouseover(function() {
+    handleShowBtn()
+  });
+  $(".full-screen-wapper").mouseout(function() {
+    $("#reduction").css("display", "none");
+    $("#full").css("display", "none");
+  });
+
+  // 全屏
+  function fullScreen() {
+    var element = document.documentElement;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    }
+
+    // $("#sessionIframe").css("height", window.screen.height + "px");
+  }
+
+  // 退出全屏
+  function EXfullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+
+    // $("#sessionIframe").css("height", document.documentElement.clientHeight + "px");
+  }
+
+  var sessionObj;
+  var icaData;
+  var sessionObjs = [];
+  var reqParams = location.search;
+  var domain = location.protocol + "//" + location.hostname + ":" + location.port;
+
+  //http://192.199.198.149:81/fgecg/launchApp.html?token=gpYXsVAVSOV%2B%2FQiWf8tt9jV0LbDf31pTWPzMYzpR0Ht7PPiexvZMw9oTXWcvAhg6R0g%2BF2LAyNqQr9TtdwVZeYmu0sRa6%2Ff483TUu%2Bm1ACI7FuHXzJyNBAhFXpsCHhjdjj2foUjvSYR%2FripI32KsWb4kS32usENJR7qa9ECJp2TUh1cSUHrkUezggrY8c%2BIcZeHPJ5c1%2F1whYv8Okf5yMakKUsGlTvjxhB33YM5lcmOsDu1GZQNE6MEg%2FAZ8dZ7swkiXUhUM9T7WG0PE8uILAg%3D%3D
+  domain = 'http://192.199.198.149:81';
+  reqParams = '?token=gpYXsVAVSOV%2B%2FQiWf8tt9jV0LbDf31pTWPzMYzpR0Ht7PPiexvZMw9oTXWcvAhg6R0g%2BF2LAyNqQr9TtdwVZeYmu0sRa6%2Ff483TUu%2Bm1ACI7FuHXzJyNBAhFXpsCHhjdjj2foUjvSYR%2FripI32KsWb4kS32usENJR7qa9ECJp2TUh1cSUHrkUezggrY8c%2BIcZeHPJ5c1%2F1whYv8Okf5yMakKUsGlTvjxhB33YM5lcmOsDu1GZQNE6MEg%2FAZ8dZ7swkiXUhUM9T7WG0PE8uILAg%3D%3D';
+
+  launchApp(domain, reqParams);
+
+  function launchApp(domain, reqParams) {
+    var launchApp = domain + "/fgecg/launchApp.php" + reqParams;
+
+    $.ajax({
+      url: launchApp,
+      context: document.body,
+      success: function(response) {
+        //console.log(response);
+        //return false;
+        if (response.RepCode == 0) {
+
+          Connect(domain);
+          icaData = response.Data.ica;
+          //console.log(icaData);
+        } else {
+          //alert(response.RepMsg)
+          handleFail("launchApp Error!");
+          console.log(response);
+        }
+        return false;
+        /*TODO : To avoid popups, call citrix.receiver.createSession function immediately on click of a button
+        and pass ica data using sessionObject.start() method once icadata is available.*/
+
+      },
+      error: function() {
+        handleFail("Server Error!");
+      }
+    });
+    // console.log('perform launch - url: ' + icaFileUrl);
+  }
+
+  //Connect
+  function Connect(domain) {
+    try {
+      var h5Path = domain + "/fgecg/HTML5";
+      citrix.receiver.setPath(h5Path);
+      var cp = getConnectionParams();
+      console.log(cp)
+        //console.log(cp)
+
+      if (cp !== null) {
+
+        citrix.receiver.createSession("", cp, sessionCreation);
+        var launchType = "embed";
+        if (launchType == "embed") {
+          //$('#sessionIframe').show();
+
+        }
+      }
+    } catch (e) {
+      console.log(e);
+      handleFail("Connect Error!");
+    }
+  }
+
+  function getConnectionParams() {
+
+    console.log("getConnectionParams...")
+    var connectionParams = {};
+    var launchType = "embed";
+    connectionParams["launchType"] = launchType;
+    if (launchType === "embed") {
+      connectionParams["container"] = {};
+      connectionParams["container"]["id"] = "sessionIframe";
+      connectionParams["container"]["type"] = "iFramE";
+    }
+    var closeOptions = {};
+    connectionParams["closeOptions"] = closeOptions;
+
+    closeOptions["showDisconnectAlert"] = false;
+    //var height = window.screen.height;
+    //var width = window.screen.width;
+
+    //connectionParams["bounds"] = {"autoresize":false,"width": width,"height":height};
+    connectionParams["bounds"] = {
+      "autoresize": true
+    };
+
+
+    var lang = "zh-cn";
+    if (lang) {
+      connectionParams["preferredLang"] = lang;
+    }
+    var showToolbar = false; //隐藏导航栏
+    /*var hideConnDialog = document.getElementById("connDialog").checked;
+    var hideURLReDialog = document.getElementById("urlReDialog").checked;
+    var hideErrorDialog = document.getElementById("errorDialog").checked;*/
+    connectionParams["preferences"] = {
+      "ui": {
+        "toolbar": {
+          "menubar": showToolbar,
+          "clipboard": true,
+        },
+
+        "sessionsize": {
+          "minwidth": 200,
+          "minheight": 200
+        }
+      }
+    };
+    console.log(connectionParams)
+
+    return connectionParams;
+  }
+
+
+  //sessionCreation
+  function sessionCreation(sessionObject) {
+    console.log("==sessionCreation==");
+
+    var handler = function(eventObj) {
+      console.log("clicked", eventObj);
+    };
+    sessionObjs[sessionObjs.length] = sessionObj = sessionObject;
+
+
+    console.log("sessionObject")
+    console.log(sessionObject)
+
+    var launchData = {};
+    launchData["type"] = "ini"; //document.getElementById("icaType").value;
+    launchData["value"] = icaData; //(document.getElementById("icaType").value == "JSON" )? icaData : text;
+    function connectionHandler(event) {
+      console.log("onConnection");
+      console.log(event);
+      if (event.data.state == "sessionReady") {
+        console.log("sessionReady");
+      }
+      //console.log(event);
+    }
+
+    function connectionClosedHandler(evevt) {
+      console.log("closed");
+    }
+
+    sessionObject.addListener("onConnection", connectionHandler);
+    sessionObject.addListener("onConnectionClosed", connectionClosedHandler);
+
+    var cst = [{
+      "id": "custom3",
+      "config": {
+        "isPrimary": true,
+        "imageUrl": "http://<path_of_the_image>/back.png",
+        "toolTip": "back",
+        "position": "front"
+      },
+      "handler": function(e) {
+        sessionObj.sendSpecialKeys(["ALt", "ArrowLeft"]);
+      }
+    }, {
+      "id": "custom4",
+      "config": {
+        "isPrimary": true,
+        "imageUrl": "http://<path_of_the_image>/fwd.png",
+        "toolTip": "forward",
+        "position": "front"
+      },
+      "handler": function(e) {
+        sessionObj.sendSpecialKeys(["ALt", "ArrowRight"]);
+      }
+    }];
+
+    //sessionObject.addToolbarBtns(cst);
+    sessionObject.start(launchData);
+  }
+</script>
+
+</html>

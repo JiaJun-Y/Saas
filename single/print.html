@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./common/css/print.css">
+  <title></title>
+</head>
+
+<body>
+  <div id="printPage">
+    <img id="print-code" />
+    <div class="print-wapper">
+      <div class="title">新疆独山子人民医院</div>
+      <div class="sub-title">预约告知单</div>
+
+      <div class="input-top-box">
+        <ul>
+          <li>
+            <label>姓名：</label>
+            <div class="common-part" style="width: 180px;">
+              <span><?PHP echo $row['Name'];?></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>性别：</label>
+            <div class="common-part" style="width: 65px;">
+              <span><?PHP echo $row['Gender'];?></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>年龄：</label>
+            <div class="common-part" style="width: 65px;">
+              <span><?PHP echo $row['Age'];?></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>门诊号：</label>
+            <div class="common-part" style="width: 200px;">
+              <span><?PHP echo $row['WardID'];?></span>
+              <span class="line"></span>
+            </div>
+          </li>
+
+          <li>
+            <label>检查项目：</label>
+            <div class="common-part" style="width: 290px">
+              <span>Holter动态心电</span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>申请时间：</label>
+            <div class="common-part" style="width: 270px">
+              <span><?PHP echo $row['CreateTime'];?></span>
+              <span class="line"></span>
+            </div>
+          </li>
+
+          <li>
+            <label>预约时间：</label>
+            <div class="appointment-time common-part" style="width: 270px">
+              <!-- <img src="/ui/images/star.png" alt=""> -->
+              <b><?PHP echo $row['AppointTime'];?></b>
+
+              <span class="line"></span>
+            </div>
+          </li>
+
+          <li>
+            <div class="lineUp common-part">
+              <b style="font-size: 18px;">自助取号排队检查</b>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="attention-wapper">
+        <div class="attention-title">动态心电图检查注意事项</div>
+        <p>1、动态心电图不属于急查项目，请凭交费单和磁卡前往动态室预约检查时间。</p>
+        <p>2、门诊戴机检查时间为上午8:30开始，请预约过的病友必须在9:00前到达，并在检查室 门口自助机取号排队，过
+          <b>过时不能保证机器，须重新预约检查时间。戴机当天请携带身份
+                  证，并准备200元押金。
+              </b>
+        </p>
+        <p>3、检查当天不能进行剧烈运行，要尽量避免上臂过度牵拉性活动，同时要尽量不出汗或 少出汗，注意不要过度拉扯导联线，以保证记录图谱的清晰性和准确性。</p>
+        <p>4、动态心电图记录仪不能着水，不能用力摔碰，<b>损坏或丢失仪器将照价赔偿。</b></p>
+        <p>5、在检查期间的药物服用请遵循门诊医生的建议，切勿随便停药。</p>
+        <p>6、检查当日不能洗澡，睡觉时可把记录仪放在枕头边上，但不要拉掉导联线，否则影响 检查数据的完整性。</p>
+        <p>7、请在规定时间内准时归还机器，<b>如果超过24小时不归还，造成记录数据丢失者责任自负。</b></p>
+        <p>8、检查报告在还机器1个工作日后，凭付费单和挂号磁卡在门诊大厅的总服务台领取。</p>
+        <p class="last-p">9、对极个别病人，偶尔会发生机器故障，干扰严重等影响检查报告的情况，此时需要重 新戴机检查，还请配合。</p>
+
+        <hr></hr>
+
+        <div class="sub-title">佩戴机器登记单
+          <div class="devId">机器号码</div>
+        </div>
+      </div>
+
+
+      <div class="input-top-box">
+
+        <ul>
+          <li>
+            <label>科别/病区 :</label>
+            <div class="common-part" style="width: 235px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>床号 :</label>
+            <div class="common-part" style="width: 136px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>住院号 :</label>
+            <div class="common-part" style="width: 175px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>联系电话 :</label>
+            <div class="common-part" style="width: 282px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>家属电话 :</label>
+            <div class="common-part" style="width: 293px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>住址 :</label>
+            <div class="common-part" style="width: 340px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>押金 :</label>
+            <div class="common-part" style="width: 293px;">
+              <span></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>身份证号 :</label>
+            <div class="common-part" style="width: 282px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>医保卡号 :</label>
+            <div class="common-part" style="width: 296px;">
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>佩戴机器 :</label>
+            <div class="common-part" style="width: 646px;">
+              <span>Holter（）动态心率（）其他（）</span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>日期 :</label>
+            <div class="common-part" style="width: 116px;">
+              <span></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>时间 :</label>
+            <div class="common-part" style="width: 145px;">
+              <span></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>心率 :</label>
+            <div class="common-part" style="width: 147px;">
+              <span></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label>血压 :</label>
+            <div class="common-part" style="width: 147px;">
+              <span></span>
+              <span class="line"></span>
+            </div>
+          </li>
+          <li>
+            <label style="margin-left: 422px; height: 35px; line-height: 35px;">戴机人 :</label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

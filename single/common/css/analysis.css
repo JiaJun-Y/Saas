@@ -1,0 +1,129 @@
+.analysis-wapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#sessionIframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 111;
+  overflow: hidden;
+  background: #fff;
+}
+
+.full-screen-wapper {
+  position: absolute;
+  top: 0px;
+  right: 29px;
+  z-index: 112;
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+}
+
+#reduction,
+#full {
+  width: 100%;
+  height: 100%;
+  background: url(../../images/res_sel.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+#reduction:hover,
+#full:hover {
+  background: url(../../images/max-icon.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.close-screen {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 112;
+  cursor: pointer;
+}
+
+.close-screen img {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-wapper {
+  text-align: center;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: calc((100% - 50%) / 2);
+  left: 25%;
+}
+
+.progress-wapper .fail p {
+  color: red;
+  font-size: 12px;
+}
+
+.progress-wapper .fail .fail-close-btn {
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  background: rgb(77, 189, 199);
+  margin: 10px auto;
+  cursor: pointer;
+}
+
+.progress-wapper h3 {
+  font-size: 26px;
+  font-weight: normal;
+}
+
+.progress-wapper .code-img img {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
+.progress-wapper .code-img p {
+  line-height: 25px;
+}
+
+.graph {
+  width: 450px;
+  height: 18px;
+  margin: 15px auto;
+  border-radius: 20px;
+  background: #D9D9D9;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 2px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.graph span {
+  display: inline-block;
+  width: 150px;
+  position: absolute;
+  left: calc((450px - 150px) / 2)
+}
+
+#bar {
+  display: block;
+  background: #4DBDC7;
+  float: left;
+  height: 100%;
+  text-align: center;
+  font-family: Verdana;
+  line-height: 18px;
+  color: #666;
+  border-radius: 20px;
+}
+
+.isHide {
+  display: block;
+}

@@ -1,8 +1,8 @@
 .top-nav {
-  height: 50px;
-  line-height: 50px;
+  height: 35px;
+  line-height: 35px;
   font-size: 20px;
-  background: #ddd;
+  background: #000;
   border-bottom: 1px solid #c0c0c0;
   width: 100%;
   position: absolute;
@@ -37,9 +37,11 @@
 
 .top-nav .user {
   float: right;
-  height: 50px;
-  line-height: 50px;
+  height: 35px;
+  line-height: 35px;
   margin-right: 20px;
+  color: #fff;
+  font-size: 14px;
 }
 
 .top-nav .user #name {
@@ -53,17 +55,17 @@
 .top-nav .user .line {
   float: left;
   display: inline-block;
-  height: 30px;
+  height: 20px;
   width: 2px;
-  margin: 10px;
+  margin: 9px;
   background: #c0c0c0;
-  line-height: 30px;
+  line-height: 20px;
 }
 
 .top-nav .user .img-box {
   float: left;
-  width: 30px;
-  height: 30px;
-  margin: 10px 0px;
+  width: 26px;
+  height: 26px;
+  margin: 4px 0px;
   cursor: pointer;
 }

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./common/css/reset.css">
+  <link rel="stylesheet" href="./common/css/header.css">
+  <link rel="stylesheet" href="./common/css/sideNav.css">
+  <link rel="stylesheet" href="./common/css/home.css">
+
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="./common/header.js"></script>
+  <script src="./common/sideNav.js"></script>
+  <!-- <script src="./common/js/protocolcheck.js"></script> -->
+  <script src="./common/js/lodash.min.js"></script>
+  <script src="./common/js/utils.js"></script>
+  <script src="./common/js/echarts.min.js"></script>
+  <script src="./common/js/moment.min.js"></script>
+
+  <!-- mockData need delete-->
+
+  <title>首页</title>
+</head>
+
+<body>
+  <!-- 顶部导航条 -->
+  <div id="topNav">
+    <div class='top-nav'>
+      <!-- <div class='time'>
+        <div class='img-box'>
+          <img src='./images/calendar.png' />
+        </div>
+        <div id='time'></div>
+      </div> -->
+      <div class='user'>
+        <div id='name'>连花清瘟胶囊</div>
+        <div class='sub-title'>医生，欢迎使用分规心电</div>
+        <span class='line'></span>
+        <div class='img-box'>
+          <img src='./images/quit.png' />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="order-wapper"> -->
+  <!-- 侧边栏 -->
+  <div id="sideNav">
+    <div class='broadside-nav'>
+      <ul>
+        <!-- 已改 -->
+        <li onclick='jump(this)' id='app'>
+          <div class='img-box'>
+            <div class="circle">0</div>
+          </div>
+          <p>主页</p>
+
+        </li>
+        <li onclick='jump(this)' id='book'>
+          <div class='img-box'>
+            <div class="circle">1</div>
+          </div>
+          <p>检查接待</p>
+
+        </li>
+
+        <li onclick='jump(this)' id="analysis">
+          <div class='img-box'>
+            <div class="circle">22</div>
+          </div>
+          <p>分析诊断</p>
+        </li>
+
+        <li onclick='jump(this)'>
+          <div class='img-box'>
+            <div class="circle">
+              99+
+            </div>
+          </div>
+          <p>更多功能</p>
+        </li>
+
+        <!-- <div id="newMessage">111</div> -->
+        <!-- <audio src="./11.wav" muted autoplay id="myaudio" style="display: none"></audio> -->
+      </ul>
+
+      <div class='bottom-opt'>
+        <div class='opt-left' onclick='help()'>
+          <img src='./images/help.png' />
+          <span>帮助</span>
+        </div>
+
+        <div class='opt-right' id="setting">
+          <img src='./images/config.png' />
+          <span>设置</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 帮助弹框 -->
+    <div class='wx-code-wapper'>
+      <div id='popLayer'></div>
+      <div id='wx-code-box'>
+        <div class='code-wapper'>
+          <div class='title'>操作遇到问题？
+            <span class='close' id='close'>
+                  <img src='./images/guanbi.png' alt=''>
+                </span>
+          </div>
+          <div class='wx-img-box'>
+            <img src='./images/qr_gzh.png' alt=''>
+          </div>
+          <p>扫一扫</p>
+          <p>关注分规心电公众号</p>
+          <p>回复
+            <span>“帮助”</span> 获取操作说明
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 设置tooltip -->
+    <div class='config-wapper'>
+      <div class='tooltip'>
+        <p onclick='changeMsg()'>信息修改</p>
+        <p onclick="downPlug()">插件下载</p>
+        <p onclick="handleConfig()">预约设置</p>
+        <span class='triangle'></span>
+      </div>
+    </div>
+
+    <!-- 信息修改弹框 -->
+    <div class='msg-wapper'>
+      <div id='popLayer'></div>
+      <div id='msg-pop'>
+        <div class='title'>信息修改</div>
+        <div class='msg-middle' id='msg-middle'>
+          <div class='msg-input-box'>
+            <span class='input-title'>姓名：</span>
+            <input type='text' value='' name='name'>
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>性别：</span>
+            <select name='gender' value='0'>
+                  <option value='male'>男</option>
+                  <option value='female'>女</option>
+                </select>
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>旧密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="old-password">
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>新密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="new-password">
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>确认密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="comfire-password">
+          </div>
+
+        </div>
+        <div class='msg-footer'>
+          <div onclick='getPopMsg()'>确认</div>
+          <div id='closeMsgPop'>取消</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下载插件弹框 -->
+    <div class='plugIn-wapper'>
+      <div id='popLayer'></div>
+      <div id='plugIn'>
+        <div class='title'>插件下载</div>
+        <div class='plug-content'>
+          <span>院内采集端</span>
+          <a href=''>下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- app.html内容 -->
+  <div id="indexBox">
+    <div class="top">
+      <div class="top-left">
+        <div class="time">
+          <div id="time"></div>
+        </div>
+      </div>
+      <div class="top-right"></div>
+    </div>
+  </div>
+
+
+  <div class="index-bottom">
+    <ul>
+      <li><a href="">点击查看详情>></a></li>
+      <li>版本号：build450.1.1</li>
+      <li>升级提示：2019/07/09</li>
+    </ul>
+  </div>
+
+  <!-- 设置弹框内容 -->
+  <div class="config-pop-wapper">
+    <div id="popLayer"></div>
+    <div id="config-pop">
+      <div class="title">设置</div>
+      <div class="from-box">
+        <p>设备数量上限<input type="text" id="count"></p>
+        <div class="info">
+          <div class="info-title">录入信息配置</div>
+          <div class="info-input-box">
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="1" />申请单号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="2" />住院号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="3" />门诊号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="4" />病人ID</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="5" />身份证号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="6" />手机号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="7" />住址</div>
+          </div>
+        </div>
+        <div class="button-groups">
+          <div class="comfire" onclick="handleConfigComfire()">确定</div>
+          <div class="cancel" onclick="cancel()">取消</div>
+        </div style="">
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  // 获取设置弹框信息
+  function handleConfigComfire() {
+    $("input[name='selectedRow']:checked").each(function(index, item) {
+      console.log($(this).val())
+    });
+    console.log($('#count').val())
+  }
+
+  // 关闭设置弹框
+  function cancel() {
+    $('#popLayer').hide()
+    $('#config-pop').hide()
+    $('input:checkbox[name="selectedRow"]').removeAttr('checked');
+    $('input').val('');
+  }
+</script>
+
+</html>

@@ -4,7 +4,7 @@
   float: left;
   font-size: 16px;
   text-align: center;
-  background: #dddddd;
+  background: #231816;
   position: absolute;
   cursor: pointer;
   top: 0px;
@@ -137,12 +137,13 @@
 
 #sideNav .bottom-opt {
   width: 100%;
-  height: 50px;
-  line-height: 50px;
-  background: #c0c0c0;
+  height: 25px;
+  line-height: 25px;
+  background: #000;
   position: absolute;
   bottom: 0px;
   left: 0px;
+  color: #fff;
 }
 
 #sideNav .bottom-opt img {
@@ -160,7 +161,7 @@
   align-items: center;
 }
 
-#sideNav .bottom-opt .opt-left { 
+#sideNav .bottom-opt .opt-left {
   margin-left: 5px;
 }
 
@@ -254,7 +255,7 @@
   width: 80px;
   background: #fff;
   position: absolute;
-  bottom: 60px;
+  bottom: 36px;
   left: 28px;
   z-index: 1;
 }

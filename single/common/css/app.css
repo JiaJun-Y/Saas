@@ -1,14 +1,14 @@
 #indexBox {
   margin-left: 99px;
   height: calc(100%);
-  padding: 50px 0px;
+  padding: 28px 28px 28px 0px;
   position: relative;
   overflow: hidden;
 }
 
 #indexBox .index-left {
   height: 100%;
-  width: 647px;
+  width: 660px;
   float: left;
 }
 
@@ -22,7 +22,7 @@
   height: 405px;
   width: 100%;
   background: #fff;
-  padding: 20px;
+  padding: 28px;
   /* float: left; */
 }
 
@@ -313,20 +313,25 @@ table.table-inner-wapper td.doc-time:hover .tip {
 /* 底部样式 */
 
 .index-bottom {
-  height: 50px;
+  height: 25px;
   width: 100%;
-  background: #dddddd;
+  background: #000;
   position: absolute;
   bottom: 0px;
+  color: #fff;
 }
 
 .index-bottom ul {
   float: right;
 }
 
+.index-bottom a {
+  color: #1989fa;
+}
+
 .index-bottom ul li {
   float: right;
-  line-height: 50px;
+  line-height: 25px;
   margin-right: 20px;
 }
 

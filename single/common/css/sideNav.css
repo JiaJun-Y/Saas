@@ -4,27 +4,30 @@
   float: left;
   font-size: 16px;
   text-align: center;
-  background: #231816;
+  background: #000;
   position: absolute;
   cursor: pointer;
   top: 0px;
   left: 0px;
-  padding-top: 50px;
+  padding-top: 35px;
   overflow: hidden;
   z-index: 1;
 }
 
 #sideNav ul li {
-  padding: 30px 0px 15px 0px;
+  /* padding: 30px 0px 15px 0px; */
+  height: 100px;
+  padding: 10px 0px;
   border-bottom: 1px solid #ebebeb;
+  color: #ccc;
 }
 
 #sideNav ul li p {
-  font-size: 20px;
+  font-size: 15px;
 }
 
-#sideNav ul li:nth-child(1):hover {
-  color: #4dbdc8;
+#sideNav ul li:hover {
+  background-color: #3e3a39;
 }
 
 #sideNav ul li:nth-child(1):hover .img-box {
@@ -38,8 +41,8 @@
   position: relative;
 }
 
-#sideNav ul li:nth-child(2):hover {
-  color: #4dbdc8;
+#sideNav ul li:nth-child(1):hover {
+  color: #fff;
 }
 
 #sideNav ul li:nth-child(2):hover .img-box {
@@ -61,8 +64,8 @@
   color: #4dbdc8;
 } */
 
-#sideNav ul li:nth-child(3):hover {
-  color: #4dbdc8;
+#sideNav ul li:nth-child(2):hover {
+  color: #fff;
 }
 
 #sideNav ul li:nth-child(3):hover .img-box {
@@ -76,8 +79,8 @@
   position: relative;
 }
 
-#sideNav ul li:nth-child(4):hover {
-  color: #4dbdc8;
+#sideNav ul li:nth-child(3):hover {
+  color: #fff;
 }
 
 #sideNav ul li:nth-child(4):hover .img-box {
@@ -92,7 +95,7 @@
 }
 
 #sideNav ul li:nth-child(4):hover {
-  color: #4dbdc8;
+  color: #fff;
 }
 
 #sideNav ul li:nth-child(4):hover .img-box {
@@ -127,7 +130,7 @@
   width: 42px;
   height: 45px;
   margin: 0 auto;
-  margin-bottom: 22px;
+  margin-bottom: 8px;
 }
 
 .broadside-nav ul li .img-box img {
@@ -141,7 +144,7 @@
   line-height: 25px;
   background: #000;
   position: absolute;
-  bottom: 0px;
+  bottom: 40px;
   left: 0px;
   color: #fff;
 }
@@ -255,7 +258,7 @@
   width: 80px;
   background: #fff;
   position: absolute;
-  bottom: 36px;
+  bottom: 80px;
   left: 28px;
   z-index: 1;
 }

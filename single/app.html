@@ -27,12 +27,12 @@
   <!-- 顶部导航条 -->
   <div id="topNav">
     <div class='top-nav'>
-      <div class='time'>
+      <!-- <div class='time'>
         <div class='img-box'>
           <img src='./images/calendar.png' />
         </div>
         <div id='time'></div>
-      </div>
+      </div> -->
       <div class='user'>
         <div id='name'>连花清瘟胶囊</div>
         <div class='sub-title'>医生，欢迎使用分规心电</div>
@@ -185,109 +185,48 @@
     </div>
   </div>
 
-  <!-- app.html内容 -->
+  <!-- app.html内容开始 -->
   <div id="indexBox">
-    <div class="index-left">
-      <div class="top-left-wapper">
-        <div class="left-inner-wapper">
-          <div class="today">Today</div>
+    <div class="top">
+      <div class="top-left">
+        <div class="time">
+          <div id="time"></div>
+        </div>
 
-          <div class="_1st-pie-chart-box">
-            <div id="_1st-pie" class="pie-chart-box" style="width: 100%;height:100%;"></div>
-            <div class="echarts-sub-title"></div>
+        <!-- 上左 -->
+        <div class="dashboard">
+          <div class="dashboard-left">
+            <div class="analysis">今日分析：</div>
+            <div class="workload">人均工作量：<span>25</span></div>
+            <div class="crisis">危机值：<span>7</span></div>
+            <div class="memorize">重背：<span>2</span></div>
+            <div class="use">使用次数：<span>1789/5000</span></div>
           </div>
-
-          <div class="_2nd-pie-chart-box">
-            <div id="_2nd-pie" class="pie-chart-box" style="width: 100%;height:100%;"></div>
-            <div class="echarts-sub-title"></div>
-          </div>
-
-          <div class="_3rd-pie-chart-box">
-            <div id="_3rd-pie" class="pie-chart-box" style="width: 100%;height:100%;"></div>
-            <div class="echarts-sub-title"></div>
-          </div>
-
-          <div class="mark">
-            <ul>
-              <li>
-                <div class="mark-color"></div>
-                <span>已完成</span>
-              </li>
-              <li>
-                <div class="mark-color light"></div>
-                <span>未完成</span>
-              </li>
-            </ul>
+          <div class="dashboard-right">
+            <div class="count">118</div>
+            <div class="progress">
+              <div class="progress-left"></div>
+              <div class="progress-right"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- left - bottom -->
-      <div class="index-left-bottom">
-        <div class="bottom-inner"></div>
-
-        <!-- <img src="./images/empty.png" alt="" id="empty-img"> -->
+      <!-- 上右 -->
+      <div class="top-right">
+        <div class="title">本月数据日统计</div>
+        <div class="statistical-charts">
+          <div id="statisticalMain" style="height: 100%; width: 100%;"></div>
+        </div>
       </div>
     </div>
 
-    <div class="index-right">
-      <div class="top-right-wapper">
-        <!-- top - right - charts -->
-        <div class="echarts-box">
-          <div id="main" style="height: 100%"></div>
-        </div>
-      </div>
-
+    <!-- 表格 -->
+    <div class="bottom">
       <div class="table-wapper">
+        <div class="title">本周排班</div>
         <table class="table-inner-wapper">
-          <thead>
-            <tr>
-              <td colspan="2" rowspan="3" class="tb-name">姓名</td>
-              <td colspan="3" class="tb-title">星期一</td>
-              <td colspan="3" class="tb-title">星期二</td>
-              <td colspan="3" class="tb-title">星期三</td>
-              <td colspan="3" class="tb-title">星期四</td>
-              <td colspan="3" class="tb-title">星期五</td>
-              <td colspan="3" class="tb-title">星期六</td>
-              <td colspan="3" class="tb-title">星期日</td>
-            </tr>
-            <tr>
-              <td colspan="3" class="tb-date">11月18日</td>
-              <td colspan="3" class="tb-date">11月18日</td>
-              <td colspan="3" class="tb-date">11月18日</td>
-              <td colspan="3" class="tb-date">11月18日</td>
-              <td colspan="3" class="tb-date">11月18日</td>
-              <td colspan="3" class="tb-date">11月18日</td>
-              <td colspan="3" class="tb-date">11月18日</td>
-            </tr>
-            <tr>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-              <td class="td-subtitle">上午</td>
-              <td class="td-subtitle">下午</td>
-              <td class="td-subtitle">值班</td>
-            </tr>
-          </thead>
-
-          <tbody class="scroll-body">
-          </tbody>
-
+          <tbody class="main-body"></tbody>
         </table>
 
         <div class="change-week">
@@ -300,6 +239,8 @@
     </div>
   </div>
 
+
+  <!-- app.html内容结束 -->
   <div class="index-bottom">
     <ul>
       <li><a href="">点击查看详情>></a></li>
@@ -335,9 +276,24 @@
     </div>
   </div>
 </body>
-
 <script>
-  var AnalyticalDiagnosisPath = ''
+  var dashboardChartsData = {
+    "Data": {
+      "Wear": {
+        "Finished": 0,
+        "Unfinished": 0
+      },
+      "Import": {
+        "Finished": 1,
+        "Unfinished": 0
+      },
+      "Analysis": {
+        "Finished": 2,
+        "Unfinished": 3
+      }
+    }
+  }
+
   var morkColumnar = {
     "Version": 1,
     "PHPSESSID": "3k2a9u5ump6t0c426lpuerla44",
@@ -349,409 +305,169 @@
     "RepMsg": "\u6210\u529f"
   }
 
-  var mockLeftData = {
+  var tableData = {
     "Version": 1,
-    "PHPSESSID": "b25vq1ebnu44frm1mb0riomob7",
-    "Data": {
-      "Wear": {
-        "Finished": 0,
-        "Unfinished": 0
-      },
-      "Import": {
-        "Finished": 0,
-        "Unfinished": 0
-      },
-      "Analysis": {
-        "Finished": 0,
-        "Unfinished": 0
-      }
-    },
-    "ScheduleData": [{
-      "ID": "1",
-      "Name": "Holter",
-      "Mems": "test01"
-    }, {
-      "ID": "2",
-      "Name": "ECG",
-      "Mems": "test01\u3001test02"
-    }, {
-      "ID": "4",
-      "Name": "ECG1",
-      "Mems": "test01\u3001test02"
-    }, {
-      "ID": "6",
-      "Name": "\u503c\u73ed",
-      "Mems": ""
-    }],
+    "PHPSESSID": "7adu8ijnf5ni22m1v4ec140lp2",
+    "Items": ["ECG", "HOLTER", 'other'],
+    "Mems": [
+      ["\u5f20\u4e09\uff08AM\uff09\u3001\u674e\u56db\uff08PM\uff09", "\u5f20\u4e09\uff08AM\uff09", '1'],
+      ["\u5f20\u4e09\uff08AM\uff09\u3001\u674e\u56db\uff08PM\uff09", "\u5f20\u4e09\uff08AM\uff09", '1'],
+      ["", "", '1'],
+      ["", "", '1'],
+      ["", "", '1'],
+      ["\u5f20\u4e09\uff08AM\uff09", "\u674e\u56db\uff08AM\uff09", '1'],
+      ["\u5f20\u4e09\uff08AM\uff09", "\u674e\u56db\uff08AM\uff09", '1'],
+    ],
     "RepCode": 0,
     "RepMsg": "\u6210\u529f"
   }
 
-  // var mockSchedulingData = {
-  //   "Version": 1,
-  //   "PHPSESSID": "b25vq1ebnu44frm1mb0riomob7",
-  //   "Data": {
-  //     "arrList": [{
-  //       "UserID": "3",
-  //       "UserName": "test01",
-  //       "list": [{
-  //         "AMItemName": "",
-  //         "PMItemName": ""
-  //       }, {
-  //         "AMItemName": "ECG\/ECG1",
-  //         "PMItemName": "Holter\/ECG"
-  //       }, {
-  //         "AMItemName": "",
-  //         "PMItemName": ""
-  //       }, {
-  //         "AMItemName": "",
-  //         "PMItemName": ""
-  //       }, {
-  //         "AMItemName": "",
-  //         "PMItemName": ""
-  //       }, {
-  //         "AMItemName": "",
-  //         "PMItemName": ""
-  //       }, {
-  //         "AMItemName": "",
-  //         "PMItemName": ""
-  //       }]
-  //     }]
-  //   },
-  //   "RepCode": 0,
-  //   "RepMsg": "\u6210\u529f"
-  // }
+  columnarCharts()
+  lineCharts()
+  currentDate() // 获取表格数据
 
-  $(function() {
-    getPathUrl()
-
-    // 柱形图
-    columnarData()
-
-    $("#popLayer").click(function(e) {
-      $("#popLayer").hide();
-      $('#config-pop').hide()
-    })
-
-    // 饼图
-    var mockPIEData = []
-    _.find(mockLeftData.Data, function(value, key) {
-      var arr = []
-      renderPieTip(key, value)
-
-
-      _.find(value, function(child, name) {
-        var obj = {}
-        obj.CURRENCY_TYPE = name === 'Finished' ? '已完成' : '未完成'
-        obj.AMOUNT = child
-        arr.push(obj)
-      })
-      mockPIEData.push(arr)
-    })
-
-    var _domArr = $('.pie-chart-box')
-    for (var dom = 0; dom < _domArr.length; dom++) {
-      initPieEchect(_domArr[dom].getAttribute('id'), mockPIEData[dom])
-    }
-
-    // 今天排班
-    toDayTable()
-
-    currentWeek()
-  })
-
-  // 跳转排班管理界面
-  function goArrange() {
-    window.open('/single/arrange.html', '_slef')
-  }
-
-  // 饼图文案
-  function renderPieTip(key, value) {
-    var _type = ''
-    var count = 0
-    var _className = ''
-
-    value.Finished = 0
-    value.Unfinished = 11
-
-    if (value.Finished > 0 || value.Unfinished > 0) {
-      count = Number(value.Finished / (value.Finished + value.Unfinished) * 100).toFixed(2)
-    } else {
-      count = 0
-    }
-
-    if (key === 'Wear') {
-      _type = '戴机（'
-      _className = '1st'
-    } else if (key === 'Import') {
-      _type = '录入（'
-      _className = '2nd'
-    } else {
-      _type = '分析（P/D：'
-      _className = '3rd'
-    }
-
-    $('._' + _className + '-pie-chart-box .echarts-sub-title').text(_type + count + '%）')
-  }
-
+  var Days = []
   var countNum = 0
-    // 获取前一周
-  $('#beforWeek').on('click', throttle(function() {
-    countNum++
+
+  // 表格数据处理
+  function renderTable(tableData) {
+    // 7天的日期 + 空数据
+    $('.table-inner-wapper .main-body').empty()
+    completeLoading()
+
+    for (var i = 0; i < Days.length; i++) {
+      var tr = '<tr>'
+      var td = '<td></td>'
+      if (i > 0) {
+        td = '<td>' + Days[i] + '\xa0' + '(' + DX(i) + ')' + '</td>'
+      }
+      for (var j = 0; j < tableData.Items.length; j++) {
+        if (i === 0) {
+          td += '<td>' + tableData.Items[j] + '</td>'
+        } else {
+          td += '<td>' + tableData.Mems[i - 1][j] + '</td>'
+        }
+      }
+      tr += td
+      tr += '</tr>'
+      $('.table-inner-wapper .main-body').append(tr)
+    }
+  }
+
+  // 获取当前日期
+  function currentDate() {
+    countNum = 0
+    handleWeeks(countNum)
+  }
+
+  // 获取天数日期
+  function handleWeeks(countNum) {
+    Days = []
     var dateFrom = moment().subtract(countNum, "weeks").format("YYYY-MM-DD");
     var weekOfDay = moment(dateFrom).format('E')
     var last_monday = moment(dateFrom).subtract(weekOfDay - 1, 'days').format('YYYY-MM-DD')
-
-    var _titleArr = $('.tb-date')
-    for (var i = 0; i < _titleArr.length; i++) {
-      $(_titleArr[i]).text(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
+    Days.push('')
+    for (var i = 0; i < 7; i++) {
+      Days.push(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
     }
     getTableData(last_monday)
+  }
+
+  // 当前一周
+  function currentWeek() {
+    countNum = 0
+    handleWeeks(countNum)
+  }
+
+  // 获取前一周
+  $('#beforWeek').on('click', throttle(function() {
+    showLoading()
+    countNum++
+    handleWeeks(countNum)
   }, 500))
 
   // 获取后一周
   $('#nextWeek').on('click', throttle(function() {
+    showLoading()
     countNum--
-    var dateFrom = moment().subtract(countNum, "weeks").format("YYYY-MM-DD");
-    var weekOfDay = moment(dateFrom).format('E')
-    var last_monday = moment(dateFrom).subtract(weekOfDay - 1, 'days').format('YYYY-MM-DD')
-
-    var _titleArr = $('.tb-date')
-    for (var i = 0; i < _titleArr.length; i++) {
-      $(_titleArr[i]).text(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
-    }
-    getTableData(last_monday)
+    handleWeeks(countNum)
   }, 500))
 
-  function throttle(fn, delay) {
-    let valid = true
-    return function() {
-      if (!valid) {
-        return false
-      }
-      // 工作时间，执行函数并且在间隔期内把状态位设为无效
-      valid = false
-      setTimeout(function() {
-        fn()
-        valid = true;
-      }, delay)
-    }
+  // 调接口，获取表格数据
+  function getTableData(monday) {
+    console.log(monday)
+    renderTable(tableData)
   }
 
-  function currentWeek() {
-    countNum = 0
-    getTableData(renderTableTime())
-
-  }
-
-  // 今天排班渲染
-  function toDayTable() {
-    if (mockLeftData.ScheduleData && mockLeftData.ScheduleData.length > 0) {
-      $('#empty-img').hide()
-      $('.bottom-inner').show()
-      var _dom = '<div>'
-      _.map(mockLeftData.ScheduleData, function(value) {
-        _dom += '<hr class="hrLine" style="width: 40%" />'
-        _dom += '<div class="title">' + value.Name + '</div>'
-        _dom += '<hr class="hrLine" style="width: 40%;" />'
-        _dom += '<div class="hr-content">' + value.Mems + '</div>'
-        _dom += '</div>'
-      })
-      $('.bottom-inner').append(_dom)
-    } else {
-      $('.bottom-inner').hide()
-      $('#empty-img').show()
-    }
-  }
-
-  // 柱状图
-  function columnarData() {
-    var myChart = echarts.init(document.getElementById('main'));
-
-    var dataset = []
-    var _days = morkColumnar.Data.days
-    dataset = _days.map(function(i) {
-      return {
-        name: i,
-        value: '',
-        itemStyle: {}
-      };
-    });
-
-    for (let i = 0; i < _days.length; i++) {
-      dataset[i].name = _days[i]
-      dataset[i].value = morkColumnar.Data.nums[i]
-    }
-
+  // 折现统计图
+  function lineCharts() {
+    var statisticalChart = echarts.init(document.getElementById('statisticalMain'));
     option = {
-      title: {
-        text: '本月病例一览表',
-        x: 'center'
-      },
       tooltip: {
-        trigger: 'axis',
-        formatter: function(params) {
-          for (x in params) {
-            return params[x].marker + params[x].data.value;
-          }
-        },
-        axisPointer: {
-          type: 'shadow'
-        }
+        trigger: 'axis'
       },
+
       grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '5%',
+        top: 10,
+        right: 20,
+        bottom: 20,
+        left: 20,
         containLabel: true
       },
 
       xAxis: [{
         type: 'category',
-        data: _days,
         axisTick: {
-          show: false
+          alignWithLabel: true
         },
         axisLine: {
           lineStyle: {
-            color: 'transparent',
+            color: '#888'
           }
         },
-        axisLabel: {
-          align: 'right',
-          interval: 0,
-          rotate: 30,
-          textStyle: {
-            color: '#4D4D4D'
+        data: morkColumnar.Data.days
+      }],
+
+      yAxis: [{
+        type: 'value',
+        min: 0,
+        position: 'left',
+        axisLine: {
+          lineStyle: {
+            color: '#888'
+          }
+        },
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
           }
         }
       }],
-      yAxis: {
-        show: false
-      },
+
       series: [{
-        type: 'bar',
-        data: dataset,
+        type: 'line',
+        symbolSize: 8,
         itemStyle: {
-          normal: {　
-            color: function(params) {
-              if (params.value >= 30) {
-                return 'green'
-              } else if (params.value > 10) {
-                return '#FF552A'
-              } else {
-                return '#F08519'
-              }
+          normal: {
+            color: '#73b0e6', //改变折线点的颜色
+            lineStyle: {
+              color: '#73b0e6' //改变折线颜色
             }
           }
-        }
+        },
+        lineStyle: {
+          normal: {
+            width: 3,
+            shadowColor: 'rgba(0,0,0,0.4)',
+            shadowBlur: 10,
+            shadowOffsetY: 10
+          }
+        },
+        data: morkColumnar.Data.nums
       }]
     };
-    myChart.setOption(option);
-  }
 
-  // 获取表格数据
-  function getTableData(weekOfday) {
-    $('.scroll-body').empty()
-    var params = {
-      sDate: weekOfday
-    }
-    $.post('http://192.199.198.22:8005/arrange/currWeekArrange', params, function(res) {
-      if (!res) return
-      var outerData = res.Data.arrList
-      if (outerData.length > 0) {
-        for (var j = 0; j < outerData.length; j++) {
-          var tr = '<tr class="content-tr">'
-          var td = '<td class="doc-name" colspan="2">' + outerData[j].UserName + '</td>'
-          var childList = []
-          var childList = outerData[j].list
-          for (var i = 0; i < childList.length; i++) {
-            childList[i]['zhiri'] = ''
-            for (var con in childList[i]) {
-              td += '<td class="doc-time"><span>' + toShow(childList[i][con]) + '</span><div class="' + hasClassTip(childList[i][con]) + '">' + childList[i][con] + '</div>' + '</td>'
-            }
-          }
-          tr += td
-          tr += '</tr>'
-          $('.table-inner-wapper .scroll-body').append(tr)
-        }
-      } else {
-        var tr = '<tr class="content-tr"><td>暂无数据</td></tr>'
-        $('.table-inner-wapper .scroll-body').append(tr)
-      }
-    })
-  }
-
-
-  // 获取星期一的时间 及时间表头渲染
-  function renderTableTime(day) {
-    var _paramsDay = ''
-    if (day && day.length > 0) {
-      _paramsDay = moment(day, 'YYYY-MM-DD').format('E');
-    } else {
-      _paramsDay = moment().format('E')
-    }
-    var last_monday = moment().subtract(_paramsDay - 1, 'days').format('YYYY-MM-DD');
-    var _titleArr = $('.tb-date')
-    for (var i = 0; i < _titleArr.length; i++) {
-      if (i < 6) {
-        $(_titleArr[i]).text(moment().subtract(_paramsDay - (i + 1), 'days').format('YYYY-MM-DD'))
-      } else {
-        $(_titleArr[i]).text(moment().add(7 - _paramsDay, 'days').format('YYYY-MM-DD'))
-      }
-    }
-
-    return last_monday
-  }
-
-  function hasClassTip(str) {
-    if (str.length > 0) {
-      return 'tip'
-    } else {
-      return ''
-    }
-  }
-
-
-  function toShow(str) {
-    var _str = ''
-    if (str.length > 0) {
-      _str = str.substr(0, 4)
-    }
-
-    return _str
-  }
-
-
-  function getPathUrl() {
-    $.get('http://192.199.198.73:8005/ryservice/load_ry_app_list?token=NhGLmIwVe1l5%2FsS3VzM0ANyaV%2FnGAOmowD9Ac%2FfcnKiznWUJD%2Fxh5HpnYuDXwqyOZjQEyG20KO%2F5JH4seZVyvLXJOblussBySOplc0QvX2moZsUf8sOhFX7TQE1glDCzEym1AmVK8pSbIzL%2Fiu8mTHcj5XU1ekZN%2F717viDWB80%3D', function(res) {
-      console.log(res)
-      if (!res) return
-      var _appList = res.AppList
-      var _Holter = []
-      _Holter = _.filter(_appList, function(o) {
-        return o.AppDescription === 'Holter'
-      })
-
-      if (_Holter.length > 0 && _Holter[0].URL.length > 0) {
-        AnalyticalDiagnosisPath = _Holter[0].URL
-        console.log(AnalyticalDiagnosisPath)
-      } else {
-        console.log('a')
-      }
-    })
-  }
-
-  // 点击箭头
-  function arrow(e) {
-    var _currentTr = $(e).parent().parent().attr('class'); // Holter; ECG; ABPM; 
-    if ($(e).attr('class') && $(e).attr('class').indexOf('to-rotate') > -1) {
-      $(e).removeClass('to-rotate')
-      $('.' + _currentTr + '-child').hide()
-    } else {
-      $(e).addClass('to-rotate')
-      $('.' + _currentTr + '-child').show()
-    }
+    statisticalChart.setOption(option);
   }
 
   // 获取设置弹框信息
@@ -770,119 +486,59 @@
     $('input').val('');
   }
 
-  function initPieEchect(_id, oldData) {
-    var _postition = 'inner'
-    var myIstPie = echarts.init(document.getElementById(_id))
-    var oldData = oldData
-    var typeArr = []
-    var dataset = []
-    oldData.forEach(function(item) {
-      if (typeArr.indexOf(item.CURRENCY_TYPE) < 0) {
-        typeArr.push(item.CURRENCY_TYPE);
-      }
-    });
-    dataset = typeArr.map(function(CURRENCY_TYPE) {
-      return {
-        name: CURRENCY_TYPE,
-        value: ''
-      };
-    });
-    for (var i = 0; i < dataset.length; i++) {
-      for (var j = 0; j < oldData.length; j++) {
-        var _isZero = _.every(oldData, function(val) {
-          return val.AMOUNT === 0
-        })
-
-        if (dataset[i].name == oldData[j].CURRENCY_TYPE) {
-          if (_isZero) {
-            dataset[i].value = oldData[j].AMOUNT
-          } else {
-            dataset[i].value = oldData[j].AMOUNT === 0 ? '' : oldData[j].AMOUNT;
-          }
-        }
-      }
+  function formattDataY(type, finished, unfinished) {
+    var _value = ''
+    if (finished === 0) {
+      _value = '' + type + '（' + '0' + '%）'
+    } else {
+      _value = '' + type + '（' + ((finished / (finished + unfinished)) * 100) + '%）'
     }
-
-    _.find(dataset, function(val, index) {
-      if (!_isZero) {
-        if (dataset[0].value == 0 || dataset[1].value == 0) {
-          return _postition = 'center'
-        } else {
-          return _postition = 'inner'
-        }
-      }
-    })
-
-    option = {
-      tooltip: {
-        trigger: 'item',
-        formatter: '{b} : {c} ({d}%)'
-      },
-      series: [{
-        type: 'pie',
-        radius: '80%',
-        center: ['50%', '50%'],
-        selectedMode: 'single',
-        data: dataset,
-        label: {
-          position: _postition,
-          formatter: function(data) {
-            return data.value
-          },
-          color: '#000',
-          fontSize: 14,
-        },
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
-          }
-        },
-        itemStyle: {
-          normal: {
-            color: function(params) {
-              var colorList = ['#4dbdc8', '#d6dadd']
-              return colorList[params.dataIndex]
-            }
-          }
-        }
-      }]
-    };
-    myIstPie.setOption(option);
+    return _value
   }
 
-  /*
-   * muted 静音
-   * autoplay 自动播放
-   * loop 循环播放
-   */
-  // var audio = document.getElementById('myaudio');
-  // var t1 = 500;//如果是轮询，这个时间必须大于音频的长度。如果是webscoket，应该设置一个状态play，避免重复播放，如下：
-  // var t2 = 2500;//音频的长度，确保能够完整的播放给用户
-  // var play = false;
-  // function run(){
-  //     if(play){
-  //         return false;
-  //     }
-  //     audio.currentTime = 0;//设置播放的音频的起始时间
-  //     audio.volume = 0.5;//设置音频的声音大小
-  //     audio.muted = false;//关闭静音状态
-  //     play = true;
-  //     setTimeout(function(){
-  //         play = false;
-  //         audio.muted = true;//播放完毕，开启静音状态
-  //     },t2);
-  // }
-  // setInterval(function(){
-  //     run();//假装在轮询服务器，或者从websocket拉取数据
-  // },t1);
+  // 柱状图
+  function columnarCharts() {
+    var _dataY = []
+    var _dataX = []
+    _.find(dashboardChartsData.Data, function(val, key) {
+      var _value = ''
+      switch (key) {
+        case 'Wear':
+          _value = formattDataY('戴机', Number(val.Finished), Number(val.Unfinished))
+          break;
 
-  // setTimeout(function() {
-  //   $('#ntfAudio')[0].play();
-  // }, 20000)
+        case 'Import':
+          _value = formattDataY('录入', Number(val.Finished), Number(val.Unfinished))
+          break;
 
-  // $('<audio id="ntfAudio"><source src="./11.wav" type="audio/ogg"><source src="./11.wav" type="audio/mpeg"><source src="./11.wav" type="audio/wav"></audio>').appendTo('body');
+        case 'Analysis':
+          _value = formattDataY('分析', Number(val.Finished), Number(val.Unfinished))
+          break
+      }
+
+      _dataY.push(_value)
+      if (Number(val.Finished) === 0) {
+        _dataX.push(0)
+      } else {
+        _dataX.push((Number(val.Finished) / (Number(val.Finished) + Number(val.Unfinished))))
+      }
+    })
+  }
+
+  function throttle(fn, delay) {
+    let valid = true
+    return function() {
+      if (!valid) {
+        return false
+      }
+      // 工作时间，执行函数并且在间隔期内把状态位设为无效
+      valid = false
+      setTimeout(function() {
+        fn()
+        valid = true;
+      }, delay)
+    }
+  }
 </script>
 
 </html>

@@ -1,295 +1,212 @@
 #indexBox {
   margin-left: 99px;
   height: calc(100%);
-  padding: 28px 28px 28px 0px;
+  padding: 28px 0px;
   position: relative;
   overflow: hidden;
+  background: #f5f5f5;
 }
 
-#indexBox .index-left {
-  height: 100%;
+#indexBox .top {
+  margin-top: 28px;
+  height: 413px;
+  width: 100%;
+}
+
+#indexBox .top-left {
   width: 660px;
+  height: calc(100% - 2px);
+  margin-left: 28px;
   float: left;
 }
 
-#indexBox .index-right {
-  float: left;
-  width: calc(100% - 647px);
-  background: #ebebeb;
-}
-
-.top-left-wapper {
-  height: 405px;
+#indexBox .top-left .time {
   width: 100%;
-  background: #fff;
-  padding: 28px;
-  /* float: left; */
-}
-
-.top-left-wapper .left-inner-wapper {
-  height: 365px;
-  background: url('../../images/index-top-bg.png') no-repeat;
-  background-size: 100% 100%;
-  position: relative;
-}
-
-.top-left-wapper .left-inner-wapper .today {
-  font-size: 24px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  background: #43b3be;
   color: #fff;
-  position: absolute;
-  left: calc((100% - 75px) / 2);
-  top: 19px;
-  font-weight: 700;
 }
 
-#indexBox .index-left .index-left-bottom {
-  height: calc(100% - 405px);
+#indexBox .top-left .dashboard {
   width: 100%;
-  padding: 20px;
-  padding-top: 0px;
-  overflow: hidden;
+  height: calc(413px - 60px);
+  border: 1px solid #b5b5b5;
+  padding: 40px;
+  border-top: none;
+  background: #fff;
+}
+
+#indexBox .top-left .dashboard .dashboard-left {
+  width: 190px;
+  height: 189px;
+  margin-top: calc(113px - 80px);
+  float: left;
+}
+
+#indexBox .top-left .dashboard .dashboard-left div {
+  width: 100%;
+  float: left;
+  font-weight: bold;
+}
+
+.dashboard-left .analysis {
+  font-size: 22px;
+  color: #231814;
+  margin-bottom: 27px;
+}
+
+.workload,
+.crisis,
+.memorize {
+  font-size: 18px;
+  color: #7092bf;
+  margin-bottom: 23px;
+}
+
+.crisis {
+  color: red;
+}
+
+.memorize {
+  color: #ffc911;
+}
+
+.use {
+  font-size: 18px;
+  color: #231814;
+}
+
+#indexBox .top-left .dashboard .dashboard-right {
+  width: calc(100% - 190px - 23px);
+  height: 100%;
+  margin-left: 23px;
+  float: left;
+}
+
+#indexBox .top-left .dashboard .dashboard-right .count {
+  width: 100%;
+  text-align: left;
+  font-size: 90px;
+  font-weight: bold;
+  color: #ff8000;
+  line-height: 70px;
+}
+
+#indexBox .top-left .dashboard .dashboard-right .progress {
+  width: 100%;
+  height: calc(100% - 90px);
+  margin-top: 20px;
+  border: 1px solid #000;
+}
+
+#indexBox .top-left .dashboard .dashboard-right .progress .progress-left {
+  width: 70px;
+  height: 100%;
+  border: 1px solid red;
+}
+
+
+/* 上右 */
+
+#indexBox .top-right {
+  width: calc(100% - 660px - 13px - 28px * 2);
+  height: 100%;
+  margin-left: 13px;
+  float: left;
+  background: #fff;
+}
+
+#indexBox .top-right .title {
+  height: 58px;
+  width: 100%;
+  background: #efefef;
+  border: 1px solid #b5b5b5;
+  font-size: 30px;
+  color: #221914;
+  text-align: center;
+  line-height: 58px;
+}
+
+#indexBox .top-right .statistical-charts {
+  width: 100%;
+  height: calc(100% - 58px);
+  border: 1px solid #b5b5b5;
+  border-top: 0px;
+}
+
+
+/* 下面表格样式 */
+
+#indexBox .bottom {
+  height: calc(100% - 413px - 27px);
+  width: 100%;
+  padding: 27px 28px;
   position: relative;
 }
 
-#indexBox .index-left .index-left-bottom .bottom-inner {
-  width: 100%;
-  height: 100%;
-  padding: 35px 20px;
-  background: #eaeaea;
-}
-
-#indexBox .index-left .index-left-bottom .bottom-inner hr {
-  vertical-align: middle;
-  display: inline-block;
-}
-
-#indexBox .index-left .index-left-bottom .bottom-inner .title {
-  display: inline-block;
-  width: 104px;
-  text-align: center;
-  font-size: 20px;
-  color: #9c9c9c;
-  font-weight: 700;
-}
-
-#indexBox .index-left .index-left-bottom .bottom-inner .hr-content {
-  min-height: 60px;
-  font-size: 16px;
-  color: #666;
-}
-
-.top-right-wapper {
-  width: calc(100% - 6px);
-  height: 380px;
-  background: #fff;
-  float: left;
-  margin-left: 6px;
-  padding: 20px;
+#indexBox .bottom .table-wapper {
+  width: calc(100% - 55px);
+  height: 45vh;
   overflow: hidden;
 }
 
-.top-right-wapper .echarts-box {
+#indexBox .bottom .table-wapper .title {
+  height: 48px;
+  line-height: 48px;
   width: 100%;
-  height: 100%;
-  background: #d6dadd;
-  overflow: hidden;
-}
-
-.index-right .table-wapper {
-  width: 100%;
-  height: 30%;
-  margin-top: 5px;
-  float: left;
-  background: #fff;
-  padding-top: 20px;
-  padding-right: 30px;
-  position: relative;
-}
-
-._1st-pie-chart-box {
-  width: 180px;
-  height: 180px;
-  position: absolute;
-  top: calc((100% - 180px) / 2);
-  left: 20px;
-}
-
-._2nd-pie-chart-box {
-  width: 180px;
-  height: 180px;
-  position: absolute;
-  top: calc((100% - 180px) / 2);
-  left: 220px;
-}
-
-._3rd-pie-chart-box {
-  width: 180px;
-  height: 180px;
-  position: absolute;
-  top: calc((100% - 180px) / 2);
-  left: 420px;
-}
-
-.echarts-sub-title {
-  width: 100%;
-  font-size: 16px;
   text-align: center;
+  background: #ddd;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.top-left-wapper .left-inner-wapper .mark {
-  width: 220px;
-  height: 20px;
-  line-height: 20px;
-  position: absolute;
-  right: 28px;
-  bottom: 27px;
+table.table-inner-wapper tr:nth-child(even) {
+  background: #e2fcf9;
 }
 
-.top-left-wapper .left-inner-wapper .mark li {
-  float: left;
-  display: flex;
-  align-items: center;
+table.table-inner-wapper tr:nth-child(odd) {
+  background: #fff;
 }
 
-.top-left-wapper .left-inner-wapper .mark li:last-child {
-  margin-left: 26px;
-}
-
-.top-left-wapper .left-inner-wapper .mark .mark-color {
-  width: 34px;
-  height: 20px;
-  display: inline-block;
-  background: #4dbdc8;
-  margin-right: 20px;
-}
-
-.top-left-wapper .left-inner-wapper .mark .light {
-  background: #d6dadd;
-}
-
-table.table-inner-wapper {
+.table-wapper table.table-inner-wapper {
   display: table;
-  height: calc(100% - 405px);
-  width: 95%;
+  width: 100%;
+  height: 2vh;
   border-collapse: collapse;
 }
 
-table.table-inner-wapper .scroll-body {
+table.table-inner-wapper tbody {
   display: block;
-  max-height: 260px;
-  width: 100%;
-  border-right: 1px solid #cad9de;
-  overflow-x: hidden;
-}
-
-table.table-inner-wapper .scroll-body:hover {
+  height: 45vh;
   overflow-y: auto;
 }
 
-
-/*滚动条样式：谷歌浏览器下*/
-
-::-webkit-scrollbar {
-  width: 14px;
-  height: 5px;
-  background-color: #f5f7fa;
-}
-
-
-/*滚动条的轨道*/
-
-::-webkit-scrollbar-track {
-  /*box-shadow: inset 0 0 5px rgba(0,0,0,.3);*/
-  background-color: #f5f7fa;
-}
-
-
-/*滚动条的滑块按钮*/
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #c5cdd0;
-  /*box-shadow: inset 0 0 5px #000;*/
-}
-
-
-/*滚动条的上下两端的按钮*/
-
-::-webkit-scrollbar-button {
-  height: 0px;
-  /* background-color: #B0AEDA; */
-}
-
-table.table-inner-wapper .scroll-body tr:nth-child(even) {
-  background: #edeef0;
-}
-
-table thead,
-tbody tr {
+table.table-inner-wapper tbody tr {
   display: table;
-  width: 100%;
+  width: calc(100% - 1px);
   table-layout: fixed;
+}
+
+table.table-inner-wapper thead {
+  width: calc( 100% - 1em);
+}
+
+.table-wapper table.table-inner-wapper .date {
+  font-weight: 600;
 }
 
 table.table-inner-wapper td,
 table.table-inner-wapper th {
   border: 1px solid #cad9de;
   font-size: 16px;
-  height: 20px;
+  height: 30px;
   cursor: pointer;
   text-align: center;
   padding: 5px;
-}
-
-table.table-inner-wapper td.tb-title,
-table.table-inner-wapper td.tb-date {
-  background: #c5cdd0;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-table.table-inner-wapper td.tb-date {
-  background: #fff;
-  font-weight: normal;
-}
-
-table.table-inner-wapper td.td-subtitle {
-  font-size: 14px;
-  color: #777777;
-}
-
-table.table-inner-wapper .scroll-wapper {
-  height: 40vh;
-  overflow-y: auto;
-}
-
-table.table-inner-wapper td.doc-time {
-  font-size: 12px;
-  color: #777;
-  position: relative;
-}
-
-table.table-inner-wapper td.doc-time span {
-  display: inline-block;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-
-table.table-inner-wapper td.doc-time .tip {
-  display: none;
-}
-
-table.table-inner-wapper td.doc-time:hover .tip {
-  display: block;
-  width: 80px;
-  padding: 6px;
-  position: absolute;
-  left: 100%;
-  top: 0px;
-  z-index: 111;
-  background: #fff;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -299,7 +216,7 @@ table.table-inner-wapper td.doc-time:hover .tip {
   width: 35px;
   height: 252px;
   position: absolute;
-  top: 20px;
+  top: 27px;
   right: 20px;
 }
 
@@ -333,20 +250,4 @@ table.table-inner-wapper td.doc-time:hover .tip {
   float: right;
   line-height: 25px;
   margin-right: 20px;
-}
-
-#empty-img {
-  display: none;
-  width: 300px;
-  height: 300px;
-  position: absolute;
-  left: calc((100% - 300px) / 2);
-  top: calc((100% - 300px) / 2);
-}
-
-#hello {
-  display: none;
-  position: absolute;
-  top: 0;
-  z-index: 111;
 }

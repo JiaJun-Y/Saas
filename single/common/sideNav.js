@@ -35,10 +35,10 @@ $(function() {
 function currentPath() {
   var _href = window.location.href
   if (_href.indexOf('app') > -1) {
-    $('#app').css({ 'color': '#4dbdc8' })
+    $('#app').css({ 'color': '#fff', 'background': '#43b3be' })
     $('#app .img-box').css({ 'background': "url(' + ../../images/home.png') no-repeat", 'backgroundSize': '100% 100%' })
   } else if (_href.indexOf('book') > -1) {
-    $('#book').css({ 'color': '#4dbdc8' })
+    $('#book').css({ 'color': '#fff', 'background': '#43b3be' })
     $('#book .img-box').css({ 'background': "url(' + ../../images/side-check-light.png') no-repeat", 'backgroundSize': '100% 100%' })
   }
 }

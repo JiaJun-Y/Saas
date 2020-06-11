@@ -1,0 +1,352 @@
+#indexBox {
+  margin-left: 99px;
+  height: calc(100%);
+  padding: 28px 28px 28px 0px;
+  position: relative;
+  overflow: hidden;
+}
+
+#indexBox .index-left {
+  height: 100%;
+  width: 660px;
+  float: left;
+}
+
+#indexBox .index-right {
+  float: left;
+  width: calc(100% - 647px);
+  background: #ebebeb;
+}
+
+.top-left-wapper {
+  height: 405px;
+  width: 100%;
+  background: #fff;
+  padding: 28px;
+  /* float: left; */
+}
+
+.top-left-wapper .left-inner-wapper {
+  height: 365px;
+  background: url('../../images/index-top-bg.png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.top-left-wapper .left-inner-wapper .today {
+  font-size: 24px;
+  color: #fff;
+  position: absolute;
+  left: calc((100% - 75px) / 2);
+  top: 19px;
+  font-weight: 700;
+}
+
+#indexBox .index-left .index-left-bottom {
+  height: calc(100% - 405px);
+  width: 100%;
+  padding: 20px;
+  padding-top: 0px;
+  overflow: hidden;
+  position: relative;
+}
+
+#indexBox .index-left .index-left-bottom .bottom-inner {
+  width: 100%;
+  height: 100%;
+  padding: 35px 20px;
+  background: #eaeaea;
+}
+
+#indexBox .index-left .index-left-bottom .bottom-inner hr {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+#indexBox .index-left .index-left-bottom .bottom-inner .title {
+  display: inline-block;
+  width: 104px;
+  text-align: center;
+  font-size: 20px;
+  color: #9c9c9c;
+  font-weight: 700;
+}
+
+#indexBox .index-left .index-left-bottom .bottom-inner .hr-content {
+  min-height: 60px;
+  font-size: 16px;
+  color: #666;
+}
+
+.top-right-wapper {
+  width: calc(100% - 6px);
+  height: 380px;
+  background: #fff;
+  float: left;
+  margin-left: 6px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.top-right-wapper .echarts-box {
+  width: 100%;
+  height: 100%;
+  background: #d6dadd;
+  overflow: hidden;
+}
+
+.index-right .table-wapper {
+  width: 100%;
+  height: 30%;
+  margin-top: 5px;
+  float: left;
+  background: #fff;
+  padding-top: 20px;
+  padding-right: 30px;
+  position: relative;
+}
+
+._1st-pie-chart-box {
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  top: calc((100% - 180px) / 2);
+  left: 20px;
+}
+
+._2nd-pie-chart-box {
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  top: calc((100% - 180px) / 2);
+  left: 220px;
+}
+
+._3rd-pie-chart-box {
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  top: calc((100% - 180px) / 2);
+  left: 420px;
+}
+
+.echarts-sub-title {
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+}
+
+.top-left-wapper .left-inner-wapper .mark {
+  width: 220px;
+  height: 20px;
+  line-height: 20px;
+  position: absolute;
+  right: 28px;
+  bottom: 27px;
+}
+
+.top-left-wapper .left-inner-wapper .mark li {
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.top-left-wapper .left-inner-wapper .mark li:last-child {
+  margin-left: 26px;
+}
+
+.top-left-wapper .left-inner-wapper .mark .mark-color {
+  width: 34px;
+  height: 20px;
+  display: inline-block;
+  background: #4dbdc8;
+  margin-right: 20px;
+}
+
+.top-left-wapper .left-inner-wapper .mark .light {
+  background: #d6dadd;
+}
+
+table.table-inner-wapper {
+  display: table;
+  height: calc(100% - 405px);
+  width: 95%;
+  border-collapse: collapse;
+}
+
+table.table-inner-wapper .scroll-body {
+  display: block;
+  max-height: 260px;
+  width: 100%;
+  border-right: 1px solid #cad9de;
+  overflow-x: hidden;
+}
+
+table.table-inner-wapper .scroll-body:hover {
+  overflow-y: auto;
+}
+
+
+/*滚动条样式：谷歌浏览器下*/
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 5px;
+  background-color: #f5f7fa;
+}
+
+
+/*滚动条的轨道*/
+
+::-webkit-scrollbar-track {
+  /*box-shadow: inset 0 0 5px rgba(0,0,0,.3);*/
+  background-color: #f5f7fa;
+}
+
+
+/*滚动条的滑块按钮*/
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #c5cdd0;
+  /*box-shadow: inset 0 0 5px #000;*/
+}
+
+
+/*滚动条的上下两端的按钮*/
+
+::-webkit-scrollbar-button {
+  height: 0px;
+  /* background-color: #B0AEDA; */
+}
+
+table.table-inner-wapper .scroll-body tr:nth-child(even) {
+  background: #edeef0;
+}
+
+table thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table.table-inner-wapper td,
+table.table-inner-wapper th {
+  border: 1px solid #cad9de;
+  font-size: 16px;
+  height: 20px;
+  cursor: pointer;
+  text-align: center;
+  padding: 5px;
+}
+
+table.table-inner-wapper td.tb-title,
+table.table-inner-wapper td.tb-date {
+  background: #c5cdd0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+table.table-inner-wapper td.tb-date {
+  background: #fff;
+  font-weight: normal;
+}
+
+table.table-inner-wapper td.td-subtitle {
+  font-size: 14px;
+  color: #777777;
+}
+
+table.table-inner-wapper .scroll-wapper {
+  height: 40vh;
+  overflow-y: auto;
+}
+
+table.table-inner-wapper td.doc-time {
+  font-size: 12px;
+  color: #777;
+  position: relative;
+}
+
+table.table-inner-wapper td.doc-time span {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+table.table-inner-wapper td.doc-time .tip {
+  display: none;
+}
+
+table.table-inner-wapper td.doc-time:hover .tip {
+  display: block;
+  width: 80px;
+  padding: 6px;
+  position: absolute;
+  left: 100%;
+  top: 0px;
+  z-index: 111;
+  background: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 切换日历 */
+
+.table-wapper .change-week {
+  width: 35px;
+  height: 252px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.table-wapper .change-week .table-date-img {
+  display: block;
+  margin-bottom: 9px;
+  cursor: pointer;
+}
+
+
+/* 底部样式 */
+
+.index-bottom {
+  height: 25px;
+  width: 100%;
+  background: #000;
+  position: absolute;
+  bottom: 0px;
+  color: #fff;
+}
+
+.index-bottom ul {
+  float: right;
+}
+
+.index-bottom a {
+  color: #1989fa;
+}
+
+.index-bottom ul li {
+  float: right;
+  line-height: 25px;
+  margin-right: 20px;
+}
+
+#empty-img {
+  display: none;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  left: calc((100% - 300px) / 2);
+  top: calc((100% - 300px) / 2);
+}
+
+#hello {
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 111;
+}

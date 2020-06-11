@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./common/css/reset.css">
+  <link rel="stylesheet" href="./common/css/header.css">
+  <link rel="stylesheet" href="./common/css/sideNav.css">
+  <link rel="stylesheet" href="./common/css/app.css">
+
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <!-- <script src="./common/header.js"></script> -->
+  <script src="./common/sideNav.js"></script>
+  <!-- <script src="./common/js/protocolcheck.js"></script> -->
+  <script src="./common/js/lodash.min.js"></script>
+  <script src="./common/js/utils.js"></script>
+  <script src="./common/js/echarts.min.js"></script>
+  <script src="./common/js/moment.min.js"></script>
+
+  <!-- mockData need delete-->
+
+  <title>首页</title>
+</head>
+
+<body>
+  <!-- 顶部导航条 -->
+  <div id="topNav">
+    <div class='top-nav'>
+      <!-- <div class='time'>
+        <div class='img-box'>
+          <img src='./images/calendar.png' />
+        </div>
+        <div id='time'></div>
+      </div> -->
+      <div class='user'>
+        <div id='name'>连花清瘟胶囊</div>
+        <div class='sub-title'>医生，欢迎使用分规心电</div>
+        <span class='line'></span>
+        <div class='img-box'>
+          <img src='./images/quit.png' />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="order-wapper"> -->
+  <!-- 侧边栏 -->
+  <div id="sideNav">
+    <div class='broadside-nav'>
+      <ul>
+        <!-- 已改 -->
+        <li onclick='jump(this)' id='app'>
+          <div class='img-box'>
+            <div class="circle">0</div>
+          </div>
+          <p>主页</p>
+
+        </li>
+        <li onclick='jump(this)' id='book'>
+          <div class='img-box'>
+            <div class="circle">1</div>
+          </div>
+          <p>检查接待</p>
+
+        </li>
+
+        <li onclick='jump(this)' id="analysis">
+          <div class='img-box'>
+            <div class="circle">22</div>
+          </div>
+          <p>分析诊断</p>
+        </li>
+
+        <li onclick='jump(this)'>
+          <div class='img-box'>
+            <div class="circle">
+              99+
+            </div>
+          </div>
+          <p>更多功能</p>
+        </li>
+
+        <!-- <div id="newMessage">111</div> -->
+        <!-- <audio src="./11.wav" muted autoplay id="myaudio" style="display: none"></audio> -->
+      </ul>
+
+      <div class='bottom-opt'>
+        <div class='opt-left' onclick='help()'>
+          <img src='./images/help.png' />
+          <span>帮助</span>
+        </div>
+
+        <div class='opt-right' id="setting">
+          <img src='./images/config.png' />
+          <span>设置</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 帮助弹框 -->
+    <div class='wx-code-wapper'>
+      <div id='popLayer'></div>
+      <div id='wx-code-box'>
+        <div class='code-wapper'>
+          <div class='title'>操作遇到问题？
+            <span class='close' id='close'>
+                  <img src='./images/guanbi.png' alt=''>
+                </span>
+          </div>
+          <div class='wx-img-box'>
+            <img src='./images/qr_gzh.png' alt=''>
+          </div>
+          <p>扫一扫</p>
+          <p>关注分规心电公众号</p>
+          <p>回复
+            <span>“帮助”</span> 获取操作说明
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 设置tooltip -->
+    <div class='config-wapper'>
+      <div class='tooltip'>
+        <p onclick='changeMsg()'>信息修改</p>
+        <p onclick="downPlug()">插件下载</p>
+        <p onclick="handleConfig()">预约设置</p>
+        <span class='triangle'></span>
+      </div>
+    </div>
+
+    <!-- 信息修改弹框 -->
+    <div class='msg-wapper'>
+      <div id='popLayer'></div>
+      <div id='msg-pop'>
+        <div class='title'>信息修改</div>
+        <div class='msg-middle' id='msg-middle'>
+          <div class='msg-input-box'>
+            <span class='input-title'>姓名：</span>
+            <input type='text' value='' name='name'>
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>性别：</span>
+            <select name='gender' value='0'>
+                  <option value='male'>男</option>
+                  <option value='female'>女</option>
+                </select>
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>旧密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="old-password">
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>新密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="new-password">
+          </div>
+
+          <div class='msg-input-box'>
+            <span class='input-title'>确认密码：</span>
+            <input type='password' placeholder='不修改密码则不填' value='' name="comfire-password">
+          </div>
+
+        </div>
+        <div class='msg-footer'>
+          <div onclick='getPopMsg()'>确认</div>
+          <div id='closeMsgPop'>取消</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下载插件弹框 -->
+    <div class='plugIn-wapper'>
+      <div id='popLayer'></div>
+      <div id='plugIn'>
+        <div class='title'>插件下载</div>
+        <div class='plug-content'>
+          <span>院内采集端</span>
+          <a href=''>下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- app.html内容 -->
+  <div id="indexBox">
+    <div class="index-left">
+      <div class="top-left-wapper">
+        <div class="left-inner-wapper">
+          <div class="today">Today</div>
+
+          <div class="_1st-pie-chart-box">
+            <div id="_1st-pie" class="pie-chart-box" style="width: 100%;height:100%;"></div>
+            <div class="echarts-sub-title"></div>
+          </div>
+
+          <div class="_2nd-pie-chart-box">
+            <div id="_2nd-pie" class="pie-chart-box" style="width: 100%;height:100%;"></div>
+            <div class="echarts-sub-title"></div>
+          </div>
+
+          <div class="_3rd-pie-chart-box">
+            <div id="_3rd-pie" class="pie-chart-box" style="width: 100%;height:100%;"></div>
+            <div class="echarts-sub-title"></div>
+          </div>
+
+          <div class="mark">
+            <ul>
+              <li>
+                <div class="mark-color"></div>
+                <span>已完成</span>
+              </li>
+              <li>
+                <div class="mark-color light"></div>
+                <span>未完成</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- left - bottom -->
+      <div class="index-left-bottom">
+        <div class="bottom-inner"></div>
+
+        <!-- <img src="./images/empty.png" alt="" id="empty-img"> -->
+      </div>
+    </div>
+
+    <div class="index-right">
+      <div class="top-right-wapper">
+        <!-- top - right - charts -->
+        <div class="echarts-box">
+          <div id="main" style="height: 100%"></div>
+        </div>
+      </div>
+
+      <div class="table-wapper">
+        <table class="table-inner-wapper">
+          <thead>
+            <tr>
+              <td colspan="2" rowspan="3" class="tb-name">姓名</td>
+              <td colspan="3" class="tb-title">星期一</td>
+              <td colspan="3" class="tb-title">星期二</td>
+              <td colspan="3" class="tb-title">星期三</td>
+              <td colspan="3" class="tb-title">星期四</td>
+              <td colspan="3" class="tb-title">星期五</td>
+              <td colspan="3" class="tb-title">星期六</td>
+              <td colspan="3" class="tb-title">星期日</td>
+            </tr>
+            <tr>
+              <td colspan="3" class="tb-date">11月18日</td>
+              <td colspan="3" class="tb-date">11月18日</td>
+              <td colspan="3" class="tb-date">11月18日</td>
+              <td colspan="3" class="tb-date">11月18日</td>
+              <td colspan="3" class="tb-date">11月18日</td>
+              <td colspan="3" class="tb-date">11月18日</td>
+              <td colspan="3" class="tb-date">11月18日</td>
+            </tr>
+            <tr>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+              <td class="td-subtitle">上午</td>
+              <td class="td-subtitle">下午</td>
+              <td class="td-subtitle">值班</td>
+            </tr>
+          </thead>
+
+          <tbody class="scroll-body">
+          </tbody>
+
+        </table>
+
+        <div class="change-week">
+          <img src="./images/table-date.png" alt="" class="table-date-img" onclick="currentWeek()">
+          <img src="./images/be-week.png" alt="" class="table-date-img" id="beforWeek">
+          <img src="./images/next-week.png" alt="" class="table-date-img" id="nextWeek">
+          <img src="./images/table-p-config.png" alt="" class="table-date-img" onclick="goArrange()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="index-bottom">
+    <ul>
+      <li><a href="">点击查看详情>></a></li>
+      <li>版本号：build450.1.1</li>
+      <li>升级提示：2019/07/09</li>
+    </ul>
+  </div>
+
+  <!-- 设置弹框内容 -->
+  <div class="config-pop-wapper">
+    <div id="popLayer"></div>
+    <div id="config-pop">
+      <div class="title">设置</div>
+      <div class="from-box">
+        <p>设备数量上限<input type="text" id="count"></p>
+        <div class="info">
+          <div class="info-title">录入信息配置</div>
+          <div class="info-input-box">
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="1" />申请单号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="2" />住院号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="3" />门诊号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="4" />病人ID</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="5" />身份证号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="6" />手机号</div>
+            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="7" />住址</div>
+          </div>
+        </div>
+        <div class="button-groups">
+          <div class="comfire" onclick="handleConfigComfire()">确定</div>
+          <div class="cancel" onclick="cancel()">取消</div>
+        </div style="">
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  var AnalyticalDiagnosisPath = ''
+  var morkColumnar = {
+    "Version": 1,
+    "PHPSESSID": "3k2a9u5ump6t0c426lpuerla44",
+    "Data": {
+      "days": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"],
+      "nums": [32, 1, 2, 30, 2, 1, 1, 1, 2, 10, 11, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "RepCode": 0,
+    "RepMsg": "\u6210\u529f"
+  }
+
+  var mockLeftData = {
+    "Version": 1,
+    "PHPSESSID": "b25vq1ebnu44frm1mb0riomob7",
+    "Data": {
+      "Wear": {
+        "Finished": 0,
+        "Unfinished": 0
+      },
+      "Import": {
+        "Finished": 0,
+        "Unfinished": 0
+      },
+      "Analysis": {
+        "Finished": 0,
+        "Unfinished": 0
+      }
+    },
+    "ScheduleData": [{
+      "ID": "1",
+      "Name": "Holter",
+      "Mems": "test01"
+    }, {
+      "ID": "2",
+      "Name": "ECG",
+      "Mems": "test01\u3001test02"
+    }, {
+      "ID": "4",
+      "Name": "ECG1",
+      "Mems": "test01\u3001test02"
+    }, {
+      "ID": "6",
+      "Name": "\u503c\u73ed",
+      "Mems": ""
+    }],
+    "RepCode": 0,
+    "RepMsg": "\u6210\u529f"
+  }
+
+  var mockSchedulingData = {
+    "Version": 1,
+    "PHPSESSID": "b25vq1ebnu44frm1mb0riomob7",
+    "Data": {
+      "arrList": [{
+        "UserID": "3",
+        "UserName": "test01",
+        "list": [{
+          "AMItemName": "",
+          "PMItemName": ""
+        }, {
+          "AMItemName": "ECG\/ECG1",
+          "PMItemName": "Holter\/ECG"
+        }, {
+          "AMItemName": "",
+          "PMItemName": ""
+        }, {
+          "AMItemName": "",
+          "PMItemName": ""
+        }, {
+          "AMItemName": "",
+          "PMItemName": ""
+        }, {
+          "AMItemName": "",
+          "PMItemName": ""
+        }, {
+          "AMItemName": "",
+          "PMItemName": ""
+        }]
+      }]
+    },
+    "RepCode": 0,
+    "RepMsg": "\u6210\u529f"
+  }
+
+  $(function() {
+    getPathUrl()
+
+    // 柱形图
+    columnarData()
+
+    $("#popLayer").click(function(e) {
+      $("#popLayer").hide();
+      $('#config-pop').hide()
+    })
+
+    // 饼图
+    var mockPIEData = []
+    _.find(mockLeftData.Data, function(value, key) {
+      var arr = []
+      renderPieTip(key, value)
+
+
+      _.find(value, function(child, name) {
+        var obj = {}
+        obj.CURRENCY_TYPE = name === 'Finished' ? '已完成' : '未完成'
+        obj.AMOUNT = child
+        arr.push(obj)
+      })
+      mockPIEData.push(arr)
+    })
+
+    var _domArr = $('.pie-chart-box')
+    for (var dom = 0; dom < _domArr.length; dom++) {
+      initPieEchect(_domArr[dom].getAttribute('id'), mockPIEData[dom])
+    }
+
+    // 今天排班
+    toDayTable()
+
+    currentWeek()
+  })
+
+  // 跳转排班管理界面
+  function goArrange() {
+    window.open('/single/arrange.html', '_slef')
+  }
+
+  // 饼图文案
+  function renderPieTip(key, value) {
+    var _type = ''
+    var count = 0
+    var _className = ''
+
+    value.Finished = 0
+    value.Unfinished = 11
+
+    if (value.Finished > 0 || value.Unfinished > 0) {
+      count = Number(value.Finished / (value.Finished + value.Unfinished) * 100).toFixed(2)
+    } else {
+      count = 0
+    }
+
+    if (key === 'Wear') {
+      _type = '戴机（'
+      _className = '1st'
+    } else if (key === 'Import') {
+      _type = '录入（'
+      _className = '2nd'
+    } else {
+      _type = '分析（P/D：'
+      _className = '3rd'
+    }
+
+    $('._' + _className + '-pie-chart-box .echarts-sub-title').text(_type + count + '%）')
+  }
+
+  var countNum = 0
+    // 获取前一周
+  $('#beforWeek').on('click', throttle(function() {
+    countNum++
+    var dateFrom = moment().subtract(countNum, "weeks").format("YYYY-MM-DD");
+    var weekOfDay = moment(dateFrom).format('E')
+    var last_monday = moment(dateFrom).subtract(weekOfDay - 1, 'days').format('YYYY-MM-DD')
+
+    var _titleArr = $('.tb-date')
+    for (var i = 0; i < _titleArr.length; i++) {
+      $(_titleArr[i]).text(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
+    }
+    getTableData(last_monday)
+  }, 500))
+
+  // 获取后一周
+  $('#nextWeek').on('click', throttle(function() {
+    countNum--
+    var dateFrom = moment().subtract(countNum, "weeks").format("YYYY-MM-DD");
+    var weekOfDay = moment(dateFrom).format('E')
+    var last_monday = moment(dateFrom).subtract(weekOfDay - 1, 'days').format('YYYY-MM-DD')
+
+    var _titleArr = $('.tb-date')
+    for (var i = 0; i < _titleArr.length; i++) {
+      $(_titleArr[i]).text(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
+    }
+    getTableData(last_monday)
+  }, 500))
+
+  function throttle(fn, delay) {
+    let valid = true
+    return function() {
+      if (!valid) {
+        return false
+      }
+      // 工作时间，执行函数并且在间隔期内把状态位设为无效
+      valid = false
+      setTimeout(function() {
+        fn()
+        valid = true;
+      }, delay)
+    }
+  }
+
+  function currentWeek() {
+    countNum = 0
+    getTableData(renderTableTime())
+
+  }
+
+  // 今天排班渲染
+  function toDayTable() {
+    if (mockLeftData.ScheduleData && mockLeftData.ScheduleData.length > 0) {
+      $('#empty-img').hide()
+      $('.bottom-inner').show()
+      var _dom = '<div>'
+      _.map(mockLeftData.ScheduleData, function(value) {
+        _dom += '<hr class="hrLine" style="width: 40%" />'
+        _dom += '<div class="title">' + value.Name + '</div>'
+        _dom += '<hr class="hrLine" style="width: 40%;" />'
+        _dom += '<div class="hr-content">' + value.Mems + '</div>'
+        _dom += '</div>'
+      })
+      $('.bottom-inner').append(_dom)
+    } else {
+      $('.bottom-inner').hide()
+      $('#empty-img').show()
+    }
+  }
+
+  // 柱状图
+  function columnarData() {
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var dataset = []
+    var _days = morkColumnar.Data.days
+    dataset = _days.map(function(i) {
+      return {
+        name: i,
+        value: '',
+        itemStyle: {}
+      };
+    });
+
+    for (let i = 0; i < _days.length; i++) {
+      dataset[i].name = _days[i]
+      dataset[i].value = morkColumnar.Data.nums[i]
+    }
+
+    option = {
+      title: {
+        text: '本月病例一览表',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        formatter: function(params) {
+          for (x in params) {
+            return params[x].marker + params[x].data.value;
+          }
+        },
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '5%',
+        containLabel: true
+      },
+
+      xAxis: [{
+        type: 'category',
+        data: _days,
+        axisTick: {
+          show: false
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'transparent',
+          }
+        },
+        axisLabel: {
+          align: 'right',
+          interval: 0,
+          rotate: 30,
+          textStyle: {
+            color: '#4D4D4D'
+          }
+        }
+      }],
+      yAxis: {
+        show: false
+      },
+      series: [{
+        type: 'bar',
+        data: dataset,
+        itemStyle: {
+          normal: {　
+            color: function(params) {
+              if (params.value >= 30) {
+                return 'green'
+              } else if (params.value > 10) {
+                return '#FF552A'
+              } else {
+                return '#F08519'
+              }
+            }
+          }
+        }
+      }]
+    };
+    myChart.setOption(option);
+  }
+
+  // 获取表格数据
+  function getTableData(weekOfday) {
+    $('.scroll-body').empty()
+    var params = {
+      sDate: weekOfday
+    }
+    $.post('http://192.199.198.22:8005/arrange/currWeekArrange', params, function(res) {
+      if (!res) return
+      var outerData = res.Data.arrList
+      if (outerData.length > 0) {
+        for (var j = 0; j < outerData.length; j++) {
+          var tr = '<tr class="content-tr">'
+          var td = '<td class="doc-name" colspan="2">' + outerData[j].UserName + '</td>'
+          var childList = []
+          var childList = outerData[j].list
+          for (var i = 0; i < childList.length; i++) {
+            childList[i]['zhiri'] = ''
+            for (var con in childList[i]) {
+              td += '<td class="doc-time"><span>' + toShow(childList[i][con]) + '</span><div class="' + hasClassTip(childList[i][con]) + '">' + childList[i][con] + '</div>' + '</td>'
+            }
+          }
+          tr += td
+          tr += '</tr>'
+          $('.table-inner-wapper .scroll-body').append(tr)
+        }
+      } else {
+        var tr = '<tr class="content-tr"><td>暂无数据</td></tr>'
+        $('.table-inner-wapper .scroll-body').append(tr)
+      }
+    })
+  }
+
+
+  // 获取星期一的时间 及时间表头渲染
+  function renderTableTime(day) {
+    var _paramsDay = ''
+    if (day && day.length > 0) {
+      _paramsDay = moment(day, 'YYYY-MM-DD').format('E');
+    } else {
+      _paramsDay = moment().format('E')
+    }
+    var last_monday = moment().subtract(_paramsDay - 1, 'days').format('YYYY-MM-DD');
+    var _titleArr = $('.tb-date')
+    for (var i = 0; i < _titleArr.length; i++) {
+      if (i < 6) {
+        $(_titleArr[i]).text(moment().subtract(_paramsDay - (i + 1), 'days').format('YYYY-MM-DD'))
+      } else {
+        $(_titleArr[i]).text(moment().add(7 - _paramsDay, 'days').format('YYYY-MM-DD'))
+      }
+    }
+
+    return last_monday
+  }
+
+  function hasClassTip(str) {
+    if (str.length > 0) {
+      return 'tip'
+    } else {
+      return ''
+    }
+  }
+
+
+  function toShow(str) {
+    var _str = ''
+    if (str.length > 0) {
+      _str = str.substr(0, 4)
+    }
+
+    return _str
+  }
+
+
+  function getPathUrl() {
+    $.get('http://192.199.198.73:8005/ryservice/load_ry_app_list?token=NhGLmIwVe1l5%2FsS3VzM0ANyaV%2FnGAOmowD9Ac%2FfcnKiznWUJD%2Fxh5HpnYuDXwqyOZjQEyG20KO%2F5JH4seZVyvLXJOblussBySOplc0QvX2moZsUf8sOhFX7TQE1glDCzEym1AmVK8pSbIzL%2Fiu8mTHcj5XU1ekZN%2F717viDWB80%3D', function(res) {
+      console.log(res)
+      if (!res) return
+      var _appList = res.AppList
+      var _Holter = []
+      _Holter = _.filter(_appList, function(o) {
+        return o.AppDescription === 'Holter'
+      })
+
+      if (_Holter.length > 0 && _Holter[0].URL.length > 0) {
+        AnalyticalDiagnosisPath = _Holter[0].URL
+        console.log(AnalyticalDiagnosisPath)
+      } else {
+        console.log('a')
+      }
+    })
+  }
+
+  // 点击箭头
+  function arrow(e) {
+    var _currentTr = $(e).parent().parent().attr('class'); // Holter; ECG; ABPM; 
+    if ($(e).attr('class') && $(e).attr('class').indexOf('to-rotate') > -1) {
+      $(e).removeClass('to-rotate')
+      $('.' + _currentTr + '-child').hide()
+    } else {
+      $(e).addClass('to-rotate')
+      $('.' + _currentTr + '-child').show()
+    }
+  }
+
+  // 获取设置弹框信息
+  function handleConfigComfire() {
+    $("input[name='selectedRow']:checked").each(function(index, item) {
+      console.log($(this).val())
+    });
+    console.log($('#count').val())
+  }
+
+  // 关闭设置弹框
+  function cancel() {
+    $('#popLayer').hide()
+    $('#config-pop').hide()
+    $('input:checkbox[name="selectedRow"]').removeAttr('checked');
+    $('input').val('');
+  }
+
+  function initPieEchect(_id, oldData) {
+    var _postition = 'inner'
+    var myIstPie = echarts.init(document.getElementById(_id))
+    var oldData = oldData
+    var typeArr = []
+    var dataset = []
+    oldData.forEach(function(item) {
+      if (typeArr.indexOf(item.CURRENCY_TYPE) < 0) {
+        typeArr.push(item.CURRENCY_TYPE);
+      }
+    });
+    dataset = typeArr.map(function(CURRENCY_TYPE) {
+      return {
+        name: CURRENCY_TYPE,
+        value: ''
+      };
+    });
+    for (var i = 0; i < dataset.length; i++) {
+      for (var j = 0; j < oldData.length; j++) {
+        var _isZero = _.every(oldData, function(val) {
+          return val.AMOUNT === 0
+        })
+
+        if (dataset[i].name == oldData[j].CURRENCY_TYPE) {
+          if (_isZero) {
+            dataset[i].value = oldData[j].AMOUNT
+          } else {
+            dataset[i].value = oldData[j].AMOUNT === 0 ? '' : oldData[j].AMOUNT;
+          }
+        }
+      }
+    }
+
+    _.find(dataset, function(val, index) {
+      if (!_isZero) {
+        if (dataset[0].value == 0 || dataset[1].value == 0) {
+          return _postition = 'center'
+        } else {
+          return _postition = 'inner'
+        }
+      }
+    })
+
+    option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c} ({d}%)'
+      },
+      series: [{
+        type: 'pie',
+        radius: '80%',
+        center: ['50%', '50%'],
+        selectedMode: 'single',
+        data: dataset,
+        label: {
+          position: _postition,
+          formatter: function(data) {
+            return data.value
+          },
+          color: '#000',
+          fontSize: 14,
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          }
+        },
+        itemStyle: {
+          normal: {
+            color: function(params) {
+              var colorList = ['#4dbdc8', '#d6dadd']
+              return colorList[params.dataIndex]
+            }
+          }
+        }
+      }]
+    };
+    myIstPie.setOption(option);
+  }
+
+  /*
+   * muted 静音
+   * autoplay 自动播放
+   * loop 循环播放
+   */
+  // var audio = document.getElementById('myaudio');
+  // var t1 = 500;//如果是轮询，这个时间必须大于音频的长度。如果是webscoket，应该设置一个状态play，避免重复播放，如下：
+  // var t2 = 2500;//音频的长度，确保能够完整的播放给用户
+  // var play = false;
+  // function run(){
+  //     if(play){
+  //         return false;
+  //     }
+  //     audio.currentTime = 0;//设置播放的音频的起始时间
+  //     audio.volume = 0.5;//设置音频的声音大小
+  //     audio.muted = false;//关闭静音状态
+  //     play = true;
+  //     setTimeout(function(){
+  //         play = false;
+  //         audio.muted = true;//播放完毕，开启静音状态
+  //     },t2);
+  // }
+  // setInterval(function(){
+  //     run();//假装在轮询服务器，或者从websocket拉取数据
+  // },t1);
+
+  // setTimeout(function() {
+  //   $('#ntfAudio')[0].play();
+  // }, 20000)
+
+  // $('<audio id="ntfAudio"><source src="./11.wav" type="audio/ogg"><source src="./11.wav" type="audio/mpeg"><source src="./11.wav" type="audio/wav"></audio>').appendTo('body');
+</script>
+
+</html>

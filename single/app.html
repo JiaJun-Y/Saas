@@ -125,7 +125,7 @@
       <div class='tooltip'>
         <p onclick='changeMsg()'>信息修改</p>
         <p onclick="downPlug()">插件下载</p>
-        <p onclick="handleConfig()">预约设置</p>
+        <!-- <p onclick="handleConfig()">预约设置</p> -->
         <span class='triangle'></span>
       </div>
     </div>
@@ -206,7 +206,17 @@
             <div class="count">118</div>
             <div class="progress">
               <div class="progress-left"></div>
-              <div class="progress-right"></div>
+              <div class="progress-right">
+                <div class="progress-item wear">
+                  <strong id="wear" style="width:10%;"></strong>
+                </div>
+                <div class="progress-item import">
+                  <strong id="import" style="width:100%;"></strong>
+                </div>
+                <div class="progress-item panalysis">
+                  <strong id="panalysis" style="width:10%;"></strong>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -250,7 +260,7 @@
   </div>
 
   <!-- 设置弹框内容 -->
-  <div class="config-pop-wapper">
+  <!-- <div class="config-pop-wapper">
     <div id="popLayer"></div>
     <div id="config-pop">
       <div class="title">设置</div>
@@ -274,9 +284,10 @@
         </div style="">
       </div>
     </div>
-  </div>
+  </div> -->
 </body>
 <script>
+  var AnalyticalDiagnosisPath = ''
   var dashboardChartsData = {
     "Data": {
       "Wear": {
@@ -322,12 +333,37 @@
     "RepMsg": "\u6210\u529f"
   }
 
+  $("#popLayer").click(function(e) {
+    $("#popLayer").hide();
+    $('#config-pop').hide()
+  })
+
+  getPathUrl()
   columnarCharts()
   lineCharts()
   currentDate() // 获取表格数据
 
   var Days = []
   var countNum = 0
+
+  function getPathUrl() {
+    $.get('http://192.199.198.73:8005/ryservice/load_ry_app_list?token=NhGLmIwVe1l5%2FsS3VzM0ANyaV%2FnGAOmowD9Ac%2FfcnKiznWUJD%2Fxh5HpnYuDXwqyOZjQEyG20KO%2F5JH4seZVyvLXJOblussBySOplc0QvX2moZsUf8sOhFX7TQE1glDCzEym1AmVK8pSbIzL%2Fiu8mTHcj5XU1ekZN%2F717viDWB80%3D', function(res) {
+      console.log(res)
+      if (!res) return
+      var _appList = res.AppList
+      var _Holter = []
+      _Holter = _.filter(_appList, function(o) {
+        return o.AppDescription === 'Holter'
+      })
+
+      if (_Holter.length > 0 && _Holter[0].URL.length > 0) {
+        AnalyticalDiagnosisPath = _Holter[0].URL
+        console.log(AnalyticalDiagnosisPath)
+      } else {
+        console.log('a')
+      }
+    })
+  }
 
   // 表格数据处理
   function renderTable(tableData) {
@@ -471,20 +507,20 @@
   }
 
   // 获取设置弹框信息
-  function handleConfigComfire() {
-    $("input[name='selectedRow']:checked").each(function(index, item) {
-      console.log($(this).val())
-    });
-    console.log($('#count').val())
-  }
+  // function handleConfigComfire() {
+  //   $("input[name='selectedRow']:checked").each(function(index, item) {
+  //     console.log($(this).val())
+  //   });
+  //   console.log($('#count').val())
+  // }
 
-  // 关闭设置弹框
-  function cancel() {
-    $('#popLayer').hide()
-    $('#config-pop').hide()
-    $('input:checkbox[name="selectedRow"]').removeAttr('checked');
-    $('input').val('');
-  }
+  // // 关闭设置弹框
+  // function cancel() {
+  //   $('#popLayer').hide()
+  //   $('#config-pop').hide()
+  //   $('input:checkbox[name="selectedRow"]').removeAttr('checked');
+  //   $('input').val('');
+  // }
 
   function formattDataY(type, finished, unfinished) {
     var _value = ''
@@ -522,6 +558,15 @@
       } else {
         _dataX.push((Number(val.Finished) / (Number(val.Finished) + Number(val.Unfinished))))
       }
+    })
+
+    _.find(_dataY, function(val, index) {
+      var _dom = '<div class="sign">'+val+'</div>'
+      $('.progress-left').append(_dom)
+    })
+
+    _.find($('.progress-right strong'), function (child, _index) {
+      $(child).css('width', _dataX[_index] * 100 + '%')
     })
   }
 

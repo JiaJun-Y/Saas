@@ -52,17 +52,17 @@ function jump(a) {
     switch ($(a).attr('id')) {
       case 'app':
         //  代码块
-        window.open('/single/app.html', '_self')
+        window.open('/Saas/single/app.html', '_self')
         break;
       case 'analysis':
-        window.open('/single/analysis.html', '_blank')
+        window.open('/Saas/single/analysis.html', '_blank')
         break;
       case 'book':
         //  代码块
         if (AnalyticalDiagnosisPath && AnalyticalDiagnosisPath.length > 0) {
           window.open(AnalyticalDiagnosisPath, '_self')
         } else {
-          window.open('/single/book.html', '_self')
+          window.open('/Saas/single/book.html', '_self')
         }
         break;
       default:

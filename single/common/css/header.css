@@ -1,6 +1,6 @@
 .top-nav {
-  height: 35px;
-  line-height: 35px;
+  height: 49px;
+  line-height: 49px;
   font-size: 20px;
   background: #000;
   border-bottom: 1px solid #c0c0c0;
@@ -10,7 +10,20 @@
   z-index: 2;
 }
 
-.top-nav .time {
+.top-nav .header-box {
+  float: left;
+  height: 26px;
+  margin-left: 30px;
+  margin-top: 6px;
+}
+
+.top-nav .header-box img {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* .top-nav .time {
   float: left;
   padding-left: 10px;
   font-size: 20px;
@@ -33,12 +46,12 @@
   float: left;
   height: 50px;
   line-height: 50px;
-}
+} */
 
 .top-nav .user {
   float: right;
-  height: 35px;
-  line-height: 35px;
+  height: 49px;
+  line-height: 49px;
   margin-right: 20px;
   color: #fff;
   font-size: 14px;
@@ -60,12 +73,13 @@
   margin: 9px;
   background: #c0c0c0;
   line-height: 20px;
+  display: none;
 }
 
 .top-nav .user .img-box {
   float: left;
   width: 26px;
   height: 26px;
-  margin: 4px 0px;
+  margin: 8px;
   cursor: pointer;
 }

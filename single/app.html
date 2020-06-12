@@ -33,6 +33,9 @@
         </div>
         <div id='time'></div>
       </div> -->
+      <div class="header-box">
+        <img src="./images/header-title.png" alt="">
+      </div>
       <div class='user'>
         <div id='name'>连花清瘟胶囊</div>
         <div class='sub-title'>医生，欢迎使用分规心电</div>
@@ -203,7 +206,7 @@
             <div class="use">使用次数：<span>1789/5000</span></div>
           </div>
           <div class="dashboard-right">
-            <div class="count">118</div>
+            <div class="count" id="analysisNum">118</div>
             <div class="progress">
               <div class="progress-left"></div>
               <div class="progress-right">
@@ -288,50 +291,6 @@
 </body>
 <script>
   var AnalyticalDiagnosisPath = ''
-  var dashboardChartsData = {
-    "Data": {
-      "Wear": {
-        "Finished": 0,
-        "Unfinished": 0
-      },
-      "Import": {
-        "Finished": 1,
-        "Unfinished": 0
-      },
-      "Analysis": {
-        "Finished": 2,
-        "Unfinished": 3
-      }
-    }
-  }
-
-  var morkColumnar = {
-    "Version": 1,
-    "PHPSESSID": "3k2a9u5ump6t0c426lpuerla44",
-    "Data": {
-      "days": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"],
-      "nums": [32, 1, 2, 30, 2, 1, 1, 1, 2, 10, 11, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    },
-    "RepCode": 0,
-    "RepMsg": "\u6210\u529f"
-  }
-
-  var tableData = {
-    "Version": 1,
-    "PHPSESSID": "7adu8ijnf5ni22m1v4ec140lp2",
-    "Items": ["ECG", "HOLTER", 'other'],
-    "Mems": [
-      ["\u5f20\u4e09\uff08AM\uff09\u3001\u674e\u56db\uff08PM\uff09", "\u5f20\u4e09\uff08AM\uff09", '1'],
-      ["\u5f20\u4e09\uff08AM\uff09\u3001\u674e\u56db\uff08PM\uff09", "\u5f20\u4e09\uff08AM\uff09", '1'],
-      ["", "", '1'],
-      ["", "", '1'],
-      ["", "", '1'],
-      ["\u5f20\u4e09\uff08AM\uff09", "\u674e\u56db\uff08AM\uff09", '1'],
-      ["\u5f20\u4e09\uff08AM\uff09", "\u674e\u56db\uff08AM\uff09", '1'],
-    ],
-    "RepCode": 0,
-    "RepMsg": "\u6210\u529f"
-  }
 
   $("#popLayer").click(function(e) {
     $("#popLayer").hide();
@@ -339,7 +298,8 @@
   })
 
   getPathUrl()
-  columnarCharts()
+  getPanelData()
+    // columnarCharts()
   lineCharts()
   currentDate() // 获取表格数据
 
@@ -366,10 +326,9 @@
   }
 
   // 表格数据处理
-  function renderTable(tableData) {
+  function renderTable(tableData, Days) {
     // 7天的日期 + 空数据
     $('.table-inner-wapper .main-body').empty()
-    completeLoading()
 
     for (var i = 0; i < Days.length; i++) {
       var tr = '<tr>'
@@ -381,7 +340,8 @@
         if (i === 0) {
           td += '<td>' + tableData.Items[j] + '</td>'
         } else {
-          td += '<td>' + tableData.Mems[i - 1][j] + '</td>'
+          var str = tableData.Mems[i - 1][j] ? tableData.Mems[i - 1][j] : ''
+          td += '<td>' + str + '</td>'
         }
       }
       tr += td
@@ -406,7 +366,8 @@
     for (var i = 0; i < 7; i++) {
       Days.push(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
     }
-    getTableData(last_monday)
+
+    getTableData(last_monday, Days)
   }
 
   // 当前一周
@@ -417,93 +378,101 @@
 
   // 获取前一周
   $('#beforWeek').on('click', throttle(function() {
-    showLoading()
     countNum++
     handleWeeks(countNum)
   }, 500))
 
   // 获取后一周
   $('#nextWeek').on('click', throttle(function() {
-    showLoading()
     countNum--
     handleWeeks(countNum)
   }, 500))
 
   // 调接口，获取表格数据
-  function getTableData(monday) {
-    console.log(monday)
-    renderTable(tableData)
+  function getTableData(monday, Days) {
+    var params = {
+      sDate: monday
+    }
+    $.post('http://192.199.198.22:8005/arrange/arrangeList', params, function(res) {
+      if (!res) return
+      renderTable(res, Days)
+    })
   }
 
   // 折现统计图
   function lineCharts() {
-    var statisticalChart = echarts.init(document.getElementById('statisticalMain'));
-    option = {
-      tooltip: {
-        trigger: 'axis'
-      },
-
-      grid: {
-        top: 10,
-        right: 20,
-        bottom: 20,
-        left: 20,
-        containLabel: true
-      },
-
-      xAxis: [{
-        type: 'category',
-        axisTick: {
-          alignWithLabel: true
+    $.post('http://192.199.198.22:8005/book/examData', function(res) {
+      if (!res) return
+      var morkColumnar = res
+      var statisticalChart = echarts.init(document.getElementById('statisticalMain'));
+      option = {
+        tooltip: {
+          trigger: 'axis'
         },
-        axisLine: {
-          lineStyle: {
-            color: '#888'
-          }
-        },
-        data: morkColumnar.Data.days
-      }],
 
-      yAxis: [{
-        type: 'value',
-        min: 0,
-        position: 'left',
-        axisLine: {
-          lineStyle: {
-            color: '#888'
-          }
+        grid: {
+          top: 10,
+          right: 20,
+          bottom: 20,
+          left: 20,
+          containLabel: true
         },
-        splitLine: {
-          lineStyle: {
-            type: 'dashed'
-          }
-        }
-      }],
 
-      series: [{
-        type: 'line',
-        symbolSize: 8,
-        itemStyle: {
-          normal: {
-            color: '#73b0e6', //改变折线点的颜色
+        xAxis: [{
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true
+          },
+          axisLine: {
             lineStyle: {
-              color: '#73b0e6' //改变折线颜色
+              color: '#888'
+            }
+          },
+          data: morkColumnar.Data.days
+        }],
+
+        yAxis: [{
+          type: 'value',
+          min: 0,
+          position: 'left',
+          axisLine: {
+            lineStyle: {
+              color: '#888'
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed'
             }
           }
-        },
-        lineStyle: {
-          normal: {
-            width: 3,
-            shadowColor: 'rgba(0,0,0,0.4)',
-            shadowBlur: 10,
-            shadowOffsetY: 10
-          }
-        },
-        data: morkColumnar.Data.nums
-      }]
-    };
+        }],
 
-    statisticalChart.setOption(option);
+        series: [{
+          type: 'line',
+          symbolSize: 8,
+          itemStyle: {
+            normal: {
+              color: '#73b0e6', //改变折线点的颜色
+              lineStyle: {
+                color: '#73b0e6' //改变折线颜色
+              }
+            }
+          },
+          lineStyle: {
+            normal: {
+              width: 3,
+              shadowColor: 'rgba(0,0,0,0.4)',
+              shadowBlur: 10,
+              shadowOffsetY: 10
+            }
+          },
+          data: morkColumnar.Data.nums
+        }]
+      };
+
+      statisticalChart.setOption(option);
+    })
+
   }
 
   // 获取设置弹框信息
@@ -522,6 +491,20 @@
   //   $('input').val('');
   // }
 
+  function getPanelData() {
+    $.post('http://192.199.198.22:8005/book/getPanelData', function(res) {
+      if (!res) return
+      var dashboardChartsData = res.Data
+      var countAnalysis = Number(dashboardChartsData.Analysis.Finished + dashboardChartsData.Analysis.Unfinished)
+      if (countAnalysis === 0) {
+        $('#analysisNum').text('0000')
+      } else {
+        $('#analysisNum').text(countAnalysis)
+      }
+      columnarCharts(dashboardChartsData)
+    })
+  }
+
   function formattDataY(type, finished, unfinished) {
     var _value = ''
     if (finished === 0) {
@@ -533,10 +516,10 @@
   }
 
   // 柱状图
-  function columnarCharts() {
+  function columnarCharts(dashboardChartsData) {
     var _dataY = []
     var _dataX = []
-    _.find(dashboardChartsData.Data, function(val, key) {
+    _.find(dashboardChartsData, function(val, key) {
       var _value = ''
       switch (key) {
         case 'Wear':
@@ -561,11 +544,11 @@
     })
 
     _.find(_dataY, function(val, index) {
-      var _dom = '<div class="sign">'+val+'</div>'
+      var _dom = '<div class="sign">' + val + '</div>'
       $('.progress-left').append(_dom)
     })
 
-    _.find($('.progress-right strong'), function (child, _index) {
+    _.find($('.progress-right strong'), function(child, _index) {
       $(child).css('width', _dataX[_index] * 100 + '%')
     })
   }

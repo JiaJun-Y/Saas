@@ -9,7 +9,7 @@
   cursor: pointer;
   top: 0px;
   left: 0px;
-  padding-top: 35px;
+  padding-top: 49px;
   overflow: hidden;
   z-index: 1;
 }
@@ -20,6 +20,7 @@
   padding: 10px 0px;
   border-bottom: 1px solid #ebebeb;
   color: #ccc;
+  cursor: pointer;
 }
 
 #sideNav ul li p {
@@ -28,6 +29,7 @@
 
 #sideNav ul li:hover {
   background-color: #3e3a39;
+  cursor: pointer;
 }
 
 #sideNav ul li:nth-child(1):hover .img-box {
@@ -36,7 +38,7 @@
 }
 
 #sideNav ul li:nth-child(1) .img-box {
-  background: url('../../images/home-dark\ .png') no-repeat;
+  background: url('../../images/home-dark.png') no-repeat;
   background-size: 100% 100%;
   position: relative;
 }

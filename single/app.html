@@ -336,14 +336,28 @@
       if (i > 0) {
         td = '<td>' + Days[i] + '\xa0' + '(' + DX(i) + ')' + '</td>'
       }
-      for (var j = 0; j < tableData.Items.length; j++) {
-        if (i === 0) {
-          td += '<td>' + tableData.Items[j] + '</td>'
-        } else {
-          var str = tableData.Mems[i - 1][j] ? tableData.Mems[i - 1][j] : ''
-          td += '<td>' + str + '</td>'
+
+      if (tableData.Items.length === 0) {
+        var emptyArr = new Array()
+        emptyArr.unshift('ECG', '', '', '', '')
+        for (var j = 0; j < emptyArr.length; j++) {
+          if (i === 0) {
+            td += '<td>' + emptyArr[j] + '</td>'
+          } else {
+            td += '<td></td>'
+          }
+        }
+      } else {
+        for (var j = 0; j < tableData.Items.length; j++) {
+          if (i === 0) {
+            td += '<td>' + tableData.Items[j] + '</td>'
+          } else {
+            var str = tableData.Mems[i - 1][j] ? tableData.Mems[i - 1][j] : ''
+            td += '<td>' + str + '</td>'
+          }
         }
       }
+
       tr += td
       tr += '</tr>'
       $('.table-inner-wapper .main-body').append(tr)

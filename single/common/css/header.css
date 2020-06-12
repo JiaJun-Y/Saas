@@ -1,6 +1,6 @@
 .top-nav {
-  height: 49px;
-  line-height: 49px;
+  height: 35px;
+  line-height: 35px;
   font-size: 20px;
   background: #000;
   border-bottom: 1px solid #c0c0c0;
@@ -50,8 +50,8 @@
 
 .top-nav .user {
   float: right;
-  height: 49px;
-  line-height: 49px;
+  height: 35px;
+  line-height: 35px;
   margin-right: 20px;
   color: #fff;
   font-size: 14px;
@@ -80,6 +80,6 @@
   float: left;
   width: 26px;
   height: 26px;
-  margin: 8px;
+  margin: 4px;
   cursor: pointer;
 }

@@ -423,7 +423,7 @@ html {
 body {
   height: 100%;
   width: 100%;
-  background-color: #404040;
+  background-color: #808080;
   background-image: url(images/texture.png);
 }
 
@@ -632,7 +632,7 @@ html[dir='rtl'] #sidebarContent {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   position: absolute;
-  top: 32px;
+  top: 65px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -675,6 +675,7 @@ html[dir='rtl'] #outerContainer.sidebarOpen #viewerContainer:not(.pdfPresentatio
   right: 0;
   z-index: 9999;
   cursor: default;
+  top: 35px;
 }
 
 #toolbarContainer {
@@ -718,7 +719,7 @@ html[dir='rtl'] #sidebarResizer {
 .findbar,
 .secondaryToolbar {
   position: relative;
-  height: 32px;
+  /* height: 32px; */
   background-color: #474747;
   /* fallback */
   background-image: url(images/texture.png), linear-gradient(hsla(0, 0%, 32%, .99), hsla(0, 0%, 27%, .95));
@@ -736,16 +737,137 @@ html[dir='rtl'] #toolbarContainer,
   box-shadow: inset 0 1px 1px hsla(0, 0%, 0%, .15), inset 0 -1px 0 hsla(0, 0%, 100%, .05), 0 1px 0 hsla(0, 0%, 0%, .15), 0 1px 1px hsla(0, 0%, 0%, .1);
 }
 
+
+/* 自定义样式开始 */
+
 #toolbarViewer {
-  height: 32px;
+  height: 30px;
+  background: rgb(243, 243, 243);
 }
+
+#toolbarViewer .bar-decoration {
+  width: 6px;
+  height: 21px;
+  margin-top: calc((30px - 21px) / 2);
+}
+
+#toolbarViewer .mul-view img,
+#toolbarViewer .singe-view img,
+#toolbarViewer .narrow img,
+#toolbarViewer .bigger img,
+#toolbarViewer .bar-previous-page img,
+#toolbarViewer .bar-next-page img,
+#toolbarViewer .bar-decoration img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+#toolbarViewer .bar-print img {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 5px;
+  margin-top: 6px;
+}
+
+#toolbarViewer .bar-print {
+  height: 30px;
+  width: 51px;
+  line-height: 30px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+#toolbarViewer .bar-print span {
+  float: left;
+  display: inline-block;
+  font-size: 14px;
+}
+
+#toolbarViewer .bar-pint-line {
+  width: 2px;
+  height: 26px;
+  background: rgb(225, 225, 225);
+  margin: 2px 8px;
+}
+
+#toolbarViewer .bar-previous-page {
+  margin: 5px 10px 6px 0px;
+  background-color: rgb(243, 243, 243);
+}
+
+#toolbarViewer .bar-next-page {
+  margin: 4px 3px 6px 0px;
+  background-color: rgb(243, 243, 243);
+}
+
+
+/* 
+#toolbarViewer .bar-page {
+  width: 120px;
+} */
+
+#toolbarViewer .bigger {
+  width: 16px;
+  height: 16px;
+  margin: 8px 7px 6px 150px;
+  background-color: rgb(243, 243, 243);
+}
+
+#toolbarViewer .mul-view,
+#toolbarViewer .singe-view {
+  margin-left: 10px;
+  margin: 6px 7px 0px 7px;
+  background-color: rgb(243, 243, 243);
+}
+
+#toolbarViewer .narrow {
+  width: 17px;
+  height: 17px;
+  margin: 7px 7px 6px 0px;
+  background-color: rgb(243, 243, 243);
+}
+
+#toolbarViewer .close-view {
+  width: 100px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#toolbarViewer .close-view img {
+  width: 17px;
+  height: 17px;
+  margin: 7px 7px 6px 0px;
+}
+
+#toolbarViewer .close-view span {
+  height: 30px;
+}
+
+#toolbarViewer #toolbarViewerMiddle #scaleSelect {
+  width: 104px;
+  height: 22px;
+  font-size: 12px;
+  line-height: 22px;
+  margin-top: 4px;
+  margin-left: 5px;
+}
+
+#toolbarViewer button {
+  border: 1px solid transparent;
+  outline: none;
+}
+
+
+/* 自定义样式结束 */
 
 #loadingBar {
   position: relative;
   width: 100%;
   height: 4px;
-  background-color: #333;
-  border-bottom: 1px solid #333;
+  background-color: #808080;
+  border-bottom: 1px solid #808080;
 }
 
 #loadingBar .progress {
@@ -979,8 +1101,6 @@ html[dir='ltr'] .doorHangerRight:before {
 
 #toolbarViewerMiddle {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 html[dir='ltr'] #toolbarViewerLeft,
@@ -1010,7 +1130,6 @@ html[dir='rtl'] .findbar * {
 }
 
 html[dir='ltr'] .splitToolbarButton {
-  margin: 3px 2px 4px 0;
   display: inline-block;
 }
 
@@ -1140,9 +1259,9 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
 .overlayButton {
   min-width: 16px;
   padding: 2px 6px 0;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  color: hsla(0, 0%, 100%, .8);
+  /* border: 1px solid transparent; */
+  /* border-radius: 2px; */
+  /* color: hsla(0, 0%, 100%, .8); */
   font-size: 12px;
   line-height: 14px;
   -webkit-user-select: none;
@@ -1177,7 +1296,7 @@ html[dir='rtl'] .dropdownToolbarButton {
   background-color: hsla(0, 0%, 0%, .12);
   background-image: linear-gradient(hsla(0, 0%, 100%, .05), hsla(0, 0%, 100%, 0));
   background-clip: padding-box;
-  border: 1px solid hsla(0, 0%, 0%, .35);
+  /* border: 1px solid hsla(0, 0%, 0%, .35); */
   border-color: hsla(0, 0%, 0%, .32) hsla(0, 0%, 0%, .38) hsla(0, 0%, 0%, .42);
   box-shadow: 0 1px 0 hsla(0, 0%, 100%, .05) inset, 0 0 1px hsla(0, 0%, 100%, .15) inset, 0 1px 0 hsla(0, 0%, 100%, .05);
 }
@@ -1217,7 +1336,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 
 .dropdownToolbarButton {
   width: 120px;
-  max-width: 120px;
+  /* max-width: 120px; */
   padding: 0;
   overflow: hidden;
   background: url(images/toolbarButton-menuArrows.png) no-repeat;
@@ -1234,16 +1353,15 @@ html[dir='rtl'] .dropdownToolbarButton {
 .dropdownToolbarButton>select {
   min-width: 140px;
   font-size: 12px;
-  color: hsl(0, 0%, 95%);
+  /* color: hsl(0, 0%, 95%); */
   margin: 0;
   padding: 3px 2px 2px;
-  border: none;
-  background: rgba(0, 0, 0, 0);
+  /* border: none; */
   /* Opera does not support 'transparent' <select> background */
 }
 
 .dropdownToolbarButton>select>option {
-  background: hsl(0, 0%, 24%);
+  /* background: hsl(0, 0%, 24%); */
 }
 
 #customScaleOption {
@@ -1565,8 +1683,7 @@ html[dir='rtl'] .verticalToolbarSeparator {
   padding: 3px 6px;
   margin: 4px 0 4px 0;
   border: 1px solid transparent;
-  border-radius: 2px;
-  background-color: hsla(0, 0%, 100%, .09);
+  background-color: #fff;
   background-image: linear-gradient(hsla(0, 0%, 100%, .05), hsla(0, 0%, 100%, 0));
   background-clip: padding-box;
   border: 1px solid hsla(0, 0%, 0%, .35);
@@ -1579,6 +1696,7 @@ html[dir='rtl'] .verticalToolbarSeparator {
   transition-property: background-color, border-color, box-shadow;
   transition-duration: 150ms;
   transition-timing-function: ease;
+  border-color: rgb(171, 171, 171);
 }
 
 .toolbarField[type=checkbox] {
@@ -1591,7 +1709,8 @@ html[dir='rtl'] .verticalToolbarSeparator {
   /* hides the spinner in moz */
   min-width: 16px;
   text-align: right;
-  width: 40px;
+  width: 70px;
+  color: #000;
 }
 
 .toolbarField.pageNumber.visiblePageIsLoading {
@@ -1607,7 +1726,7 @@ html[dir='rtl'] .verticalToolbarSeparator {
 }
 
 .toolbarField:hover {
-  background-color: hsla(0, 0%, 100%, .11);
+  background-color: #fff;
   border-color: hsla(0, 0%, 0%, .4) hsla(0, 0%, 0%, .43) hsla(0, 0%, 0%, .45);
 }
 
@@ -1622,7 +1741,6 @@ html[dir='rtl'] .verticalToolbarSeparator {
   margin: 4px 2px 4px 0;
   border: 1px solid transparent;
   border-radius: 2px;
-  color: hsl(0, 0%, 85%);
   font-size: 12px;
   line-height: 14px;
   text-align: left;
@@ -1916,6 +2034,7 @@ html[dir='rtl'] .outlineItemToggler::before {
   position: absolute;
   width: 100%;
   height: 100%;
+  top: 0px;
   background-color: hsla(0, 0%, 0%, .2);
   z-index: 40000;
 }

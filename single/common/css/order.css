@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   padding-top: 50px;
+  background: #f5f5f5;
 }
 
 .order-content {
@@ -11,176 +12,203 @@
   height: 100%;
   float: left;
   margin-left: 94px;
-  padding: 30px 30px 0px 36px;
+  padding: 63px 28px 0px 28px;
   overflow: hidden;
 }
-
-.order-content .search-wapper {
-  font-size: 14px;
-  overflow: hidden;
-  margin-top: 40px;
-}
-
-
 /* 左1 */
 
 .adorn {
-  width: 25%;
-  border: 2px solid #eaeaea;
-  padding: 20px;
+  width: 870px;
+  height: 208px;
+  border: 1px solid rgb(214, 214, 214);
   float: left;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
 }
 
-.first-p {
-  margin-bottom: 20px;
+.adorn .time {
   width: 100%;
+  height: 52px;
+  background: rgb(67, 179, 190);
+  color: #fff;
+  font-size: 25px;
+  line-height: 52px;
+  text-align: center;
+}
+
+.adorn .adorn-content {
+  width: 100%;
+  height: calc(100% - 52px);
+  padding: 25px 10px 37px 56px;
+}
+
+.adorn-content .adorn-item {
+  width: 158px;
+  height: 34px;
+  margin-right: 42px;
+  margin-top: 13px;
+  float: left;
+}
+
+.adorn-content .adorn-item p {
+  width: 108px;
+  height: 100%;
+  line-height: 34px;
+  text-align: center;
+  border: 1px solid rgb(198, 204, 202);
+  font-size: 18px;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+.adorn-content .adorn-item p:hover {
+  border-color: rgb(67, 179, 190);
+  color: rgb(67, 179, 190);
+}
+
+.adorncurrent {
+  border-color: rgb(67, 179, 190);
+  color: rgb(67, 179, 190);
+}
+
+.adorn-content .adorn-item i {
+  display: inline-block;
+}
+
+
+/* 右1 */
+.search-wapper {
+  width: 870px;
+  height: 208px;
+  float: right;
+}
+
+.search-wapper .search-top-wapper {
+  width: 100%;
+  height: 128px;
+  border: 1px solid rgb(199, 199, 199);
+  padding: 19px 9px 33px 54px;
+}
+
+.search-wapper .search-top-wapper .time-input,
+.search-wapper .search-top-wapper p {
+  font-size: 14px;
+  height: 22px;
+  line-height: 22px;
+  margin-top: 15px;
+  margin-right: 40px;
+  float: left;
+}
+
+.search-wapper .search-top-wapper p input {
+  width: 162px;
+  height: 100%;
+  background: rgb(221, 221, 221);
+  padding-left: 15px;
+  margin-left: 13px;
+}
+
+.search-wapper .search-top-wapper  p select {
+  background: rgb(221, 221, 221);
+  border: 1px solid rgb(221, 221, 221);
+  margin-left: 10px;
+  width: 162px;
+  border-radius: 0px;
+  outline: none;
+  height: 22px;
+}
+
+.search-wapper .select-date {
+  width: 600px;
+  height: 52px;
+  line-height: 52px;
+  border: 1px solid rgb(199, 199, 199);
+  margin-top: 28px;
+  font-size: 14px;
+  float: left;
+}
+
+.search-wapper .search-buttons {
+  width: 240px;
+  height: 52px;
+  line-height: 52px;
+  border: 1px solid rgb(199, 199, 199);
+  margin-top: 28px;
+  font-size: 14px;
+  float: right;
+}
+
+.search-wapper .select-date .examine span,
+.search-wapper .select-date .record-date span {
+  display: inline-block;
+  width: 70px;
+}
+
+.search-wapper .select-date .record-date {
+  float: left;
+  margin-left: 17px;
+}
+
+.search-wapper .select-date .examine input,
+.search-wapper .select-date .record-date input {
+  display: inline-block;
+  margin-right: 7px;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  margin-bottom: 2px;
+  border-color: rgb(220, 220, 220);
+  cursor: pointer;
+}
+
+.search-wapper .select-date .record-date i {
+  display: inline-block;
+}
+
+.search-wapper .select-date .examine {
+  float: left;
+  margin-left: 30px;
+}
+
+.search-wapper .search-buttons .reset,
+.search-wapper .search-buttons .search {
+  width: 50px;
+  margin-left: 17px;
+  float: left;
+  cursor: pointer;
+}
+
+.search-wapper .search-buttons .reset {
+  margin: 0px 18px;
+}
+
+.search-wapper .search-buttons .img-box img {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+}
+
+.search-wapper .search-buttons .check-in {
+  color: rgb(80, 160, 249);
+  cursor: pointer;
 }
 
 .m-b-17 {
   margin-bottom: 37px;
 }
 
-.m-r-20 {
+.m-r-18 {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 18px;
 }
 
-.m-l-7 {
+.m-r-10 {
   display: inline-block;
-  margin-left: 7px;
-}
-
-.first-p .record-date {
-  width: 100%;
-}
-
-.base-info .record-date {
-  height: 42px;
-  line-height: 42px;
-  display: flex;
-  align-items: center;
-}
-
-.base-info .record-date input {
-  width: 18px;
-  margin-left: 0px;
-}
-
-.adorn .span-left,
-.adorn .span-right {
-  display: inline-block;
-  width: 44%;
-  text-align: center;
-}
-
-
-/* 左1 */
-
-.adorn .span-left:hover,
-.adorn .span-right:hover {
-  background: #e6e6e6;
-}
-
-.base-info {
-  width: 17%;
-  float: left;
-  margin-left: 3%;
-  padding: 20px 0px;
-}
-
-.base-info span {
-  display: inline-block;
-  font-size: 16px;
-}
-
-.base-info input {
-  background: #eeeeef;
-  border: 1px solid #e4e4e4;
-  width: 195px;
-  margin-left: 15px;
-  padding: 0px 5px;
-  height: 25px;
-}
-
-.base-info select {
-  background: #eeeeef;
-  border: 1px solid #e4e4e4;
-  margin-left: 14px;
-  width: 195px;
-  border-radius: 0px;
-  padding: 0px 5px;
-  outline: none;
-  height: 25px;
-}
-
-.base-info .date-input {
-  width: 100px;
-}
-
-.time-select {
-  width: 30%;
-}
-
-.base-info .last-date-input {
-  margin-left: 0px;
-}
-
-.base-info .time-margin {
-  margin-left: 10px;
-}
-
-.opt-button-group .reset,
-.opt-button-group .search {
-  float: left;
-  width: 65px;
-  padding: 5px 0px;
-  background: #c0c0c0;
-  text-align: center;
-  margin-top: 40px;
-  cursor: pointer;
-}
-
-.opt-button-group .search {
-  margin-left: 1%;
-}
-
-.tool-wapper {
-  width: 66%;
-  height: 50px;
-  line-height: 50px;
-  font-size: 16px;
-  cursor: pointer;
-  position: absolute;
-  top: 207px;
-  right: 17px;
-}
-
-.tool-wapper div {
-  float: left;
-}
-
-.tool-wapper .check-in {
-  float: right;
-  margin-right: 2%;
-  color: #3492f7;
+  margin-right: 10px;
 }
 
 .m-l-30 {
   margin-left: 30px;
-}
-
-.tool-one {
-  width: 25%;
-  margin-left: 2%;
-}
-
-.tool-wapper .img-box img {
-  height: 25px;
-  float: left;
-  margin-top: 12px;
-  margin-right: 6px;
 }
 
 .filtration input[type='checkbox'] {
@@ -191,10 +219,6 @@
   border-radius: 2px;
   outline: none;
   zoom: 80%;
-}
-
-.examine {
-  margin-left: 30px;
 }
 
 .table-wapper {
@@ -749,4 +773,29 @@
 .select-person p:hover {
   background: #409EFF;
   color: #fff;
+}
+
+/* 底部样式 */
+
+.index-bottom {
+  height: 25px;
+  width: 100%;
+  background: #000;
+  position: absolute;
+  bottom: 0px;
+  color: #fff;
+}
+
+.index-bottom ul {
+  float: right;
+}
+
+.index-bottom a {
+  color: #1989fa;
+}
+
+.index-bottom ul li {
+  float: right;
+  line-height: 25px;
+  margin-right: 20px;
 }

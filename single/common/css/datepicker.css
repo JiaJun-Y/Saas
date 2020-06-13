@@ -785,7 +785,8 @@ div.c-datepicker-data-input {
 }
 
 .c-datepicker-data-input.only-date {
-  width: 195px;
+  width: 78px;
+  background: rgb(221, 221, 221);
   /* text-align: center; */
 }
 
@@ -813,8 +814,8 @@ div.c-datepicker-data-input {
   color: #333;
   display: inline-block;
   font-size: inherit;
-  height: 17px;
-  line-height: 17px;
+  height: 22px;
+  line-height: 22px;
   outline: none;
   white-space: nowrap
 }

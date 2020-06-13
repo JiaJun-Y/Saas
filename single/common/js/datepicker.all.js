@@ -3111,7 +3111,7 @@
     var height = _this.$target.outerHeight();
     _this.pickerObject.$container.css({
       top: offset.top + height,
-      left: offset.left - 150
+      left: offset.left - 300
     });
   }
 

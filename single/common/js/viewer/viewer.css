@@ -831,6 +831,7 @@ html[dir='rtl'] #toolbarContainer,
 
 #toolbarViewer .close-view {
   width: 100px;
+  height: 35px;
   cursor: pointer;
   font-size: 14px;
 }
@@ -838,11 +839,12 @@ html[dir='rtl'] #toolbarContainer,
 #toolbarViewer .close-view img {
   width: 17px;
   height: 17px;
-  margin: 7px 7px 6px 0px;
+  vertical-align: text-top;
 }
 
 #toolbarViewer .close-view span {
-  height: 30px;
+  display: inline-block;
+  line-height: 30px;
 }
 
 #toolbarViewer #toolbarViewerMiddle #scaleSelect {

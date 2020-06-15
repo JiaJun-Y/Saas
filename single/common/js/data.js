@@ -671,7 +671,7 @@ var TABLEDATA = [{
   "Time": "20030408132351",
   "Birthday": "19520901",
   "RoomId": "00786619",
-  "Gender": "0",
+  "Gender": "",
   "HeightUnit": "",
   "Name": "姜春兰",
   "MessageControlId": "A013463072",

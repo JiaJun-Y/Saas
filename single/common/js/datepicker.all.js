@@ -3109,9 +3109,11 @@
   function setContainerPos(_this) {
     var offset = _this.$target.offset();
     var height = _this.$target.outerHeight();
+    console.log($(_this.$target.context).attr('class'))
+
     _this.pickerObject.$container.css({
       top: offset.top + height,
-      left: offset.left - 300
+      left: offset.left - 100
     });
   }
 

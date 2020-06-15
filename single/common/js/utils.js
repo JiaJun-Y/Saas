@@ -51,8 +51,14 @@ function input(element) {
 
 function handleSelectParams(element) {
   var index = element.selectedIndex;
-  var _value = element.options[index].value
-  return [element.name, _value];
+  console.log(element.options)
+  if (index >= 0) {
+    var _value = element.options[index].value
+    console.log(element.name, _value)
+    return [element.name, _value];
+  } else {
+    return
+  }
 }
 
 //组合URL 

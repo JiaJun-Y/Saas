@@ -131,7 +131,6 @@
       <div class='tooltip'>
         <p onclick='changeMsg()'>信息修改</p>
         <p onclick="downPlug()">插件下载</p>
-        <p onclick="handleConfig()">预约设置</p>
         <span class='triangle'></span>
       </div>
     </div>
@@ -257,8 +256,9 @@
             <option value="1">已预约</option>
             <option value="2">已佩戴</option>
             <option value="3">已录入</option>
-            <option value="4">已打印</option>
-          </select>
+            <option value="4">已审核</option>
+            <option value="5">已打印</option>
+        </select>
         </p>
         <div class="time-input">
           <span style="margin-right: 13px;">戴机时间</span>
@@ -310,36 +310,6 @@
       </div>
     </div>
 
-    <!-- 单行工具栏 -->
-    <div class="tool-wapper" style="display: none;">
-      <div class="check-in">
-        <div class="img-box m-l-30" onclick="checkD()">
-          <img src="./images/order-check.png" alt="">
-          <span>检查登记</span>
-        </div>
-      </div>
-
-      <div class="img-box m-l-30 filtration">
-        <input type="checkbox" name="checkbox" id="cancellation" />
-        <span>过滤作废</span>
-      </div>
-
-      <div class="img-box m-l-30" onclick="handleExportCase()">
-        <img src="./images/order-export.png" alt="">
-        <span>导出病例薄</span>
-      </div>
-
-      <div class="img-box m-l-30" onclick="handleSearch()">
-        <img src="./images/order-search.png" alt="">
-        <span>查询</span>
-      </div>
-
-      <div class="img-box m-l-30" onclick="handleReset(true)">
-        <img src="./images/order-reset.png" alt="">
-        <span>重置</span>
-      </div>
-    </div>
-
     <!-- 表格 -->
 
     <div class="table-wapper">
@@ -366,6 +336,20 @@
             </div>
           </script>
         </div>
+      </div>
+      <div class="bottom-config">
+        <div class="img-box" onclick="handleExportCase()">
+          <img src="./images/order-export.png" alt="">
+          <span>导出病例薄</span>
+        </div>
+
+        <div class="img-box m-l-30 filtration">
+          <input type="checkbox" name="checkbox" id="cancellation" />
+          <span>过滤作废</span>
+        </div>
+
+        <div class="img-box m-l-30" onclick="handleConfig()">预约设置</div>
+
       </div>
       <div id="page_bottom" class="page_div"></div>
     </div>

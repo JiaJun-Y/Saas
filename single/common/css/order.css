@@ -8,13 +8,15 @@
 }
 
 .order-content {
-  width: calc(100% - 94px);
+  width: calc(100% - 80px);
   height: 100%;
   float: left;
-  margin-left: 94px;
-  padding: 63px 28px 0px 28px;
+  margin-left: 80px;
+  padding: 63px 20px 0px 20px;
   overflow: hidden;
 }
+
+
 /* 左1 */
 
 .adorn {
@@ -77,6 +79,7 @@
 
 
 /* 右1 */
+
 .search-wapper {
   width: 870px;
   height: 208px;
@@ -108,7 +111,7 @@
   margin-left: 13px;
 }
 
-.search-wapper .search-top-wapper  p select {
+.search-wapper .search-top-wapper p select {
   background: rgb(221, 221, 221);
   border: 1px solid rgb(221, 221, 221);
   margin-left: 10px;
@@ -219,6 +222,7 @@
   border-radius: 2px;
   outline: none;
   zoom: 80%;
+  margin-right: 5px;
 }
 
 .table-wapper {
@@ -448,6 +452,28 @@
 
 #page #table {
   height: 55vh;
+}
+
+.bottom-config {
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  right: 800px;
+  bottom: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.bottom-config .img-box {
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.bottom-config .img-box img {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
 }
 
 
@@ -775,12 +801,10 @@
   color: #fff;
 }
 
-/* 底部样式 */
-
 .index-bottom {
-  height: 25px;
+  height: 22px;
   width: 100%;
-  background: #000;
+  background: #3e3a39;
   position: absolute;
   bottom: 0px;
   color: #fff;
@@ -796,6 +820,6 @@
 
 .index-bottom ul li {
   float: right;
-  line-height: 25px;
+  line-height: 22px;
   margin-right: 20px;
 }

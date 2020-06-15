@@ -52,25 +52,23 @@
   .reponsetable span {
     color: #000;
     cursor: pointer;
-    display: flex;
     float: left;
     width: 33%;
-    text-align: left;
+    text-align: center;
   }
   
   .reponsetable span img {
-    width: 18px;
-    height: 20px;
-    display: inline-flex;
-    margin-right: 2px;
-    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
     display: inline-block;
+    vertical-align: middle;
   }
   
   .reponsetable th,
   .reponsetable td {
     position: relative;
-    padding: 9px 5px;
+    padding: 10px;
     min-height: 20px;
     line-height: 20px;
     font-size: 14px;
@@ -201,18 +199,19 @@
   }
   
   .reponsetable .more {
-    display: flex;
     color: #000;
     cursor: pointer;
     width: 33%;
     position: relative;
     margin-left: 15px;
+    text-align: center;
+    overflow: hidden;
   }
   
   .reponsetable .more img {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     display: inline-flex;
-    margin-right: 2px;
+    margin-right: 10px;
     vertical-align: middle;
   }

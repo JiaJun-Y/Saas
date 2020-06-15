@@ -1,5 +1,5 @@
 #indexBox {
-  margin-left: 99px;
+  margin-left: 80px;
   height: calc(100%);
   padding: 28px 0px;
   position: relative;
@@ -16,8 +16,10 @@
 #indexBox .top-left {
   width: 660px;
   height: calc(100% - 2px);
-  margin-left: 28px;
+  margin-left: 20px;
   float: left;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
+  border-radius: 10px;
 }
 
 #indexBox .top-left .time {
@@ -29,6 +31,8 @@
   font-weight: 600;
   background: #43b3be;
   color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 #indexBox .top-left .dashboard {
@@ -38,6 +42,8 @@
   padding: 40px;
   border-top: none;
   background: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 #indexBox .top-left .dashboard .dashboard-left {
@@ -55,7 +61,7 @@
 
 .dashboard-left .analysis {
   font-size: 22px;
-  color: #231814;
+  color: #FF8000;
   margin-bottom: 27px;
 }
 
@@ -68,11 +74,34 @@
 }
 
 .crisis {
-  color: red;
+  color: #ed1b24;
+  position: relative;
+}
+
+.crisis img {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+#indexBox .top-left .dashboard .dashboard-left .crisis-value {
+  padding: 20px 10px;
+  width: 300px;
+  background: #fff;
+  position: absolute;
+  top: 160px;
+  left: 160px;
+  z-index: 111;
+  border-radius: 5px;
+  border: 1px solid #ebeef5;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+}
+
+.isShowCrisis {
+  display: none;
 }
 
 .memorize {
-  color: #ffc911;
+  color: #ffc90d;
 }
 
 .use {
@@ -123,26 +152,26 @@
 }
 
 .wear {
-  border: 1px solid #23b14d;
+  border: 1px solid #22B14C;
   position: relative;
 }
 
 #wear {
   position: absolute;
   height: 26px;
-  background: #23b14d;
+  background: #22B14C;
   top: -1px;
 }
 
 .import {
-  border: 1px solid #7092bf;
+  border: 1px solid #7092BE;
   position: relative;
 }
 
 #import {
   position: absolute;
   height: 26px;
-  background: #7092bf;
+  background: #7092BE;
   top: -1px;
 }
 
@@ -169,28 +198,31 @@
 /* 上右 */
 
 #indexBox .top-right {
-  width: calc(100% - 660px - 13px - 28px * 2);
+  width: calc(100% - 660px - 13px - 20px * 2);
   height: 100%;
   margin-left: 13px;
   float: left;
   background: #fff;
+  border: 1px solid #dadada;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
+  border-radius: 10px;
 }
 
 #indexBox .top-right .title {
-  height: 58px;
+  height: 60px;
   width: 100%;
   background: #efefef;
-  border: 1px solid #b5b5b5;
   font-size: 30px;
   color: #221914;
   text-align: center;
-  line-height: 58px;
+  line-height: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 #indexBox .top-right .statistical-charts {
   width: 100%;
-  height: calc(100% - 58px);
-  border: 1px solid #b5b5b5;
+  height: calc(100% - 60px);
   border-top: 0px;
 }
 
@@ -200,14 +232,16 @@
 #indexBox .bottom {
   height: calc(100% - 413px - 27px);
   width: 100%;
-  padding: 27px 28px;
+  padding: 27px 20px;
   position: relative;
 }
 
 #indexBox .bottom .table-wapper {
   width: calc(100% - 55px);
-  height: 45vh;
+  height: calc(43vh - 3px);
   overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
+  border-radius: 10px;
 }
 
 #indexBox .bottom .table-wapper .title {
@@ -218,10 +252,12 @@
   background: #ddd;
   font-size: 18px;
   font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 table.table-inner-wapper tr:nth-child(even) {
-  background: #e2fcf9;
+  background: #E2FCFA;
 }
 
 table.table-inner-wapper tr:nth-child(odd) {
@@ -233,11 +269,12 @@ table.table-inner-wapper tr:nth-child(odd) {
   width: 100%;
   height: 2vh;
   border-collapse: collapse;
+  overflow: hidden;
 }
 
 table.table-inner-wapper tbody {
   display: block;
-  height: 45vh;
+  height: calc(43vh - 3px);
   overflow-y: auto;
 }
 
@@ -265,6 +302,11 @@ table.table-inner-wapper th {
   padding: 5px;
 }
 
+table.table-inner-wapper td.about-date {
+  width: 121px;
+  height: 32px;
+}
+
 
 /* 切换日历 */
 
@@ -273,7 +315,7 @@ table.table-inner-wapper th {
   height: 252px;
   position: absolute;
   top: 27px;
-  right: 20px;
+  right: 27px;
 }
 
 .table-wapper .change-week .table-date-img {
@@ -286,9 +328,9 @@ table.table-inner-wapper th {
 /* 底部样式 */
 
 .index-bottom {
-  height: 25px;
+  height: 22px;
   width: 100%;
-  background: #000;
+  background: #3e3a39;
   position: absolute;
   bottom: 0px;
   color: #fff;
@@ -304,6 +346,6 @@ table.table-inner-wapper th {
 
 .index-bottom ul li {
   float: right;
-  line-height: 25px;
+  line-height: 22px;
   margin-right: 20px;
 }

@@ -201,9 +201,30 @@
           <div class="dashboard-left">
             <div class="analysis">今日分析：</div>
             <div class="workload">人均工作量：<span>25</span></div>
-            <div class="crisis">危机值：<span>7</span></div>
+            <div class="crisis">危机值 <img src="./images/book-crisis.png" onclick="showCirsis()" id="crisis">：<span>7</span></div>
             <div class="memorize">重背：<span>2</span></div>
             <div class="use">使用次数：<span>1789/5000</span></div>
+
+            <div class="crisis-value isShowCrisis">
+              <ul>
+                <li>1、心脏停搏</li>
+                <li>2、急性心肌梗死</li>
+                <li>3、心室扑动、颤动</li>
+                <li>4、室性心动过速</li>
+                <li>5、二度二型、三度房室传导阻滞</li>
+                <li>6、心率
+                  < 40次/分的心动过缓；心率> 180次</li>
+                <li>7、大于2秒的心室停搏</li>
+                <li>8、室上性心动过速 > 160次/分</li>
+                <li>9、明显心肌缺血</li>
+                <li>10、房颤伴快速心室率（心室率 > 150次/分）</li>
+                <li>11、病窦综合征（心率
+                  < 35次/分）</li>
+                    <li>12、频发室性早搏伴Q-T间期延长</li>
+                    <li>13、多源性R-on-t型室早</li>
+                    <li>14、完全性左束支传导阻滞</li>
+              </ul>
+            </div>
           </div>
           <div class="dashboard-right">
             <div class="count" id="analysisNum">118</div>
@@ -260,33 +281,6 @@
       <li>升级提示：2019/07/09</li>
     </ul>
   </div>
-
-  <!-- 设置弹框内容 -->
-  <!-- <div class="config-pop-wapper">
-    <div id="popLayer"></div>
-    <div id="config-pop">
-      <div class="title">设置</div>
-      <div class="from-box">
-        <p>设备数量上限<input type="text" id="count"></p>
-        <div class="info">
-          <div class="info-title">录入信息配置</div>
-          <div class="info-input-box">
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="1" />申请单号</div>
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="2" />住院号</div>
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="3" />门诊号</div>
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="4" />病人ID</div>
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="5" />身份证号</div>
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="6" />手机号</div>
-            <div class="info-input-format"><input type="checkbox" name="selectedRow" value="7" />住址</div>
-          </div>
-        </div>
-        <div class="button-groups">
-          <div class="comfire" onclick="handleConfigComfire()">确定</div>
-          <div class="cancel" onclick="cancel()">取消</div>
-        </div style="">
-      </div>
-    </div>
-  </div> -->
 </body>
 <script>
   var AnalyticalDiagnosisPath = ''
@@ -294,6 +288,15 @@
   $("#popLayer").click(function(e) {
     $("#popLayer").hide();
     $('#config-pop').hide()
+  })
+
+  $('#indexBox').on('click', function(e) {
+    var _id = $(e.target).attr('id');
+    if (_id && _id.indexOf('crisis') > -1) {
+      return
+    } else {
+      $('.crisis-value').addClass('isShowCrisis')
+    }
   })
 
   getPathUrl()
@@ -324,6 +327,15 @@
     })
   }
 
+  // 展示危机
+  function showCirsis() {
+    if ($('.crisis-value').attr('class').indexOf('isShowCrisis') > -1) {
+      $('.crisis-value').removeClass('isShowCrisis')
+    } else {
+      $('.crisis-value').addClass('isShowCrisis')
+    }
+  }
+
   // 表格数据处理
   function renderTable(tableData, Days) {
     // 7天的日期 + 空数据
@@ -331,9 +343,9 @@
 
     for (var i = 0; i < Days.length; i++) {
       var tr = '<tr>'
-      var td = '<td></td>'
+      var td = '<td class="about-date"></td>'
       if (i > 0) {
-        td = '<td>' + Days[i] + '\xa0' + '(' + DX(i) + ')' + '</td>'
+        td = '<td class="about-date">' + Days[i] + '\xa0' + '(' + DX(i) + ')' + '</td>'
       }
 
       if (tableData.Items.length === 0) {
@@ -510,7 +522,7 @@
       var dashboardChartsData = res.Data
       var countAnalysis = Number(dashboardChartsData.Analysis.Finished + dashboardChartsData.Analysis.Unfinished)
       if (countAnalysis === 0) {
-        $('#analysisNum').text('0000')
+        $('#analysisNum').text('0')
       } else {
         $('#analysisNum').text(countAnalysis)
       }
@@ -523,7 +535,7 @@
     if (finished === 0) {
       _value = '' + type + '（' + '0' + '%）'
     } else {
-      _value = '' + type + '（' + ((finished / (finished + unfinished)) * 100) + '%）'
+      _value = '' + type + '（' + ((finished / (finished + unfinished)) * 100).toFixed(1) + '%）'
     }
     return _value
   }

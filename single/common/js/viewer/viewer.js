@@ -2286,6 +2286,7 @@
     }
 
     function webViewerSwitchSpreadMode(evt) {
+      console.log(evt)
       PDFViewerApplication.pdfViewer.spreadMode = evt.mode;
     }
 

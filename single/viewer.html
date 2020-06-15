@@ -241,12 +241,12 @@
 
               <div id="secondaryToolbarButtonContainer">
                 <!-- 单页展示 -->
-                <button class="singe-view" id="spreadNone">
+                <button class="singe-view" id="spreadNone" onclick="tospreadNone()">
                   <img src="./images/viewer-single.png" alt="">
                 </button>
 
                 <!-- 双页展示 -->
-                <button class="mul-view" id="spreadOdd">
+                <button class="mul-view" id="spreadOdd" onclick="toSpreadOdd()">
                   <img src="./images/viewer-mul.png" alt="">
                 </button>
               </div>
@@ -451,6 +451,16 @@
 <script>
   function goBack() {
     $(window.parent.document).find('#PDF').hide()
+  }
+
+  // 双页展示
+  function toSpreadOdd() {
+    PDFViewerApplication.pdfViewer.spreadMode = 1;
+  }
+
+  // 单页展示
+  function tospreadNone() {
+    PDFViewerApplication.pdfViewer.spreadMode = 0;
   }
 </script>
 

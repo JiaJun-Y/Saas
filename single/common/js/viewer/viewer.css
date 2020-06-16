@@ -2438,9 +2438,10 @@ screen and (min-resolution: 1.1dppx) {
     padding: 0 10px;
   }
   body {
-    background: transparent none;
+    background: #fff;
   }
   /* Rules for browsers that don't support mozPrintCallback. */
+  #overlayContainer,
   #sidebarContainer,
   #secondaryToolbar,
   .toolbar,

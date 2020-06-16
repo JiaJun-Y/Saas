@@ -18,7 +18,7 @@
   height: calc(100% - 2px);
   margin-left: 20px;
   float: left;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
+  box-shadow: -5px 5px 7px 0 rgba(0, 0, 0, .3);
   border-radius: 5px;
 }
 
@@ -110,9 +110,9 @@
 }
 
 #indexBox .top-left .dashboard .dashboard-right {
-  width: calc(100% - 190px - 23px);
+  width: calc(100% - 190px - 30px);
   height: 100%;
-  margin-left: 23px;
+  margin-left: 30px;
   float: left;
 }
 
@@ -133,13 +133,13 @@
 }
 
 #indexBox .top-left .dashboard .dashboard-right .progress .progress-left {
-  width: 100px;
+  width: 38px;
   height: 100%;
   float: left;
 }
 
 #indexBox .top-left .dashboard .dashboard-right .progress-right {
-  width: calc(100% - 100px);
+  width: calc(100% - 38px);
   height: 100%;
   float: left;
 }
@@ -161,6 +161,24 @@
   height: 26px;
   background: #22B14C;
   top: -1px;
+}
+
+.child-0 {
+  position: absolute;
+  top: 4px;
+  left: calc((100% - 10px) / 2)
+}
+
+.child-1 {
+  position: absolute;
+  top: 4px;
+  left: calc((100% - 10px) / 2)
+}
+
+.child-2 {
+  position: absolute;
+  top: 4px;
+  left: calc((100% - 10px) / 2)
 }
 
 .import {
@@ -190,8 +208,8 @@
 #indexBox .progress .progress-left .sign {
   height: 26px;
   line-height: 26px;
-  float: left;
   margin-top: 30px;
+  font-weight: bold;
 }
 
 
@@ -204,7 +222,7 @@
   float: left;
   background: #fff;
   border: 1px solid #dadada;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
+  box-shadow: 7px 5px 12px 0 rgba(0, 0, 0, .3);
   border-radius: 5px;
 }
 
@@ -212,7 +230,8 @@
   height: 60px;
   width: 100%;
   background: #efefef;
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: bold;
   color: #221914;
   text-align: center;
   line-height: 60px;
@@ -250,10 +269,15 @@
   width: 100%;
   text-align: center;
   background: #ddd;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+table.table-inner-wapper tr:nth-child(8) {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 table.table-inner-wapper tr:nth-child(even) {
@@ -274,7 +298,7 @@ table.table-inner-wapper tr:nth-child(odd) {
 
 table.table-inner-wapper tbody {
   display: block;
-  height: calc(43vh - 3px);
+  height: calc(38vh - 3px);
   overflow-y: auto;
 }
 
@@ -333,7 +357,15 @@ table.table-inner-wapper td.about-date {
   background: #3e3a39;
   position: absolute;
   bottom: 0px;
+  z-index: 111;
   color: #fff;
+}
+
+.index-bottom p {
+  width: 400px;
+  margin-left: 5px;
+  line-height: 22px;
+  float: left;
 }
 
 .index-bottom ul {
@@ -342,10 +374,73 @@ table.table-inner-wapper td.about-date {
 
 .index-bottom a {
   color: #1989fa;
+  cursor: pointer;
 }
 
 .index-bottom ul li {
   float: right;
   line-height: 22px;
   margin-right: 20px;
+}
+
+
+/* 版本弹框 */
+
+.version-wapper #popLayer {
+  display: none;
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  -moz-opacity: 0.6;
+  opacity: .6;
+  filter: alpha(opacity=60);
+  /* 只支持IE6、7、8、9 */
+}
+
+.version-wapper .version-msg {
+  display: none;
+  background-color: #FFFFFF;
+  z-index: 11;
+  width: 530px;
+  min-height: 300px;
+  position: fixed;
+  top: calc((100% - 300px) / 2);
+  right: 0;
+  left: 0;
+  margin: auto;
+  box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+  overflow: hidden;
+}
+
+.version-msg .title {
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  background-color: #34A8E4
+}
+
+.version-msg ul {
+  padding: 5px 20px;
+}
+
+.version-msg ul.content {
+  height: 200px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.version-msg ul.content li {
+  padding: 5px 0px;
+}
+
+.version-msg ul li {
+  padding: 8px 0px;
 }

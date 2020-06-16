@@ -33,10 +33,6 @@
   cursor: pointer;
 }
 
-#sideNav ul li:nth-child(1) {
-  padding-right: 5px;
-}
-
 #sideNav ul li:nth-child(1):hover .img-box {
   background: url('../../images/home.png') no-repeat;
   background-size: 100% 100%;

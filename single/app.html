@@ -89,15 +89,15 @@
       </ul>
 
       <div class='bottom-opt'>
-        <div class='opt-left' onclick='help()'>
+        <!-- <div class='opt-left' onclick='help()'>
           <img src='./images/help.png' />
           <span>帮助</span>
-        </div>
+        </div> -->
 
-        <div class='opt-right' id="setting">
+        <!-- <div class='opt-right' id="setting">
           <img src='./images/config.png' />
           <span>设置</span>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -201,7 +201,7 @@
           <div class="dashboard-left">
             <div class="analysis">今日分析：</div>
             <div class="workload">人均工作量：<span>25</span></div>
-            <div class="crisis">危机值 <img src="./images/book-crisis.png" onclick="showCirsis()" id="crisis">：<span>7</span></div>
+            <div class="crisis">危急值 <img src="./images/book-crisis.png" onclick="showCirsis()" id="crisis">：<span>7</span></div>
             <div class="memorize">重背：<span>2</span></div>
             <div class="use">使用次数：<span>1789/5000</span></div>
 
@@ -230,17 +230,22 @@
             <div class="count" id="analysisNum">118</div>
             <div class="progress">
               <div class="progress-left"></div>
+
               <div class="progress-right">
                 <div class="progress-item wear">
                   <strong id="wear" style="width:10%;"></strong>
+                  <div class="child-0"></div>
                 </div>
                 <div class="progress-item import">
                   <strong id="import" style="width:100%;"></strong>
+                  <div class="child-1"></div>
                 </div>
                 <div class="progress-item panalysis">
                   <strong id="panalysis" style="width:10%;"></strong>
+                  <div class="child-2"></div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -275,21 +280,37 @@
 
   <!-- app.html内容结束 -->
   <div class="index-bottom">
-    <ul>
-      <li><a href="">点击查看详情>></a></li>
-      <li>版本号：build450.1.1</li>
-      <li>升级提示：2019/07/09</li>
-    </ul>
+    <p>成都琅瑞医疗技术股份有限公司 服务电话：15308091011</p>
   </div>
+
+  <!-- 版本更新信息 -->
+  <div class="version-wapper">
+    <div id="popLayer"></div>
+    <div class="version-msg">
+      <div class="title">
+        更新详情
+      </div>
+      <ul>
+        <li>更新日期：20190716</li>
+        <li>更新版本：v1.0.0.1 Build 449</li>
+        <li>更新内容：</li>
+      </ul>
+      <ul class="content">
+        <li>1. 优化起搏器分析流程（首次算法不分析起搏器）</li>
+        <li>2. 打印增加是否显示页码选项</li>
+        <li>3. 打印增加数据表格纵向显示选项</li>
+        <li>4. 优化内置首页报告打印</li>
+        <li>5. 增加首页报告自定义模板功能</li>
+        <li>6. 修正插入房早未下传与干扰的BUG（因按RR间期排序导致）</li>
+      </ul>
+    </div>
+  </div>
+
+
 </body>
+
 <script>
   var AnalyticalDiagnosisPath = ''
-
-  $("#popLayer").click(function(e) {
-    $("#popLayer").hide();
-    $('#config-pop').hide()
-  })
-
   $('#indexBox').on('click', function(e) {
     var _id = $(e.target).attr('id');
     if (_id && _id.indexOf('crisis') > -1) {
@@ -307,6 +328,12 @@
 
   var Days = []
   var countNum = 0
+
+  // 展示详情信息
+  function toShowVersion() {
+    $('.version-wapper #popLayer').show()
+    $('.version-msg').show()
+  }
 
   function getPathUrl() {
     $.get('http://192.199.198.73:8005/ryservice/load_ry_app_list?token=NhGLmIwVe1l5%2FsS3VzM0ANyaV%2FnGAOmowD9Ac%2FfcnKiznWUJD%2Fxh5HpnYuDXwqyOZjQEyG20KO%2F5JH4seZVyvLXJOblussBySOplc0QvX2moZsUf8sOhFX7TQE1glDCzEym1AmVK8pSbIzL%2Fiu8mTHcj5XU1ekZN%2F717viDWB80%3D', function(res) {
@@ -345,7 +372,7 @@
       var tr = '<tr>'
       var td = '<td class="about-date"></td>'
       if (i > 0) {
-        td = '<td class="about-date">' + Days[i] + '\xa0' + '(' + DX(i) + ')' + '</td>'
+        td = '<td class="about-date">' + Days[i] + '\xa0\xa0\xa0' + DX(i) + '</td>'
       }
 
       if (tableData.Items.length === 0) {
@@ -389,7 +416,7 @@
     var last_monday = moment(dateFrom).subtract(weekOfDay - 1, 'days').format('YYYY-MM-DD')
     Days.push('')
     for (var i = 0; i < 7; i++) {
-      Days.push(moment(last_monday).add(i, 'days').format('YYYY-MM-DD'))
+      Days.push(moment(last_monday).add(i, 'days').format('MM-DD'))
     }
 
     getTableData(last_monday, Days)
@@ -530,12 +557,12 @@
     })
   }
 
-  function formattDataY(type, finished, unfinished) {
+  function formattDataY(finished, unfinished) {
     var _value = ''
     if (finished === 0) {
-      _value = '' + type + '（' + '0' + '%）'
+      _value = '0' + '%'
     } else {
-      _value = '' + type + '（' + ((finished / (finished + unfinished)) * 100).toFixed(1) + '%）'
+      _value = ((finished / (finished + unfinished)) * 100).toFixed(1) + '%'
     }
     return _value
   }
@@ -546,26 +573,26 @@
     var _dataX = []
     _.find(dashboardChartsData, function(val, key) {
       var _value = ''
+      var label = ''
       switch (key) {
         case 'Wear':
-          _value = formattDataY('戴机', Number(val.Finished), Number(val.Unfinished))
+          label = '戴机'
+          _value = formattDataY(Number(val.Finished), Number(val.Unfinished))
           break;
 
         case 'Import':
-          _value = formattDataY('录入', Number(val.Finished), Number(val.Unfinished))
+          label = '录入'
+          _value = formattDataY(Number(val.Finished), Number(val.Unfinished))
           break;
 
         case 'Analysis':
-          _value = formattDataY('分析', Number(val.Finished), Number(val.Unfinished))
+          label = '分析'
+          _value = formattDataY(Number(val.Finished), Number(val.Unfinished))
           break
       }
 
-      _dataY.push(_value)
-      if (Number(val.Finished) === 0) {
-        _dataX.push(0)
-      } else {
-        _dataX.push((Number(val.Finished) / (Number(val.Finished) + Number(val.Unfinished))))
-      }
+      _dataY.push(label)
+      _dataX.push(_value)
     })
 
     _.find(_dataY, function(val, index) {
@@ -574,7 +601,8 @@
     })
 
     _.find($('.progress-right strong'), function(child, _index) {
-      $(child).css('width', _dataX[_index] * 100 + '%')
+      $('.child-' + _index + '').text(_dataX[_index])
+      $(child).css('width', _dataX[_index])
     })
   }
 

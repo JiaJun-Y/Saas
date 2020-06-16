@@ -42,11 +42,11 @@
   #page #table td {
     border-width: 1px;
     border-style: solid;
-    border-color: #bebebe;
+    border-color: #b5b5b6;
   }
   
   #page #table th {
-    background: #ddd;
+    background: #dcdddd;
   }
   
   .reponsetable thead {
@@ -95,7 +95,7 @@
   }
   
   .reponsetable tr:nth-child(even) {
-    background: #ddd;
+    background: #dcdddd;
   }
   
   .layui-btn {

@@ -236,7 +236,7 @@
     <div class="search-wapper">
       <!-- input -->
       <div class="search-top-wapper base-info">
-        <p><span>登记号</span><input type="text" id="RegistrationNo" /></p>
+        <p><span>检查号</span><input type="text" id="StudyID" /></p>
         <p><span>申请号</span><input type="text" id="applyNumber" /></p>
         <div class="time-input">
           <span style="margin-right: 13px;">检查时间</span>
@@ -248,9 +248,9 @@
             <input type="text" autocomplete="off" name="check-end-time" class="c-datepicker-data-input only-date" value="">
           </div>
         </div>
-        <p><span>姓&nbsp;&nbsp;&nbsp;名</span><input type="text" id="Name" /></p>
+        <p><span>姓<span style="visibility: hidden;">占</span>名</span><input type="text" id="Name" /></p>
         <p>
-          <span>状&nbsp;&nbsp;&nbsp;态</span>
+          <span>状<span style="visibility: hidden;">占</span>态</span>
           <select name="status" id="Status">
             <option value="0">不限</option>
             <option value="1">已预约</option>
@@ -303,7 +303,7 @@
 
         <div class="check-in " onclick="checkD()">
           <div class="img-box">
-            <img src="./images/order-check.png" alt="">
+            <img src="./images/search-import.png" alt="">
             <span>检查登记</span>
           </div>
         </div>
@@ -433,12 +433,12 @@
           </div>
 
           <div class="input-line">
-            <span class="sub-title">姓名：</span>
+            <span class="sub-title">姓名<span class="colorRed">*</span>：</span>
             <div id="data-wapper"><input type="text" name="username" value="" data-label="Name"></div>
           </div>
 
           <div class="input-line">
-            <span class="sub-title">性别：</span>
+            <span class="sub-title">性别<span class="colorRed">*</span>：</span>
             <div id="data-wapper">
               <select name="gender" value="0" data-label="Gender">
                   <option value="0">男</option>
@@ -448,7 +448,7 @@
           </div>
 
           <div class="input-line">
-            <span class="sub-title">年龄：</span>
+            <span class="sub-title">年龄<span class="colorRed">*</span>：</span>
             <div id="data-wapper"><input type="text" name="age" value="" data-label="Age"></div>
           </div>
 
@@ -488,7 +488,7 @@
           </div>
 
           <div class="input-line">
-            <span class="sub-title">申请科室：</span>
+            <span class="sub-title">申请科室<span class="colorRed">*</span>：</span>
             <div id="data-wapper"><input type="text" name="department" value="" data-label="ReqDepartment"></div>
           </div>
 
@@ -710,6 +710,11 @@
             <option value="0">无</option>
             <option value="1">有</option>
           </select>
+        </div>
+
+        <div class="wear-input">
+          <span>戴机编号：</span>
+          <input type="text" name="RUID" value="" readonly>
         </div>
 
         <div class="wear-button-groups">
@@ -1264,7 +1269,7 @@
         }, {
           "field": "PM"
         }],
-        "data": tableData
+        "data": data()
       });
       tableStatus()
       completeLoading()
@@ -1366,19 +1371,20 @@
 
   // 查询
   function handleSearch() {
-    showLoading()
-    let _checked = document.getElementById("cancellation").checked
-    tableParams.xm = $("#Name").val()
-    tableParams.sqh = $("#applyNumber").val()
+    showLoading();
+    let _checked = document.getElementById("cancellation").checked;
+    tableParams = {};
+    tableParams.jch = $("#StudyID").val();
+    tableParams.xm = $("#Name").val();
+    tableParams.sqh = $("#applyNumber").val();
     tableParams.yyzt = $('#Status option:selected').val()
     tableParams.sRe = $(" input[ name='check-start-time' ] ").val()
     tableParams.eRe = $(" input[ name='check-end-time' ] ").val()
     tableParams.sWear = $(" input[ name='wear-start-time']").val()
     tableParams.eWear = $(" input[ name='wear-end-time']").val()
-    tableParams.date = ''
-    tableParams.cnt = null
-    tableParams.pg = 1
-    console.log(tableParams)
+    tableParams.pg = 1;
+    tableParams.flt_del = _checked ? 1 : 0;
+    console.log(_checked);
     getTableList(1, false, tableParams)
   }
 

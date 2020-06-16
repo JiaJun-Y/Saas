@@ -32,6 +32,11 @@
   float: left;
 }
 
+.top-nav .user #name {
+  float: left;
+  cursor: pointer;
+}
+
 .top-nav .user .line {
   float: left;
   display: inline-block;

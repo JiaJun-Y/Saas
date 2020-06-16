@@ -26,6 +26,22 @@
   height: 25px;
 }
 
+#cut_screen {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 112;
+  width: 80px;
+  height: 20px;
+}
+
+#cut_img {
+  height: 100%;
+  background: url(../../images/res_cut.png) no-repeat;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+
 #reduction,
 #full {
   width: 100%;

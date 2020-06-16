@@ -387,3 +387,38 @@ img {
   display: inline-block;
   vertical-align: middle;
 }
+
+
+/* 底部样式 */
+
+.index-bottom {
+  height: 22px;
+  width: 100%;
+  background: #3e3a39;
+  position: absolute;
+  bottom: 0px;
+  z-index: 111;
+  color: #fff;
+}
+
+.index-bottom p {
+  width: 400px;
+  margin-left: 5px;
+  line-height: 22px;
+  float: left;
+}
+
+.index-bottom ul {
+  float: right;
+}
+
+.index-bottom a {
+  color: #1989fa;
+  cursor: pointer;
+}
+
+.index-bottom ul li {
+  float: right;
+  line-height: 22px;
+  margin-right: 20px;
+}

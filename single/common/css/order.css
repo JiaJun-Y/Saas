@@ -835,29 +835,6 @@
   color: #fff;
 }
 
-.index-bottom {
-  height: 22px;
-  width: 100%;
-  background: #3e3a39;
-  position: absolute;
-  bottom: 0px;
-  color: #fff;
-}
-
-.index-bottom ul {
-  float: right;
-}
-
-.index-bottom a {
-  color: #1989fa;
-}
-
-.index-bottom ul li {
-  float: right;
-  line-height: 22px;
-  margin-right: 20px;
-}
-
 .colorRed {
   color: red;
 }

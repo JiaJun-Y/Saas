@@ -21,8 +21,13 @@
       <div onclick="EXfullScreen()" id="reduction" style="display: none;"></div>
     </div>
 
+    <!-- 截图 -->
+    <div id="cut_screen" style="display: none">
+      <div id="cut_img"></div>
+    </div>
+
     <!-- 关闭 -->
-    <iframe id="sessionIframe" frameborder="0" width="100%" height="100%" scrolling="yes" style="visibility: hidden;"></iframe>
+    <iframe src="mock.html" id="sessionIframe" frameborder="0" width="100%" height="100%" scrolling="yes"></iframe>
     <input id="closeFlag" type="hidden" name="closed" value="0">
     <div class="progress-wapper isHide">
       <h3>欢迎使用分规<sup>®</sup>心电数据处理软件</h3>
@@ -189,7 +194,6 @@
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-
     // $("#sessionIframe").css("height", document.documentElement.clientHeight + "px");
   }
 

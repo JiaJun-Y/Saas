@@ -1,5 +1,5 @@
 #sideNav .broadside-nav {
-  width: 80px;
+  width: 79px;
   height: 100%;
   float: left;
   font-size: 16px;
@@ -17,20 +17,24 @@
 #sideNav ul li {
   /* padding: 30px 0px 15px 0px; */
   height: 100px;
-  padding: 10px 0px;
-  border-bottom: 1px solid #C3C3C5;
+  padding: 14px 0px;
+  border-bottom: 1px solid rgb(88, 88, 88);
   color: #ccc;
   cursor: pointer;
   background: #35363b;
 }
 
 #sideNav ul li p {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 #sideNav ul li:hover {
   background-color: #3e3a39;
   cursor: pointer;
+}
+
+#sideNav ul li:nth-child(1) {
+  padding-right: 5px;
 }
 
 #sideNav ul li:nth-child(1):hover .img-box {

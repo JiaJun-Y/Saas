@@ -19,7 +19,7 @@
   margin-left: 20px;
   float: left;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 #indexBox .top-left .time {
@@ -31,8 +31,8 @@
   font-weight: 600;
   background: #43b3be;
   color: #fff;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 #indexBox .top-left .dashboard {
@@ -42,8 +42,8 @@
   padding: 40px;
   border-top: none;
   background: #fff;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 #indexBox .top-left .dashboard .dashboard-left {
@@ -205,7 +205,7 @@
   background: #fff;
   border: 1px solid #dadada;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 #indexBox .top-right .title {
@@ -216,8 +216,8 @@
   color: #221914;
   text-align: center;
   line-height: 60px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 #indexBox .top-right .statistical-charts {
@@ -241,7 +241,7 @@
   height: calc(43vh - 3px);
   overflow: hidden;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .3);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 #indexBox .bottom .table-wapper .title {
@@ -252,8 +252,8 @@
   background: #ddd;
   font-size: 18px;
   font-weight: bold;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 table.table-inner-wapper tr:nth-child(even) {

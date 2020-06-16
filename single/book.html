@@ -301,8 +301,8 @@
           <span>重置</span>
         </div>
 
-        <div class="check-in">
-          <div class="img-box" onclick="checkD()">
+        <div class="check-in " onclick="checkD()">
+          <div class="img-box">
             <img src="./images/order-check.png" alt="">
             <span>检查登记</span>
           </div>
@@ -337,21 +337,24 @@
           </script>
         </div>
       </div>
-      <div class="bottom-config">
-        <div class="img-box" onclick="handleExportCase()">
-          <img src="./images/order-export.png" alt="">
-          <span>导出病例薄</span>
+
+      <div id="pageBottom">
+        <div class="bottom-config">
+          <div class="img-box m-r-10" onclick="handleConfig()"><img src="./images/order-config.png" alt="">预约设置</div>
+
+          <div class="img-box  m-r-10" onclick="handleExportCase()">
+            <img src="./images/order-export.png" alt="">
+            <span>导出病例薄</span>
+          </div>
+
+          <div class="img-box m-r-10 filtration">
+            <input type="checkbox" name="checkbox" id="cancellation" checked/>
+            <span>过滤作废</span>
+          </div>
         </div>
-
-        <div class="img-box m-l-30 filtration">
-          <input type="checkbox" name="checkbox" id="cancellation" />
-          <span>过滤作废</span>
-        </div>
-
-        <div class="img-box m-l-30" onclick="handleConfig()">预约设置</div>
-
+        <div id="page_bottom" class="page_div"></div>
       </div>
-      <div id="page_bottom" class="page_div"></div>
+
     </div>
   </div>
   <!-- </div> -->
@@ -420,7 +423,7 @@
       <div id="from-wapper">
         <!-- 登记预约 -->
         <form action="" method="" id="forms" name="forms">
-          <div class="select-person" style="margin-left: 100px; cursor: pointer;"></div>
+          <div class="select-person search-box" style="margin-left: 100px; cursor: pointer;"></div>
 
           <div class="input-line">
             <span class="sub-title">登记时间：</span>
@@ -749,7 +752,7 @@
   var configTime = '' // 配置的时间，时分
   var _protoco = ''
   var isWearPopShow = false
-  var isShowSearchInput = true
+  var isShowSearchInput = false
   var checkPerson = []
 
   // 左1
@@ -760,12 +763,6 @@
     tableParams = {}
     tableParams.pg = 1
     tableParams.cnt = Number($(this)[0].getAttribute('data-index'))
-
-    _.find($('.adorn p'), function(val) {
-      if ($(val).attr('class') && $(val).attr('class') === 'adorncurrent') {
-        $(val).removeClass('adorncurrent')
-      }
-    })
 
     $(this)[0].setAttribute('class', 'adorncurrent')
     console.log(tableParams)
@@ -782,46 +779,47 @@
 
   $('#from-wapper .search-box .button').on('click', function() {
     console.log(TABLEDATA)
-    renderCheckTable(TABLEDATA)
-      //   var HisKeykords = $('#from-wapper .search-box input').val();
-      //   if (!HisKeykords) {
-      //     layer.msg("请输入查询内容", {
-      //       icon: 2,
-      //       time: 1000
-      //     });
-      //     return false;
-      //   }
-      //   var loading = layer.load(0);
-      //   // var url = "http://" + document.domain + ":8006/his/QueryFromHIS";
-      //   var url = "http://192.199.198.22:8006/his/QueryFromHIS"
-      //   $.post(url, {
-      //     KeyWords: HisKeykords
-      //   }, function(ret) {
-      //     layer.close(loading);
-      //     console.log(ret.PatientInfo);
-      //     renderCheckTable(ret.PatientInfo)
-      //     if (ret.RepCode != 0) {
-      //       layer.msg(ret.RepMsg, {
-      //         icon: 2,
-      //         time: 1500
-      //       });
-      //       return false;
-      //     }
+    $('.select-person').empty()
+      // renderCheckTable(TABLEDATA)
+    var HisKeykords = $('#from-wapper .search-box input').val();
+    if (!HisKeykords) {
+      layer.msg("请输入查询内容", {
+        icon: 2,
+        time: 1000
+      });
+      return false;
+    }
+    var loading = layer.load(0);
+    // var url = "http://" + document.domain + ":8006/his/QueryFromHIS";
+    var url = "http://192.199.198.22:8006/his/QueryFromHIS"
+    $.post(url, {
+      KeyWords: HisKeykords
+    }, function(ret) {
+      layer.close(loading);
+      console.log(ret.PatientInfo);
+      renderCheckTable(ret.PatientInfo)
+      if (ret.RepCode != 0) {
+        layer.msg(ret.RepMsg, {
+          icon: 2,
+          time: 1500
+        });
+        return false;
+      }
 
-    //   var len = ret.PatientInfo.length;
-    //   if (len == 0) {
-    //     layer.msg("未查询到数据", {
-    //       icon: 2,
-    //       time: 1000
-    //     });
-    //     return false;
-    //   } else if (len == 1) {
+      var len = ret.PatientInfo.length;
+      if (len == 0) {
+        layer.msg("未查询到数据", {
+          icon: 2,
+          time: 1000
+        });
+        return false;
+      } else if (len == 1) {
 
-    //   } else {
+      } else {
 
-    //   }
+      }
 
-    // });
+    });
   });
 
   // 渲染登记检查表格
@@ -840,6 +838,7 @@
 
   $('#from-wapper .select-person').click(function(e) {
     var _index = Number($(e.target).attr('data-index'))
+    $('.select-person').hide()
     formatterCKData(checkPerson[_index])
   })
 
@@ -916,31 +915,30 @@
       $('#case-pop').hide()
       $('#config-pop').hide()
       $('#wear-pop').hide()
+
       isWearPopShow = false
       renderDate()
       e.stopPropagation();
       resetForm('wear-pop')
       $('select.select').select();
 
-      $('input:radio[name="date"]').val('') // 519
-
       $('.readonly-left-box').scrollTop(0)
     })
 
-    // getTableList(1, true) // 获取表格数据
+    getTableList(1, true) // 获取表格数据
 
     // getUntreatedCount() // 获取未分析病例数
 
     // 519开始
     $('input:radio[name="date"]').click(function() {
-      handleReset(false)
+      // handleReset(false)
       var val = $('input:radio[name="date"]:checked').val();
       console.log(val)
       tableParams = {}
       tableParams.pg = 1
       tableParams.type = val
       console.log(tableParams)
-        // getTableList(1, false, tableParams)
+      getTableList(1, false, tableParams)
     });
 
     $('.base-info input').blur(function() {
@@ -966,83 +964,82 @@
     $('.base-info select').val(0).trigger('change');
     // 519结束
 
-    goPage(1, 15, 68, 5)
+    // goPage(1, 15, 68, 5)
 
-    $("#table").reponsetable({
-      "id": "table",
-      "operation": "editer",
-      "type": "numbers",
-      "colum": [{
-        "field": "Name",
-        "title": "姓名"
-      }, {
-        "field": "Age",
-        "title": "年龄"
-      }, {
-        "field": "Gender",
-        "title": "性别"
-      }, {
-        "field": "RUID",
-        "title": "预约号"
-      }, {
-        "field": "Phone",
-        "title": "手机"
-      }, {
-        "field": "CreateTime",
-        "title": "预约时间"
-      }, {
-        "field": "WearTime",
-        "title": "戴机时间"
-      }, {
-        "field": "DevID",
-        "title": "设备编号"
-      }, {
-        "field": "cash",
-        "title": "担保方式"
-      }, {
-        "field": "Status",
-        "title": "状态"
-      }, {
-        "field": "Info",
-        "title": "备注"
-      }, {
-        "field": "ID"
-      }, {
-        "field": "ReqID"
-      }, {
-        "field": "PID"
-      }, {
-        "field": "WardID"
-      }, {
-        "field": "InHospitalID"
-      }, {
-        "field": "IDCard"
-      }, {
-        "field": "ReqDepartment"
-      }, {
-        "field": "ReqDoctorPhone"
-      }, {
-        "field": "Symptom"
-      }, {
-        "field": "TreatMethod"
-      }, {
-        "field": "PM"
-      }],
-      "data": data()
-    });
-    tableStatus()
-    setTimeout(function() {
-      initDropDown()
+    // $("#table").reponsetable({
+    //   "id": "table",
+    //   "operation": "editer",
+    //   "type": "numbers",
+    //   "colum": [{
+    //     "field": "Name",
+    //     "title": "姓名"
+    //   }, {
+    //     "field": "Age",
+    //     "title": "年龄"
+    //   }, {
+    //     "field": "Gender",
+    //     "title": "性别"
+    //   }, {
+    //     "field": "RUID",
+    //     "title": "预约号"
+    //   }, {
+    //     "field": "Phone",
+    //     "title": "手机"
+    //   }, {
+    //     "field": "CreateTime",
+    //     "title": "预约时间"
+    //   }, {
+    //     "field": "WearTime",
+    //     "title": "戴机时间"
+    //   }, {
+    //     "field": "DevID",
+    //     "title": "设备编号"
+    //   }, {
+    //     "field": "cash",
+    //     "title": "担保方式"
+    //   }, {
+    //     "field": "Status",
+    //     "title": "状态"
+    //   }, {
+    //     "field": "Info",
+    //     "title": "备注"
+    //   }, {
+    //     "field": "ID"
+    //   }, {
+    //     "field": "ReqID"
+    //   }, {
+    //     "field": "PID"
+    //   }, {
+    //     "field": "WardID"
+    //   }, {
+    //     "field": "InHospitalID"
+    //   }, {
+    //     "field": "IDCard"
+    //   }, {
+    //     "field": "ReqDepartment"
+    //   }, {
+    //     "field": "ReqDoctorPhone"
+    //   }, {
+    //     "field": "Symptom"
+    //   }, {
+    //     "field": "TreatMethod"
+    //   }, {
+    //     "field": "PM"
+    //   }],
+    //   "data": data()
+    // });
+    // tableStatus()
+    // setTimeout(function() {
+    //   initDropDown()
 
-      $("tbody").scrollTop(1);
-      if ($("tbody").scrollTop() > 0) {
-        console.log("有滚动条");
-        $('#page table thead').css('width', 'calc(100% - 5px)')
-      } else {
-        console.log("没有滚动条");
-      }
-    }, 0)
-
+    //   $("tbody").scrollTop(1);
+    //   if ($("tbody").scrollTop() > 0) {
+    //     console.log("有滚动条");
+    //     $('#page table thead').css('width', 'calc(100% - 5px)')
+    //   } else {
+    //     console.log("没有滚动条");
+    //   }
+    // }, 100)
   })
 
   // 表格操作判断   521 tag
@@ -1119,12 +1116,6 @@
     });
   }
 
-  setTimeout(function() {
-
-  }, 400)
-
-
-
   // 信息修改 today
   function getPopMsg() {
     var params = {}
@@ -1155,10 +1146,10 @@
 
 
   function goPage(pno, psize, count, totalPage, isOnce) {
-    // if (!isOnce) {
-    //   tableParams.pg = pno
-    //   getTableList(pno, false, tableParams)
-    // }
+    if (!isOnce) {
+      tableParams.pg = pno
+      getTableList(pno, false, tableParams)
+    }
 
     var num = count; // 表格所有行数(所有记录数)
     var totalPage = totalPage; // 总页数
@@ -1183,10 +1174,10 @@
   // 获取table数据
   function getTableList(page, isOnce, params) {
     // 第二次之后移除table
-    // if (!isOnce) {
-    //   $("#table").children('thead').first().remove()
-    //   $("#table").children('tbody').first().remove()
-    // }
+    if (!isOnce) {
+      $("#table").children('thead').first().remove()
+      $("#table").children('tbody').first().remove()
+    }
 
     showLoading()
 
@@ -1397,38 +1388,78 @@
       getTableList(1, false, {})
     }
 
+    _.find($('.adorn p'), function(val) {
+      if ($(val).attr('class') && $(val).attr('class') === 'adorncurrent') {
+        $(val).removeClass('adorncurrent')
+      }
+    })
+    $('input:radio[name="date"]').attr("checked", false)
     $('.search-top-wapper input').val('');
     $('#Status').val(0);
-    $("#cancellation").attr("checked", false);
   }
 
   // 检查登记
+  // function checkD() {
+  //   $(".search-box").show();
+  //   $(".select-person").empty()
+  //   $('#detail-pop').css('width', '550px')
+
+  //   resetForm('forms', 'time-of-appointment')
+  //   $('#popLayer').show()
+  //   $('#detail-pop').show()
+  //   $('#detail-pop form').show()
+  //   $('#detail-pop .sub-time').show()
+  //   $('.c-datepicker-picker').show()
+  //   $('#detail-pop #checkIn').show()
+  //   $('#detail-pop .title').hide()
+  //   $('#detail-pop #edit').hide()
+  //   $('#detail-pop #readonly-wapper').hide()
+  //   $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
+
+  //   var todayTime = moment().format("YYYY-MM-DD")
+  //   var inputTime = configTime.length > 0 ? todayTime + '  ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+  //   $("input[ name='time-of-appointment']").val(inputTime)
+
+  //   if (configTime && configTime.length > 0) {
+  //     if ($('.c-datePicker__input-time').val().length === 0) {
+  //       $('.c-datePicker__input-time').val(configTime)
+  //     }
+  //   } else {
+  //     $('.c-datePicker__input-time').val((moment().format("HH:mm")))
+  //   }
+  //   renderDate()
+  // }
+
+  // 检查登记
   function checkD() {
-    $('#detail-pop').css('width', '550px')
-
+    $(".search-box").show();
+    $(".select-person").empty();
+    $("#detail-pop").css("width", "550px");
     resetForm('forms', 'time-of-appointment')
-    $('#popLayer').show()
-    $('#detail-pop').show()
-    $('#detail-pop form').show()
-    $('#detail-pop .sub-time').show()
-    $('.c-datepicker-picker').show()
-    $('#detail-pop #checkIn').show()
-    $('#detail-pop .title').hide()
-    $('#detail-pop #edit').hide()
+    $("#forms").attr("action", "/book/add");
+    $('#popLayer').show();
+    $('#detail-pop').show();
+    $('#detail-pop form').show();
+    $('#detail-pop .sub-time').show();
+    $('.c-datepicker-picker').show();
+    $('#detail-pop #checkIn').show();
+    $('#detail-pop .title').hide();
+    $('#detail-pop #edit').hide();
     $('#detail-pop #readonly-wapper').hide()
-    $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
-
+    $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"));
     var todayTime = moment().format("YYYY-MM-DD")
-    var inputTime = configTime.length > 0 ? todayTime + '  ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
-    $("input[ name='time-of-appointment']").val(inputTime)
+    var inputTime = configTime.length > 0 ? todayTime + ' ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+    $("input[ name='AppointTime']").val(inputTime);
 
     if (configTime && configTime.length > 0) {
       if ($('.c-datePicker__input-time').val().length === 0) {
         $('.c-datePicker__input-time').val(configTime)
       }
+
     } else {
       $('.c-datePicker__input-time').val((moment().format("HH:mm")))
     }
+
     renderDate()
   }
 
@@ -1575,17 +1606,54 @@
     console.log(params)
   }
 
-  // 编辑页面
-  function toEdit(a) {
-    $('#detail-pop').css('width', '550px')
-    $('.search-box').hide()
+  function toEdit(a, isTagP) {
+    $('#detail-pop').css('width', '550px');
+    $(".search-box").hide();
+    $(".select-person").empty();
+    $("#forms").attr("action", "/book/edit");
+    var id = isTagP ? Number($(a).parent().parent().parent().attr('data-id')) : Number($(a).parent().attr('data-id'));
+    var status = isTagP ? Number($(a).parent().parent().parent().attr('data-status')) : Number($(a).parent().attr('data-status'));
 
-    var tr = $(a).parent().parent();
-    reponse.resiverowdata(tr, "table");
-    var rowdata = $("#table").data("rowdata");
-    console.log(rowdata)
+    if (status > 2) {
+      layer.msg("导入数据后不能再编辑", {
+        icon: 2,
+        time: 1500
+      });
+      return false;
+    }
+    showLoading();
+    $.post("http://192.199.198.22:8005/book/getInfo", {
+      id: id
+    }, function(ret) {
+      completeLoading();
+      console.log(ret);
+      if (ret.RepCode != 0) {
+        layer.msg(ret.RepMsg, {
+          icon: 2,
+          time: 1500
+        });
+        return false;
+      }
+      var rowdata = ret.Data;
+      setEditForm(rowdata);
+      $('.edit-show').css("display", "block");
+      $('#popLayer').show()
+      $('#detail-pop').show()
+      $('#detail-pop form').show()
+      $('#detail-pop #checkIn').hide()
+      $('#detail-pop #edit').show()
+      $('#detail-pop .sub-time').hide()
+      $('#detail-pop #readonly-wapper').hide()
+      $('#detail-pop .title').show()
+      $('#detail-pop .title').text('编辑信息')
+    });
+  }
+
+  //填充编辑数据
+  function setEditForm(rowdata) {
+    $("input[ name='ID']").val(rowdata.ID);
     var _domsInput = $('#data-wapper input')
-    var _domsSelect = $('#data-wapper select')
+    var _domsSelect = $('#data-wapper select');
     $('#data-wapper textarea').val(rowdata.Symptom)
     _.forEach(rowdata, function(value, key) {
       for (var i = 0; i < _domsInput.length; i++) {
@@ -1595,26 +1663,11 @@
       }
       for (var j = 0; j < _domsSelect.length; j++) {
         if (key === $(_domsSelect[j]).attr('data-label')) {
-
-          if (key === 'Gender') {
-            value = value === '男' ? '0' : '1'
-          }
           $(_domsSelect[j]).val(value)
         }
       }
-    })
-
+    });
     renderDate()
-    $('#popLayer').show()
-    $('#detail-pop').show()
-    $('#detail-pop form').show()
-    $('#detail-pop #checkIn').hide()
-    $('#detail-pop #edit').show()
-    $('#detail-pop .sub-time').hide()
-    $('#detail-pop #readonly-wapper').hide()
-    $('#detail-pop .title').show()
-    $('#detail-pop .title').text('编辑信息')
-    $("input[ name='record-time']").val((moment().format("YYYY-MM-DD HH:mm")))
   }
 
   // 取消编辑
@@ -1660,7 +1713,7 @@
       $(".dropdown-content").hide();
 
       setTimeout(function() {
-        if (_top >= 617) {
+        if (_top >= 557) {
           $(".dropdown-content").eq(index).css('top', '-240px')
 
         } else {

@@ -1,68 +1,11 @@
-/* .table-b .title {
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  background: #c5cdd1;
-}
-
-.table-b table th {
-  display: inline-block;
-  text-align: center;
-  font-size: 18px;
-}
-
-.table-b table tr {
-  display: block;
-} */
-
-
-/* .table-width-80 {
-  width: 5%;
-  float: left;
-}
-
-.table-width-90 {
-  width: 9%;
-  float: left;
-}
-
-.table-width-120 {
-  width: 15%;
-  float: left;
-}
-
-.table-border-right {
-  border-right: 1px solid #f9fcfc;
-}
-
-.table-b table td {
-  text-align: center;
-  padding: 30px 0px;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
-
-.sroll-area {
-  height: 60vh;
-  width: 100%;
-  overflow-y: auto;
-  border-left: 1px solid #ccc;
-}
-
-.isCurrentStyle {
-  color: #fff !important;
-  border: 1px solid #077ee3;
-  background: #077ee3;
-} */
-
 .page_div {
   font-size: 15px;
   font-family: "microsoft yahei";
   color: #666666;
   box-sizing: border-box;
   position: absolute;
-  right: 30px;
-  bottom: 30px;
+  right: 0px;
+  bottom: 20px;
 }
 
 
@@ -88,6 +31,7 @@
   width: 50px;
   color: #0073A9;
   border: 1px solid #0073A9!important;
+  background: #fff;
 }
 
 #prePage,
@@ -95,6 +39,7 @@
   width: 70px;
   color: #0073A9;
   border: 1px solid #0073A9!important;
+  background: #fff;
 }
 
 .page_div .current {

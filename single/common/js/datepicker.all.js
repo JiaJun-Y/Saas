@@ -3109,11 +3109,17 @@
   function setContainerPos(_this) {
     var offset = _this.$target.offset();
     var height = _this.$target.outerHeight();
-    console.log($(_this.$target.context).attr('class'))
+    var _left = null
+    console.log()
+    if ($(_this.$target.context).attr('class').indexOf('J-datepicker-day') > -1) {
+      _left = 300
+    } else if ($(_this.$target.context).attr('class').indexOf('J-datepickerTime-single') > -1) {
+      _left = 0
+    }
 
     _this.pickerObject.$container.css({
       top: offset.top + height,
-      left: offset.left - 100
+      left: offset.left - _left
     });
   }
 

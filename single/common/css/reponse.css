@@ -42,7 +42,11 @@
   #page #table td {
     border-width: 1px;
     border-style: solid;
-    border-color: #e6e6e6;
+    border-color: #bebebe;
+  }
+  
+  #page #table th {
+    background: #ddd;
   }
   
   .reponsetable thead {
@@ -86,8 +90,12 @@
     background: #fcf8e3 !important;
   }
   
+  .reponsetable tr:nth-child(odd) {
+    background: #fff;
+  }
+  
   .reponsetable tr:nth-child(even) {
-    background: #f3f3f3;
+    background: #ddd;
   }
   
   .layui-btn {
@@ -117,7 +125,7 @@
   
   #page table tbody {
     display: block;
-    height: 55vh;
+    height: 53vh;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -203,15 +211,13 @@
     cursor: pointer;
     width: 33%;
     position: relative;
-    margin-left: 15px;
     text-align: center;
-    overflow: hidden;
+    float: left;
   }
   
   .reponsetable .more img {
     width: 14px;
     height: 14px;
-    display: inline-flex;
     margin-right: 10px;
     vertical-align: middle;
   }

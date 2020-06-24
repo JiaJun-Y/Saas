@@ -33,13 +33,13 @@
   z-index: 112;
   width: 80px;
   height: 20px;
+  cursor: pointer;
 }
 
 #cut_img {
   height: 100%;
   background: url(../../images/res_cut.png) no-repeat;
   background-size: 100% 100%;
-  cursor: pointer;
 }
 
 #reduction,
@@ -104,7 +104,7 @@
   width: 150px;
   height: 150px;
   margin: 0 auto;
-  margin-top: 280px;
+  margin-top: 240px;
 }
 
 .progress-wapper .code-img p {

@@ -87,12 +87,12 @@
 }
 
 #sideNav ul li:nth-child(4):hover .img-box {
-  background: url('../../images/side-more-light.png') no-repeat;
+  background: url('../../images/side-statistics-light.png') no-repeat;
   background-size: 100% 100%;
 }
 
 #sideNav ul li:nth-child(4) .img-box {
-  background: url('../../images/side-more.png') no-repeat;
+  background: url('../../images/side-statistics-dark.png') no-repeat;
   background-size: 100% 100%;
   position: relative;
 }
@@ -101,12 +101,27 @@
   color: #fff;
 }
 
-#sideNav ul li:nth-child(4):hover .img-box {
+#sideNav ul li:last-child:hover .img-box {
   background: url('../../images/side-more-light.png') no-repeat;
   background-size: 100% 100%;
 }
 
-#sideNav ul li:nth-child(4) .img-box {
+#sideNav ul li:last-child .img-box {
+  background: url('../../images/side-more.png') no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+#sideNav ul li:last-child:hover {
+  color: #fff;
+}
+
+#sideNav ul li:last-child:hover .img-box {
+  background: url('../../images/side-more-light.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+#sideNav ul li:last-child .img-box {
   background: url('../../images/side-more.png') no-repeat;
   background-size: 100% 100%;
   position: relative;

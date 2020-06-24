@@ -602,8 +602,8 @@ a {
 }
 
 .c-datepicker-date-table td.current:not(.disabled) .cell {
-  color: #fff;
-  background-color: #409eff
+  color: #409eff;
+  /* background-color: #409eff; */
 }
 
 .c-datepicker-month-table td .cell:hover,

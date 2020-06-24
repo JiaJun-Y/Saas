@@ -135,7 +135,7 @@ function statusFormat(val) {
       _val = '已预约'
       break;
     case '2':
-      _val = '已佩戴'
+      _val = '已戴机'
       break;
     case '3':
       _val = '已录入'

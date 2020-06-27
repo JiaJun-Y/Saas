@@ -29,9 +29,7 @@
     </div>
 
     <!-- 将canvas转换为img -->
-    <div class="img-container" style="display: none;">
-      <img src="" alt="" id="cutArea">
-    </div>
+    <div class="img-container" style="display: none;"></div>
 
     <!-- 关闭 -->
     <!-- <iframe id="sessionIframe" frameborder="0" width="100%" height="100%" scrolling="yes" style="visibility: hidden;"></iframe> -->
@@ -73,6 +71,7 @@
   // 截屏
   function handleCutScreen() {
     var _dom = $('#sessionIframe').contents().find("body")[0]
+    $('.img-container').empty()
     html2canvas(_dom, {
       width: $(document.body).width(),
       height: $(document.body).height(),
@@ -82,7 +81,10 @@
       useCORS: true,
     }).then(function(canvas) {
       var _src = canvas.toDataURL("image/png", 1.0)
-      $('.img-container #cutArea').attr('src', _src)
+      var _img = document.createElement('img')
+      _img.src = _src
+      _img.id = 'cutArea'
+      $('.img-container').append(_img)
       $('.img-container').show()
       initCutArea()
     })
@@ -120,7 +122,7 @@
         console.log(e.type);
       }
     }).cropper(options);
-    $(document.body).on('click', '[data-method]', function() {
+    $('.img-container').on('click', '[data-method]', function() {
       var data = $(this).data(),
         $target,
         result;
@@ -145,9 +147,12 @@
         if (data.method === 'getCroppedCanvas') {
           var strDataURI = result.toDataURL("image/png");
           downloadIamge(strDataURI)
-        } else if (data.method === 'destroy') {
+        } else if (data.method === 'restCut') {
           setTimeout(function() {
-            $('.img-container #cutArea').attr('src', null)
+            $image.cropper('crop')
+            $image.cropper('destroy').cropper(options);
+            $('.img-container').unbind('click')
+            $('.img-container').empty()
             $('.img-container').hide()
           }, 200)
         }
@@ -187,7 +192,6 @@
     });
 
     function downloadIamge(imgUrl) {
-      console.log(imgUrl)
         // 生成一个a元素
       var a = document.createElement('a')
         // 创建一个单击事件
@@ -201,9 +205,11 @@
       // 触发a的单击事件 开始下载
       a.dispatchEvent(event);
 
-      $image.cropper('destroy')
       setTimeout(function() {
-        $('.img-container #cutArea').attr('src', null)
+        $image.cropper('crop')
+        $image.cropper('destroy').cropper(options);
+        $('.img-container').unbind('click')
+        $('.img-container').empty()
         $('.img-container').hide()
       }, 200)
     }

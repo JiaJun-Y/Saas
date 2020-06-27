@@ -592,6 +592,12 @@ a {
   font-weight: 700
 }
 
+.c-datepicker-date-table td.grey .cell {
+  background-color: #ccc;
+  color: #fff;
+  font-weight: 700
+}
+
 .c-datepicker-date-table td.cell {
   width: 24px;
   height: 24px;

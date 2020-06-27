@@ -761,7 +761,7 @@
   var tableParams = {}
   var orangeData = []
   var redData = []
-  var configTime = '' // 配置的时间，时分
+  var configTime = '10: 00' // 配置的时间，时分
   var _protoco = ''
   var isWearPopShow = false
   var isShowSearchInput = false
@@ -902,16 +902,6 @@
   //   attributeFilter: ['style']
   // });
 
-  // 已改
-  setTimeout(function() {
-    orangeData = ['2020-06-10', '2020-06-11', '2020-06-22']
-    redData = ['2020-05-13', '2020-05-16', '2020-05-18']
-    renderDate()
-
-    // 519
-
-  }, 200)
-
   $(function() {
     if (_protoco.length > 0) {
       window.protocolCheck(_protoco, function() {
@@ -937,7 +927,7 @@
       $('.readonly-left-box').scrollTop(0)
     })
 
-    getTableList(1, true) // 获取表格数据
+    // getTableList(1, true) // 获取表格数据
 
     // getUntreatedCount() // 获取未分析病例数
 
@@ -976,82 +966,82 @@
     $('.base-info select').val(0).trigger('change');
     // 519结束
 
-    // goPage(1, 15, 68, 5)
+    goPage(1, 15, 68, 5)
 
-    // $("#table").reponsetable({
-    //   "id": "table",
-    //   "operation": "editer",
-    //   "type": "numbers",
-    //   "colum": [{
-    //     "field": "Name",
-    //     "title": "姓名"
-    //   }, {
-    //     "field": "Age",
-    //     "title": "年龄"
-    //   }, {
-    //     "field": "Gender",
-    //     "title": "性别"
-    //   }, {
-    //     "field": "RUID",
-    //     "title": "预约号"
-    //   }, {
-    //     "field": "Phone",
-    //     "title": "手机"
-    //   }, {
-    //     "field": "CreateTime",
-    //     "title": "预约时间"
-    //   }, {
-    //     "field": "WearTime",
-    //     "title": "戴机时间"
-    //   }, {
-    //     "field": "DevID",
-    //     "title": "设备编号"
-    //   }, {
-    //     "field": "cash",
-    //     "title": "担保方式"
-    //   }, {
-    //     "field": "Status",
-    //     "title": "状态"
-    //   }, {
-    //     "field": "Info",
-    //     "title": "备注"
-    //   }, {
-    //     "field": "ID"
-    //   }, {
-    //     "field": "ReqID"
-    //   }, {
-    //     "field": "PID"
-    //   }, {
-    //     "field": "WardID"
-    //   }, {
-    //     "field": "InHospitalID"
-    //   }, {
-    //     "field": "IDCard"
-    //   }, {
-    //     "field": "ReqDepartment"
-    //   }, {
-    //     "field": "ReqDoctorPhone"
-    //   }, {
-    //     "field": "Symptom"
-    //   }, {
-    //     "field": "TreatMethod"
-    //   }, {
-    //     "field": "PM"
-    //   }],
-    //   "data": data()
-    // });
-    // tableStatus()
-    // setTimeout(function() {
-    //   initDropDown()
+    $("#table").reponsetable({
+      "id": "table",
+      "operation": "editer",
+      "type": "numbers",
+      "colum": [{
+        "field": "Name",
+        "title": "姓名"
+      }, {
+        "field": "Age",
+        "title": "年龄"
+      }, {
+        "field": "Gender",
+        "title": "性别"
+      }, {
+        "field": "RUID",
+        "title": "预约号"
+      }, {
+        "field": "Phone",
+        "title": "手机"
+      }, {
+        "field": "CreateTime",
+        "title": "预约时间"
+      }, {
+        "field": "WearTime",
+        "title": "戴机时间"
+      }, {
+        "field": "DevID",
+        "title": "设备编号"
+      }, {
+        "field": "cash",
+        "title": "担保方式"
+      }, {
+        "field": "Status",
+        "title": "状态"
+      }, {
+        "field": "Info",
+        "title": "备注"
+      }, {
+        "field": "ID"
+      }, {
+        "field": "ReqID"
+      }, {
+        "field": "PID"
+      }, {
+        "field": "WardID"
+      }, {
+        "field": "InHospitalID"
+      }, {
+        "field": "IDCard"
+      }, {
+        "field": "ReqDepartment"
+      }, {
+        "field": "ReqDoctorPhone"
+      }, {
+        "field": "Symptom"
+      }, {
+        "field": "TreatMethod"
+      }, {
+        "field": "PM"
+      }],
+      "data": data()
+    });
+    tableStatus()
+    setTimeout(function() {
+      initDropDown()
 
-    //   $("tbody").scrollTop(1);
-    //   if ($("tbody").scrollTop() > 0) {
-    //     console.log("有滚动条");
-    //     $('#page table thead').css('width', 'calc(100% - 5px)')
-    //   } else {
-    //     console.log("没有滚动条");
-    //   }
-    // }, 100)
+      $("tbody").scrollTop(1);
+      if ($("tbody").scrollTop() > 0) {
+        console.log("有滚动条");
+        $('#page table thead').css('width', 'calc(100% - 5px)')
+      } else {
+        console.log("没有滚动条");
+      }
+    }, 100)
   })
 
   // 表格操作判断   521 tag
@@ -1158,10 +1148,10 @@
 
 
   function goPage(pno, psize, count, totalPage, isOnce) {
-    if (!isOnce) {
-      tableParams.pg = pno
-      getTableList(pno, false, tableParams)
-    }
+    // if (!isOnce) {
+    //   tableParams.pg = pno
+    //   getTableList(pno, false, tableParams)
+    // }
 
     var num = count; // 表格所有行数(所有记录数)
     var totalPage = totalPage; // 总页数
@@ -1186,10 +1176,10 @@
   // 获取table数据
   function getTableList(page, isOnce, params) {
     // 第二次之后移除table
-    if (!isOnce) {
-      $("#table").children('thead').first().remove()
-      $("#table").children('tbody').first().remove()
-    }
+    // if (!isOnce) {
+    //   $("#table").children('thead').first().remove()
+    //   $("#table").children('tbody').first().remove()
+    // }
 
     showLoading()
 
@@ -1412,68 +1402,112 @@
   }
 
   // 检查登记
-  // function checkD() {
-  //   $(".search-box").show();
-  //   $(".select-person").empty()
-  //   $('#detail-pop').css('width', '550px')
-
-  //   resetForm('forms', 'time-of-appointment')
-  //   $('#popLayer').show()
-  //   $('#detail-pop').show()
-  //   $('#detail-pop form').show()
-  //   $('#detail-pop .sub-time').show()
-  //   $('.c-datepicker-picker').show()
-  //   $('#detail-pop #checkIn').show()
-  //   $('#detail-pop .title').hide()
-  //   $('#detail-pop #edit').hide()
-  //   $('#detail-pop #readonly-wapper').hide()
-  //   $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
-
-  //   var todayTime = moment().format("YYYY-MM-DD")
-  //   var inputTime = configTime.length > 0 ? todayTime + '  ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
-  //   $("input[ name='time-of-appointment']").val(inputTime)
-
-  //   if (configTime && configTime.length > 0) {
-  //     if ($('.c-datePicker__input-time').val().length === 0) {
-  //       $('.c-datePicker__input-time').val(configTime)
-  //     }
-  //   } else {
-  //     $('.c-datePicker__input-time').val((moment().format("HH:mm")))
-  //   }
-  //   renderDate()
-  // }
-
-  // 检查登记
   function checkD() {
     $(".search-box").show();
-    $(".select-person").empty();
-    $("#detail-pop").css("width", "550px");
+    $(".select-person").empty()
+    $('#detail-pop').css('width', '550px')
+
     resetForm('forms', 'time-of-appointment')
-    $("#forms").attr("action", "/book/add");
-    $('#popLayer').show();
-    $('#detail-pop').show();
-    $('#detail-pop form').show();
-    $('#detail-pop .sub-time').show();
-    $('.c-datepicker-picker').show();
-    $('#detail-pop #checkIn').show();
-    $('#detail-pop .title').hide();
-    $('#detail-pop #edit').hide();
+    $('#popLayer').show()
+    $('#detail-pop').show()
+    $('#detail-pop form').show()
+    $('#detail-pop .sub-time').show()
+    $('.c-datepicker-picker').show()
+    $('#detail-pop #checkIn').show()
+    $('#detail-pop .title').hide()
+    $('#detail-pop #edit').hide()
     $('#detail-pop #readonly-wapper').hide()
-    $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"));
-    var todayTime = moment().format("YYYY-MM-DD")
-    var inputTime = configTime.length > 0 ? todayTime + ' ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
-    $("input[ name='AppointTime']").val(inputTime);
+    $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
+
+    // var todayTime = moment().format("YYYY-MM-DD")
+    var todayTime = selectInputTime()
+    var inputTime = configTime.length > 0 ?  todayTime + '  ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+    $("input[ name='time-of-appointment']").val(inputTime)
 
     if (configTime && configTime.length > 0) {
       if ($('.c-datePicker__input-time').val().length === 0) {
         $('.c-datePicker__input-time').val(configTime)
       }
-
     } else {
       $('.c-datePicker__input-time').val((moment().format("HH:mm")))
     }
-
     renderDate()
+  }
+
+  // 检查登记
+  // function checkD() {
+  //   $(".search-box").show();
+  //   $(".select-person").empty();
+  //   $("#detail-pop").css("width", "550px");
+  //   resetForm('forms', 'time-of-appointment')
+  //   $("#forms").attr("action", "/book/add");
+  //   $('#popLayer').show();
+  //   $('#detail-pop').show();
+  //   $('#detail-pop form').show();
+  //   $('#detail-pop .sub-time').show();
+  //   $('.c-datepicker-picker').show();
+  //   $('#detail-pop #checkIn').show();
+  //   $('#detail-pop .title').hide();
+  //   $('#detail-pop #edit').hide();
+  //   $('#detail-pop #readonly-wapper').hide()
+  //   $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"));
+  //   var todayTime = moment().format("YYYY-MM-DD")
+  //   var inputTime = configTime.length > 0 ? todayTime + ' ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+  //   $("input[ name='AppointTime']").val(inputTime);
+
+  //   if (configTime && configTime.length > 0) {
+  //     if ($('.c-datepicker-data-input').val().length === 0) {
+  //       $('.c-datepicker-data-input').val(configTime)
+  //       selectInputTime()
+  //     }
+
+  //   } else {
+  //     $('.c-datepicker-data-input').val((moment().format("HH:mm")))
+  //   }
+
+  //   renderDate()
+  // }
+
+  // 已改
+  setTimeout(function() {
+    orangeData = ['2020-06-10', '2020-06-11', '2020-06-22']
+    redData = ['2020-05-13', '2020-05-16', '2020-05-18']
+    greyData = ['2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29','2020-07-01']
+    renderDate()
+    // 519
+  }, 200)
+
+  // 判断选择的时间
+  function selectInputTime() {
+    var time = moment().format("YYYY-MM-DD")
+    var maxArr = []
+    var tomArr = []
+    var todayTime = moment().format("YYYY-MM-DD")
+    var nextTime = null
+
+    if (_.indexOf(greyData, todayTime) > -1) {
+      _.find(greyData, function(g) {
+        if (new Date(g) >= new Date(todayTime)) {
+          maxArr.push(g)
+        }
+      })
+    }
+
+    console.log(maxArr)
+    for (var i = 0; i< maxArr.length; i++) {
+      nextTime = moment(maxArr[i]).add(1,'days').format("YYYY-MM-DD");
+      tomArr.push(nextTime)
+    }
+
+    console.log(tomArr)
+    for (var j = 0; j < tomArr.length; j++) {
+      if (_.indexOf(maxArr, tomArr[j]) === -1) {
+        console.log(tomArr[j])
+        return time = tomArr[j]
+      }
+    }
+    console.log(time)
+    return time
   }
 
   // 关闭检查登记

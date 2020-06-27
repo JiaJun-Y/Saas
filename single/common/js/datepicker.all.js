@@ -1231,6 +1231,14 @@
               }
             }
           })
+
+          _.find(greyData, function(G) {
+            if (year == G.slice(0, 4) && API.fillTime(month) == G.slice(5, 7)) {
+              if (API.fillTime(_val) == G.slice(8, 10)) {
+                className += 'disabled grey';
+              }
+            }
+          })
         }
 
         if (_val === today) {

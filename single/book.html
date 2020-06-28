@@ -136,8 +136,13 @@
     <!-- 设置tooltip -->
     <div class='config-wapper'>
       <div class='tooltip'>
-        <p onclick='changeMsg()'>信息修改</p>
-        <p onclick="downPlug()">插件下载</p>
+        <!-- 
+          保存文件 调接口
+          
+          导入文件 选择文件，文件类型.fg-->
+        <p onclick=''>许可证录入</p>
+        <p onclick='goAdmin()'>后台设置</p>
+        <p onclick="downPlug()">录入端下载</p>
         <span class='triangle'></span>
       </div>
     </div>
@@ -761,7 +766,7 @@
   var tableParams = {}
   var orangeData = []
   var redData = []
-  var configTime = '10: 00' // 配置的时间，时分
+
   var _protoco = ''
   var isWearPopShow = false
   var isShowSearchInput = false
@@ -927,7 +932,7 @@
       $('.readonly-left-box').scrollTop(0)
     })
 
-    // getTableList(1, true) // 获取表格数据
+    getTableList(1, true) // 获取表格数据
 
     // getUntreatedCount() // 获取未分析病例数
 
@@ -966,82 +971,82 @@
     $('.base-info select').val(0).trigger('change');
     // 519结束
 
-    goPage(1, 15, 68, 5)
+    // goPage(1, 15, 68, 5)
 
-    $("#table").reponsetable({
-      "id": "table",
-      "operation": "editer",
-      "type": "numbers",
-      "colum": [{
-        "field": "Name",
-        "title": "姓名"
-      }, {
-        "field": "Age",
-        "title": "年龄"
-      }, {
-        "field": "Gender",
-        "title": "性别"
-      }, {
-        "field": "RUID",
-        "title": "预约号"
-      }, {
-        "field": "Phone",
-        "title": "手机"
-      }, {
-        "field": "CreateTime",
-        "title": "预约时间"
-      }, {
-        "field": "WearTime",
-        "title": "戴机时间"
-      }, {
-        "field": "DevID",
-        "title": "设备编号"
-      }, {
-        "field": "cash",
-        "title": "担保方式"
-      }, {
-        "field": "Status",
-        "title": "状态"
-      }, {
-        "field": "Info",
-        "title": "备注"
-      }, {
-        "field": "ID"
-      }, {
-        "field": "ReqID"
-      }, {
-        "field": "PID"
-      }, {
-        "field": "WardID"
-      }, {
-        "field": "InHospitalID"
-      }, {
-        "field": "IDCard"
-      }, {
-        "field": "ReqDepartment"
-      }, {
-        "field": "ReqDoctorPhone"
-      }, {
-        "field": "Symptom"
-      }, {
-        "field": "TreatMethod"
-      }, {
-        "field": "PM"
-      }],
-      "data": data()
-    });
-    tableStatus()
-    setTimeout(function() {
-      initDropDown()
+    // $("#table").reponsetable({
+    //   "id": "table",
+    //   "operation": "editer",
+    //   "type": "numbers",
+    //   "colum": [{
+    //     "field": "Name",
+    //     "title": "姓名"
+    //   }, {
+    //     "field": "Age",
+    //     "title": "年龄"
+    //   }, {
+    //     "field": "Gender",
+    //     "title": "性别"
+    //   }, {
+    //     "field": "RUID",
+    //     "title": "预约号"
+    //   }, {
+    //     "field": "Phone",
+    //     "title": "手机"
+    //   }, {
+    //     "field": "CreateTime",
+    //     "title": "预约时间"
+    //   }, {
+    //     "field": "WearTime",
+    //     "title": "戴机时间"
+    //   }, {
+    //     "field": "DevID",
+    //     "title": "设备编号"
+    //   }, {
+    //     "field": "cash",
+    //     "title": "担保方式"
+    //   }, {
+    //     "field": "Status",
+    //     "title": "状态"
+    //   }, {
+    //     "field": "Info",
+    //     "title": "备注"
+    //   }, {
+    //     "field": "ID"
+    //   }, {
+    //     "field": "ReqID"
+    //   }, {
+    //     "field": "PID"
+    //   }, {
+    //     "field": "WardID"
+    //   }, {
+    //     "field": "InHospitalID"
+    //   }, {
+    //     "field": "IDCard"
+    //   }, {
+    //     "field": "ReqDepartment"
+    //   }, {
+    //     "field": "ReqDoctorPhone"
+    //   }, {
+    //     "field": "Symptom"
+    //   }, {
+    //     "field": "TreatMethod"
+    //   }, {
+    //     "field": "PM"
+    //   }],
+    //   "data": data()
+    // });
+    // tableStatus()
+    // setTimeout(function() {
+    //   initDropDown()
 
-      $("tbody").scrollTop(1);
-      if ($("tbody").scrollTop() > 0) {
-        console.log("有滚动条");
-        $('#page table thead').css('width', 'calc(100% - 5px)')
-      } else {
-        console.log("没有滚动条");
-      }
-    }, 100)
+    //   $("tbody").scrollTop(1);
+    //   if ($("tbody").scrollTop() > 0) {
+    //     console.log("有滚动条");
+    //     $('#page table thead').css('width', 'calc(100% - 5px)')
+    //   } else {
+    //     console.log("没有滚动条");
+    //   }
+    // }, 100)
   })
 
   // 表格操作判断   521 tag
@@ -1148,10 +1153,10 @@
 
 
   function goPage(pno, psize, count, totalPage, isOnce) {
-    // if (!isOnce) {
-    //   tableParams.pg = pno
-    //   getTableList(pno, false, tableParams)
-    // }
+    if (!isOnce) {
+      tableParams.pg = pno
+      getTableList(pno, false, tableParams)
+    }
 
     var num = count; // 表格所有行数(所有记录数)
     var totalPage = totalPage; // 总页数
@@ -1176,10 +1181,10 @@
   // 获取table数据
   function getTableList(page, isOnce, params) {
     // 第二次之后移除table
-    // if (!isOnce) {
-    //   $("#table").children('thead').first().remove()
-    //   $("#table").children('tbody').first().remove()
-    // }
+    if (!isOnce) {
+      $("#table").children('thead').first().remove()
+      $("#table").children('tbody').first().remove()
+    }
 
     showLoading()
 
@@ -1271,6 +1276,14 @@
       tableStatus()
       completeLoading()
     })
+  }
+
+  function goAdmin() {
+    var protocol = window.location.protocol;
+    var hostname = window.location.hostname;
+
+    var url = protocol + "//" + hostname + ":9023";
+    window.open(url, "_blank");
   }
 
   // 打印
@@ -1401,6 +1414,8 @@
     $('#Status').val(0);
   }
 
+  var configTime = '10:00' // 配置的时间，时分
+
   // 检查登记
   function checkD() {
     $(".search-box").show();
@@ -1419,19 +1434,15 @@
     $('#detail-pop #readonly-wapper').hide()
     $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
 
-    // var todayTime = moment().format("YYYY-MM-DD")
-    var todayTime = selectInputTime()
-    var inputTime = configTime.length > 0 ?  todayTime + '  ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
-    $("input[ name='time-of-appointment']").val(inputTime)
+    var todayTime = greyData.length > 0 ? selectInputTime() : moment().format("YYYY-MM-DD")
+    var inputTime = configTime.length > 0 ? todayTime + ' ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+    console.log(inputTime)
 
-    if (configTime && configTime.length > 0) {
-      if ($('.c-datePicker__input-time').val().length === 0) {
-        $('.c-datePicker__input-time').val(configTime)
-      }
-    } else {
-      $('.c-datePicker__input-time').val((moment().format("HH:mm")))
-    }
-    renderDate()
+    setTimeout(function() {
+      $("input[ name='time-of-appointment']").val(inputTime)
+      renderDate()
+    }, 200)
+
   }
 
   // 检查登记
@@ -1472,9 +1483,9 @@
   setTimeout(function() {
     orangeData = ['2020-06-10', '2020-06-11', '2020-06-22']
     redData = ['2020-05-13', '2020-05-16', '2020-05-18']
-    greyData = ['2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29','2020-07-01']
+    greyData = ['2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-07-01']
     renderDate()
-    // 519
+      // 519
   }, 200)
 
   // 判断选择的时间
@@ -1493,13 +1504,13 @@
       })
     }
 
-    console.log(maxArr)
-    for (var i = 0; i< maxArr.length; i++) {
-      nextTime = moment(maxArr[i]).add(1,'days').format("YYYY-MM-DD");
+    // console.log(maxArr)
+    for (var i = 0; i < maxArr.length; i++) {
+      nextTime = moment(maxArr[i]).add(1, 'days').format("YYYY-MM-DD");
       tomArr.push(nextTime)
     }
 
-    console.log(tomArr)
+    // console.log(tomArr)
     for (var j = 0; j < tomArr.length; j++) {
       if (_.indexOf(maxArr, tomArr[j]) === -1) {
         console.log(tomArr[j])

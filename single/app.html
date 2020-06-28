@@ -130,16 +130,6 @@
       </div>
     </div>
 
-    <!-- 设置tooltip -->
-    <div class='config-wapper'>
-      <div class='tooltip'>
-        <p onclick='changeMsg()'>信息修改</p>
-        <p onclick="downPlug()">插件下载</p>
-        <!-- <p onclick="handleConfig()">预约设置</p> -->
-        <span class='triangle'></span>
-      </div>
-    </div>
-
     <!-- 信息修改弹框 -->
     <div class='msg-wapper'>
       <div id='popLayer'></div>
@@ -340,6 +330,15 @@
   function toShowVersion() {
     $('.version-wapper #popLayer').show()
     $('.version-msg').show()
+  }
+
+
+  function goAdmin() {
+    var protocol = window.location.protocol;
+    var hostname = window.location.hostname;
+
+    var url = protocol + "//" + hostname + ":9023";
+    window.open(url, "_blank");
   }
 
   function getPathUrl() {

@@ -801,15 +801,15 @@
       // 点击选择日期
       this.picker.$container.on('click', '.c-datepicker-date-table td.available', function(event) {
         console.log($(this))
-          // event.stopPropagation();
-          // if (configTime && configTime.length > 0) {
-          //   if ($('.c-datePicker__input-time').val().length === 0) {
-          //     $('.c-datePicker__input-time').val(configTime)
-          //   }
+        event.stopPropagation();
+        if (configTime && configTime.length > 0) {
+          if ($('.c-datePicker__input-time').val().length === 0) {
+            $('.c-datePicker__input-time').val(configTime)
+          }
 
-        // } else {
-        //   $('.c-datePicker__input-time').val((moment().format("HH:mm")))
-        // }
+        } else {
+          $('.c-datePicker__input-time').val((moment().format("HH:mm")))
+        }
 
         var $this = $(this);
         var _this = API.getPicker($this, 'day');
@@ -1235,7 +1235,7 @@
           _.find(greyData, function(G) {
             if (year == G.slice(0, 4) && API.fillTime(month) == G.slice(5, 7)) {
               if (API.fillTime(_val) == G.slice(8, 10)) {
-                className += 'disabled grey';
+                className += ' disabled grey';
               }
             }
           })

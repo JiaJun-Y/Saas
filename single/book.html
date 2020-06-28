@@ -440,7 +440,7 @@
           <div class="input-line">
             <span class="sub-title">登记时间：</span>
             <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepickerTime-single" id="data-wapper">
-              <input type="text" autocomplete="off" name="time-of-appointment" class="c-datepicker-data-input" value="" id="mark" data-label="CreateTime">
+              <input type="text" autocomplete="off" name="AppointTime" class="c-datepicker-data-input" value="" id="mark" data-label="CreateTime">
             </div>
           </div>
 
@@ -1297,7 +1297,7 @@
   // 获取表单内容
   function getFormInfo() {
     var params = serializeForm('forms');
-    resetForm('forms', 'time-of-appointment')
+    resetForm('forms', 'AppointTime')
   }
 
   // 打开设置弹框
@@ -1422,7 +1422,7 @@
     $(".select-person").empty()
     $('#detail-pop').css('width', '550px')
 
-    resetForm('forms', 'time-of-appointment')
+    resetForm('forms', 'AppointTime')
     $('#popLayer').show()
     $('#detail-pop').show()
     $('#detail-pop form').show()
@@ -1434,15 +1434,14 @@
     $('#detail-pop #readonly-wapper').hide()
     $('#detail-pop .sub-time').text(moment().format("YYYY-MM-DD HH:mm"))
 
-    var todayTime = greyData.length > 0 ? selectInputTime() : moment().format("YYYY-MM-DD")
-    var inputTime = configTime.length > 0 ? todayTime + ' ' + configTime : (moment().format("YYYY-MM-DD HH:mm"))
+    var todayTime = selectInputTime()
+    var inputTime = configTime.length > 0 ? todayTime + ' ' + configTime : (selectInputTime() + ' ' + moment().format("HH:mm"))
     console.log(inputTime)
 
     setTimeout(function() {
-      $("input[ name='time-of-appointment']").val(inputTime)
+      $("input[ name='AppointTime']").val(inputTime)
       renderDate()
     }, 200)
-
   }
 
   // 检查登记
@@ -1450,7 +1449,7 @@
   //   $(".search-box").show();
   //   $(".select-person").empty();
   //   $("#detail-pop").css("width", "550px");
-  //   resetForm('forms', 'time-of-appointment')
+  //   resetForm('forms', 'AppointTime')
   //   $("#forms").attr("action", "/book/add");
   //   $('#popLayer').show();
   //   $('#detail-pop').show();
@@ -1483,9 +1482,8 @@
   setTimeout(function() {
     orangeData = ['2020-06-10', '2020-06-11', '2020-06-22']
     redData = ['2020-05-13', '2020-05-16', '2020-05-18']
-    greyData = ['2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-07-01']
+    greyData = ['2020-06-26', '2020-06-27', '2020-06-28', '2020-07-01']
     renderDate()
-      // 519
   }, 200)
 
   // 判断选择的时间

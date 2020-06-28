@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./common/css/reset.css">
+
   <link rel="stylesheet" href="./common/css/header.css">
   <link rel="stylesheet" href="./common/css/sideNav.css">
   <link rel="stylesheet" href="./common/css/order.css">
@@ -12,6 +13,8 @@
   <link rel="stylesheet" href="./common/css/reponse.css">
   <link rel="stylesheet" href="./common/css/datepicker.css">
   <link rel="stylesheet" href="./common/css/print.css">
+  <link rel="stylesheet" href="./common/css/fileUpload.css">
+  <link rel="stylesheet" href="./common/css/iconfont.css">
 
   <!-- <link rel="stylesheet" href="./common/css/pdf.css"> -->
   <!-- <link rel="stylesheet" href="./common/js/viewer/viewer.css"> -->
@@ -138,9 +141,8 @@
       <div class='tooltip'>
         <!-- 
           保存文件 调接口
-          
           导入文件 选择文件，文件类型.fg-->
-        <p onclick=''>许可证录入</p>
+        <p onclick='handleUpload()'>许可证录入</p>
         <p onclick='goAdmin()'>后台设置</p>
         <p onclick="downPlug()">录入端下载</p>
         <span class='triangle'></span>
@@ -746,6 +748,20 @@
   <!-- 查看PDF -->
   <div id="PDF" class="pdf-wapper"></div>
 
+  <!-- 上传文件 -->
+  <div class='upload-wapper'>
+    <div id='popLayer'></div>
+    <div id='upload'>
+      <div class='title'>许可证录入</div>
+      <div class='plug-content'>
+        <div id="fileUploadContent" class="fileUploadContent"></div>
+        <!-- <div onclick="getFile()">选取文件</div> -->
+        <!-- <span>院内采集端</span>
+        <a href=''>下载</a> -->
+      </div>
+    </div>
+  </div>
+
   <!-- app.html内容结束 -->
   <div class="index-bottom">
     <ul>
@@ -761,6 +777,7 @@
 <script src="./common/js/utils.js"></script>
 <script src="./common/js/layer/layer.js"></script>
 <script src="./common/js/clipboard.min.js"></script>
+<script src="./common/js/fileUpload.js"></script>
 <script>
   var tablePage = 1
   var tableParams = {}
@@ -771,6 +788,22 @@
   var isWearPopShow = false
   var isShowSearchInput = false
   var checkPerson = []
+
+  // 上传文件
+  function handleUpload() {
+    $('#popLayer').show()
+    $('#upload').show()
+    let wfu = new WpFileUpload("fileUploadContent");
+
+    wfu.initUpload({
+      "uploadUrl": "#", //上传文件信息地址
+      "progressUrl": "#", //获取进度信息地址，可选，注意需要返回的data格式如下（{bytesRead: 102516060, contentLength: 102516060, items: 1, percent: 100, startTime: 1489223136317, useTime: 2767}）
+      "scheduleStandard": true,
+      "maxFileNumber": 1,
+      "ismultiple": false,
+      "fileType": ['fg']
+    });
+  }
 
   // 左1
   $('.adorn').on('click', 'p', function() {
@@ -922,6 +955,9 @@
       $('#case-pop').hide()
       $('#config-pop').hide()
       $('#wear-pop').hide()
+      $('#fileUploadContent').empty()
+      $('#upload').hide()
+
 
       isWearPopShow = false
       renderDate()

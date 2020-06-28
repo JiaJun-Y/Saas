@@ -328,6 +328,7 @@
   overflow: hidden;
 }
 
+#upload .title,
 #msg-pop .title,
 #plugIn .title {
   height: 40px;
@@ -388,6 +389,10 @@
 
 /* 下载插件弹框 */
 
+
+/* 上传文件弹框 */
+
+#upload,
 #plugIn {
   display: none;
   z-index: 11;
@@ -402,6 +407,15 @@
   box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
   background: #fff;
   overflow: hidden;
+}
+
+#upload {
+  height: 200px;
+}
+
+#upload .plug-content {
+  font-size: 16px;
+  padding: 15px;
 }
 
 #plugIn .plug-content {

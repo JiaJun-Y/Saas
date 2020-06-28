@@ -87,6 +87,7 @@ function downPlug() {
   $('#plugIn').show()
 }
 
+
 // 获取用户修改信息
 function getPopMsg() {
   var name = $('input[name="name"]').val();

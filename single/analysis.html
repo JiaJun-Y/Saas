@@ -65,6 +65,7 @@
 </body>
 
 <script src="./common/js/layer/layer.js"></script>
+<script src="./common/js/cut/bluebird.js"></script>
 <script type="text/javascript" src="./common/js/cut/html2canvas.js"></script>
 <script src="./common/js/cut/cropper/cropper.js"></script>
 <script>
@@ -192,18 +193,32 @@
     });
 
     function downloadIamge(imgUrl) {
+      // 兼容IE
+      var userAgent = navigator.userAgent;
+      if (-1 !== userAgent.indexOf("Trident")) {
+        console.log(imgUrl)
+        var base64 = {
+          dataURL: imgUrl,
+          type: 'image/jpg',
+          ext: 'jpg'
+        };
+        var blob = convertBase64UrlToBlob(base64);
+        window.navigator.msSaveBlob(blob, imgUrl.substring(22, 30) + timestamp + '.png');
+      } else {
         // 生成一个a元素
-      var a = document.createElement('a')
-        // 创建一个单击事件
-      var event = new MouseEvent('click')
-        // 生成文件名称
-      var timestamp = new Date().getTime();
-      var name = imgUrl.substring(22, 30) + timestamp + '.png';
-      a.download = name
-        // 将生成的URL设置为a.href属性
-      a.href = imgUrl;
-      // 触发a的单击事件 开始下载
-      a.dispatchEvent(event);
+        var a = document.createElement('a')
+          // 创建一个单击事件
+        var event = new MouseEvent('click')
+          // 生成文件名称
+        var timestamp = new Date().getTime();
+        var name = imgUrl.substring(22, 30) + timestamp + '.png';
+        a.download = name
+          // 将生成的URL设置为a.href属性
+        a.href = imgUrl;
+        // 触发a的单击事件 开始下载
+        a.dispatchEvent(event);
+      }
+
 
       setTimeout(function() {
         $image.cropper('crop')
@@ -212,6 +227,21 @@
         $('.img-container').empty()
         $('.img-container').hide()
       }, 200)
+    }
+
+
+    function convertBase64UrlToBlob(base64) {
+      var parts = base64.dataURL.split(';base64,');
+      var contentType = parts[0].split(':')[1];
+      var raw = window.atob(parts[1]);
+      var rawLength = raw.length;
+      var uInt8Array = new Uint8Array(rawLength);
+      for (var i = 0; i < rawLength; i++) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+      return new Blob([uInt8Array], {
+        type: contentType
+      });
     }
   }
 

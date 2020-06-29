@@ -626,6 +626,7 @@ var WpFileUploadAjax = {
           wfu.onUpload()
           $('#popLayer').hide()
           $('#upload').hide()
+          $('#fileUploadContent').empty()
         }, 800);
         // 自定清除文件
         if (wfu.isAutoClean) {
@@ -635,6 +636,11 @@ var WpFileUploadAjax = {
       error: function(e) {
         // 显示上传错误
         wfu.uploadError();
+        setTimeout(function() {
+          $('#popLayer').hide()
+          $('#upload').hide()
+          $('#fileUploadContent').empty()
+        }, 800);
       }
     });
   }

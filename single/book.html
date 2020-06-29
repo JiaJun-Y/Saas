@@ -796,11 +796,14 @@
     let wfu = new WpFileUpload("fileUploadContent");
 
     wfu.initUpload({
-      "uploadUrl": "#", //上传文件信息地址
-      "progressUrl": "#", //获取进度信息地址，可选，注意需要返回的data格式如下（{bytesRead: 102516060, contentLength: 102516060, items: 1, percent: 100, startTime: 1489223136317, useTime: 2767}）
-      "scheduleStandard": true,
+      "uploadUrl": "http://192.199.198.22:8005/license_yf/import_lic",
+      "progressUrl": "#",
+      "scheduleStandard": false,
+      "showSummerProgress": false,
       "maxFileNumber": 1,
       "ismultiple": false,
+      "autoCommit": true,
+      "showProgressNum": true,
       "fileType": ['fg']
     });
   }

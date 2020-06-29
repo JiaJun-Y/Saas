@@ -2,7 +2,7 @@
  * 文件创建对象
  * @param containerId 文件容器ID
  */
-let WpFileUpload = function(containerId) {
+var WpFileUpload = function(containerId) {
   // 验证参数是否有
   if (WpParamTools.isNullOrEmpty(containerId)) {
     // 容器Id不存在
@@ -10,7 +10,7 @@ let WpFileUpload = function(containerId) {
     return;
   }
   // 文件操作对象，添加默认配置
-  let wfu = {
+  var wfu = {
     "uploadId": containerId,
     // 必须，上传地址
     "uploadUrl": "#",
@@ -82,7 +82,7 @@ let WpFileUpload = function(containerId) {
 /**
  * 文件上传参数工具
  */
-let WpParamTools = {
+var WpParamTools = {
   /**
    * 是否为空或者为null
    * @param param 要验证的参数
@@ -112,7 +112,7 @@ let WpParamTools = {
 /**
  * 文件上传事件调用工具
  */
-let WpFileUploadEvent = {
+var WpFileUploadEvent = {
   /**
    * 初始化上传:
    *    初始化界面
@@ -122,7 +122,7 @@ let WpFileUploadEvent = {
    */
   "initUpload": function(opt) {
     // 获取对象，作为全局变量，方便修改
-    let wfu = this;
+    var wfu = this;
     // 设置自定义配置
     if (null != opt) {
       if (!WpParamTools.isOnlyObject(opt)) {
@@ -155,12 +155,12 @@ let WpFileUploadEvent = {
    * @param wfu 要初始化的对象
    */
   "initWithLayout": function(wfu) {
-    let uploadId = wfu.uploadId;
-    let fileContanObj = $("#" + uploadId);
+    var uploadId = wfu.uploadId;
+    var fileContanObj = $("#" + uploadId);
     // 添加上传头部按钮集合
     fileContanObj.append(WpFileUploadViewsModel.getHeadButtonsView(wfu));
     // 添加总进度条
-    // fileContanObj.append(WpFileUploadViewsModel.getSummerProgress(wfu));
+    fileContanObj.append(WpFileUploadViewsModel.getSummerProgress(wfu));
     // 添加文件上传的显示容器
     fileContanObj.append(WpFileUploadViewsModel.getFileContainBox());
   },
@@ -169,12 +169,12 @@ let WpFileUploadEvent = {
    * @param wfu 初始化操作的对象
    */
   "initWithDrag": function(wfu) {
-    let canDrag = wfu.canDrag;
-    let uploadId = wfu.uploadId;
+    var canDrag = wfu.canDrag;
+    var uploadId = wfu.uploadId;
     // 文件上传容器
-    let containObj = $("#" + uploadId);
+    var containObj = $("#" + uploadId);
     // 文件存放的容器
-    let containBoxObj = containObj.find(".box").get(0);
+    var containBoxObj = containObj.find(".box").get(0);
     if (canDrag) {
       $(document).on({
         dragleave: function(e) { // 拖离 
@@ -207,9 +207,7 @@ let WpFileUploadEvent = {
    * @param wfu 初始化操作的对象
    */
   "initWithSelectFile": function(wfu) {
-    let uploadId = wfu.uploadId;
-    let selectFileBtObj = $("#" + uploadId + " .uploadBts .selectFileBt");
-    selectFileBtObj.css("background-color", "#0099FF");
+    var selectFileBtObj = $(".selectFileBt");
     selectFileBtObj.off();
     selectFileBtObj.on("click", function() {
       if (wfu.autoCommit) {
@@ -217,16 +215,22 @@ let WpFileUploadEvent = {
       }
       WpFileUploadEvent.selectFileEvent(wfu);
     });
+
+    var saveFileBtObj = $('.saveFileBt');
+    saveFileBtObj.off();
+    saveFileBtObj.on("click", function() {
+      WpFileUploadEvent.saveFileEvent(wfu);
+    });
   },
   /**
    * 初始化清除文件
    * @param wfu 初始化操作的对象
    */
   "initWithCleanFile": function(wfu) {
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
     if (!wfu.isHiddenCleanBt) {
-      let cleanBtObj = $("#" + uploadId + " .uploadBts .cleanFileBt");
-      let cleanBtObjIcon = $("#" + uploadId + " .uploadBts .cleanFileBt i");
+      var cleanBtObj = $("#" + uploadId + " .uploadBts .cleanFileBt");
+      var cleanBtObjIcon = $("#" + uploadId + " .uploadBts .cleanFileBt i");
       cleanBtObj.off();
       cleanBtObj.on("click", function() {
         WpFileUploadEvent.cleanFileEvent(wfu);
@@ -239,9 +243,11 @@ let WpFileUploadEvent = {
    * @param wfu 初始化操作的对象
    */
   "selectFileEvent": function(wfu) {
-    let uploadId = wfu.uploadId;
-    let ismultiple = wfu.ismultiple;
-    let inputObj = document.createElement('input');
+    console.log('选择文件')
+    var uploadId = wfu.uploadId;
+    var ismultiple = wfu.ismultiple;
+    var inputObj = document.createElement('input');
+    inputObj.setAttribute('accept', '.fg')
     inputObj.setAttribute('id', uploadId + '_file');
     inputObj.setAttribute('type', 'file');
     inputObj.setAttribute("style", 'visibility:hidden');
@@ -254,6 +260,14 @@ let WpFileUploadEvent = {
     document.body.appendChild(inputObj);
     inputObj.click();
   },
+  /**
+   * 下载文件事件
+   * @param wfu 初始化操作的对象
+   */
+  "saveFileEvent": function(wfu) {
+    console.log(wfu)
+  },
+
   /**
    * 选择文件，改变文件的事件
    * @param files 选择的文件
@@ -275,7 +289,7 @@ let WpFileUploadEvent = {
    * @param wfu 操作的对象
    */
   "cleanFileEvent": function(wfu) {
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
     if (wfu.showSummerProgress) {
       // 设置进度条关闭
       WpFileUploadTools.setProgressShow(uploadId, false);
@@ -305,13 +319,13 @@ let WpFileUploadEvent = {
     setTimeout(function() {
       if (!wfu.isHiddenUploadBt) {
         // 上传文件按钮
-        let uploadFileBt = $(".saveFile");
+        var uploadFileBt = $(".saveFile");
         uploadFileBt.off();
         uploadFileBt.on("click", function() {
           WpFileUploadTools.uploadFileEvent(wfu);
         });
         // 上传按钮图标
-        let uploadFileBtIcon = $(".saveFile")
+        var uploadFileBtIcon = $(".saveFile")
         uploadFileBtIcon.css("color", "#0099FF");
       }
     }, 200)
@@ -319,7 +333,7 @@ let WpFileUploadEvent = {
     if (wfu.selfUploadBtId != null && wfu.selfUploadBtId !== "") {
       if (WpFileUploadTools.foundExitById(wfu.selfUploadBtId)) {
         // 自定义上传按钮
-        let selfUploadBt = $("#" + wfu.selfUploadBtId);
+        var selfUploadBt = $("#" + wfu.selfUploadBtId);
         selfUploadBt.off();
         selfUploadBt.on("click", function() {
           WpFileUploadTools.uploadFileEvent(wfu);
@@ -332,7 +346,7 @@ let WpFileUploadEvent = {
    * @param wfu 要操作的对象
    */
   "startUpload": function(wfu) {
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
     $("#" + uploadId).attr("isUpload", "true")
   },
   /**
@@ -340,7 +354,7 @@ let WpFileUploadEvent = {
    * @param wfu 要操作的对象
    */
   "stopUpload": function(wfu) {
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
     $("#" + uploadId).removeAttr("isUpload");
   },
   /**
@@ -348,9 +362,9 @@ let WpFileUploadEvent = {
    * @param wfu 操作的对象
    */
   "initWithDeleteFile": function(wfu) {
-    let uploadId = wfu.uploadId;
-    let fileItemViewArray = WpFileItemTools.getNeedUploadItemArray(uploadId)
-    let fileItemDeleteBt = WpFileItemTools.getFileViewStatus(fileItemViewArray);
+    var uploadId = wfu.uploadId;
+    var fileItemViewArray = WpFileItemTools.getNeedUploadItemArray(uploadId)
+    var fileItemDeleteBt = WpFileItemTools.getFileViewStatus(fileItemViewArray);
     fileItemDeleteBt.off();
     fileItemDeleteBt.on("click", function() {
       WpFileUploadEvent.deleteFileEvent(wfu, this);
@@ -362,9 +376,9 @@ let WpFileUploadEvent = {
    * @param obj 操作的文件对象
    */
   "deleteFileEvent": function(wfu, obj) {
-    let fileItem = $(obj).parent().parent();
-    let fileCodeId = fileItem.attr("fileCodeId");
-    let fileListArray = WpFileUploadFileList.getFileList(wfu);
+    var fileItem = $(obj).parent().parent();
+    var fileCodeId = fileItem.attr("fileCodeId");
+    var fileListArray = WpFileUploadFileList.getFileList(wfu);
     delete fileListArray[fileCodeId];
     WpFileUploadFileList.setFileList(fileListArray, wfu);
     fileItem.remove();
@@ -381,32 +395,32 @@ let WpFileUploadEvent = {
    */
   "showFileResult": function(fileUrl, fileId, defineFileName, deleteFile, downloadFile, deleteEvent, downLoadEvent) {
     // 获取对象，作为全局变量，方便修改
-    let wfu = this;
+    var wfu = this;
     // 上传的Id
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
     if (null == fileUrl || fileUrl == "" || uploadId == null || uploadId == "") {
       return;
     }
-    let boxJsObj = $("#" + uploadId + " .box").get(0);
+    var boxJsObj = $("#" + uploadId + " .box").get(0);
 
     // 设置文件名
-    let fileName = defineFileName;
+    var fileName = defineFileName;
     // 根据文件地址获取文件名称
     if (WpParamTools.isNullOrEmpty(defineFileName)) {
       fileName = WpFileUploadTools.getFileNameWithUrl(fileUrl);
     }
     // 文件类型
-    let fileType = WpFileUploadTools.getSuffixNameByFileName(fileName)
+    var fileType = WpFileUploadTools.getSuffixNameByFileName(fileName)
       // 是否是图片
-    let isImg = WpFileUploadTools.isInArray(fileType, WpFileUploadTools.imgArray);
+    var isImg = WpFileUploadTools.isInArray(fileType, WpFileUploadTools.imgArray);
     // 文件类型大写
     fileType = fileType.toUpperCase();
     // 获取回显文件模版
-    let modelStr = WpFileUploadViewsModel.getFileItemResultModel(fileType, fileId, fileName, isImg, fileUrl, deleteFile, downloadFile);
+    var modelStr = WpFileUploadViewsModel.getFileItemResultModel(fileType, fileId, fileName, isImg, fileUrl, deleteFile, downloadFile);
     $(boxJsObj).append(modelStr);
     // 如果删除文件，则添加删除文件的事件
     if (deleteFile) {
-      let fileItem = WpFileItemTools.getIsUploadItem(uploadId, fileId);
+      var fileItem = WpFileItemTools.getIsUploadItem(uploadId, fileId);
       WpFileItemTools.getFileViewRemove(fileItem).mousedown(function() {
         if (deleteEvent != null && deleteEvent != "" && (typeof deleteEvent === "function")) {
           deleteEvent(fileId);
@@ -415,7 +429,7 @@ let WpFileUploadEvent = {
     }
     // 执行下载函数
     if (downloadFile) {
-      let fileItem = WpFileItemTools.getIsUploadItem(uploadId, fileId);
+      var fileItem = WpFileItemTools.getIsUploadItem(uploadId, fileId);
       WpFileItemTools.getFileViewDown(fileItem).mousedown(function() {
         if (deleteEvent != null && deleteEvent != "" && (typeof deleteEvent === "function")) {
           downLoadEvent(fileId, fileUrl);
@@ -429,10 +443,10 @@ let WpFileUploadEvent = {
    */
   "removeShowFileItem": function(fileId) {
     // 获取对象，作为全局变量，方便修改
-    let wfu = this;
+    var wfu = this;
     // 上传的Id
-    let uploadId = wfu.uploadId;
-    let fileitemObj = WpFileItemTools.getIsUploadItem(uploadId, fileId);
+    var uploadId = wfu.uploadId;
+    var fileitemObj = WpFileItemTools.getIsUploadItem(uploadId, fileId);
     fileitemObj.remove();
   }
 
@@ -440,7 +454,7 @@ let WpFileUploadEvent = {
 /**
  * 文件上传视图模板
  */
-let WpFileUploadViewsModel = {
+var WpFileUploadViewsModel = {
   /**
    * 头部按钮操作视图模板
    * @param wfu 操作的对象
@@ -448,10 +462,11 @@ let WpFileUploadViewsModel = {
    */
   "getHeadButtonsView": function(wfu) {
     // 选择文件的按钮标题
-    let selectFileButtonTitle = '选择文件';
-    let btsStr = '';
+    var selectFileButtonTitle = '导入许可';
+    var btsStr = '';
     btsStr += '<div class="uploadBts">';
     btsStr += '<div>';
+    btsStr += '<div class="saveFileBt">' + '保存文件' + '</div>';
     btsStr += '<div class="selectFileBt">' + selectFileButtonTitle + '</div>';
     btsStr += '</div>';
     // 上传按钮
@@ -475,8 +490,8 @@ let WpFileUploadViewsModel = {
    * @return {string} 总进度模板
    */
   "getSummerProgress": function(wfu) {
-    let summerProgressStr = '';
-    let progressNum = '';
+    var summerProgressStr = '';
+    var progressNum = '';
     if (wfu.showProgressNum) {
       progressNum = '0%';
     }
@@ -507,14 +522,14 @@ let WpFileUploadViewsModel = {
    */
   "getFileItemModel": function(isImg, fileType, fileName, isImgUrl, fileCodeId) {
     // 默认显示类型
-    let showTypeStr = '<div class="fileType">' + fileType + '</div> <i class="iconfont icon-wenjian"></i>';
+    var showTypeStr = '<div class="fileType">' + fileType + '</div> <i class="iconfont icon-wenjian"></i>';
     if (isImg) {
       // 图片显示类型
       if (isImgUrl != null && isImgUrl !== "null" && isImgUrl !== "") {
         showTypeStr = '<img src="' + isImgUrl + '" alt="' + fileName + '"/>';
       }
     }
-    let modelStr = "";
+    var modelStr = "";
     modelStr += '<div class="fileItem" fileCodeId="' + fileCodeId + '">';
     modelStr += '<div class="imgShow">';
     modelStr += showTypeStr;
@@ -546,7 +561,7 @@ let WpFileUploadViewsModel = {
    */
   "getFileItemResultModel": function(fileType, fileId, fileName, isImg, fileUrl, deleteFile, downloadFile) {
     //默认显示类型
-    let showTypeStr = '<div class="fileType">' + fileType + '</div> <i class="iconfont icon-wenjian"></i>';
+    var showTypeStr = '<div class="fileType">' + fileType + '</div> <i class="iconfont icon-wenjian"></i>';
     //是否是文件
     if (isImg) {
       //图片显示类型
@@ -554,11 +569,11 @@ let WpFileUploadViewsModel = {
         showTypeStr = '<img src="' + fileUrl + '"/>';
       }
     }
-    let showImgStyle = 'imgShow';
+    var showImgStyle = 'imgShow';
     if (!deleteFile) {
       showImgStyle += " imgShowResult";
     }
-    let modelStr = '';
+    var modelStr = '';
     modelStr += '<div class="fileItem" showFileCode="' + fileId + '">';
     modelStr += '<div class="' + showImgStyle + '">';
     modelStr += showTypeStr;
@@ -583,28 +598,35 @@ let WpFileUploadViewsModel = {
 /**
  * 文件上传Ajax操作
  */
-let WpFileUploadAjax = {
-  /**
+var WpFileUploadAjax = {
+  /*
    * 开始上传文件
    * @param wfu 调用的对象
    * @param formData 封装的参数
    * @param rememberFile 记住已上传文件的对象
    */
-  "startUploadFile": function(wfu, formData, rememberFile) {
-    console.log('ajax')
+  "startUploadFile": function(wfu, rememberFile) {
+    var formData = new FormData();
+    formData.append('file', wfu.fileList[0])
     $.ajax({
       type: "post",
       url: wfu.uploadUrl,
       data: formData,
+      dataType: "json",
       processData: false,
       contentType: false,
       success: function(data) {
-        // 更新记住我的缓存
+        layer.msg(data.RepMsg)
+          // 更新记住我的缓存
         WpFileUploadFileList.flushRememberFile(rememberFile, wfu);
         // 记录上传成功后的结果
         wfu.resultData = data;
         // 调用上传结束后的事件
-        setTimeout(function() { wfu.onUpload() }, 500);
+        setTimeout(function() {
+          wfu.onUpload()
+          $('#popLayer').hide()
+          $('#upload').hide()
+        }, 800);
         // 自定清除文件
         if (wfu.isAutoClean) {
           setTimeout(function() { WpFileUploadEvent.cleanFileEvent(wfu); }, 2000);
@@ -621,7 +643,7 @@ let WpFileUploadAjax = {
  * 文件列表操作
  * @type {{}}
  */
-let WpFileUploadFileList = {
+var WpFileUploadFileList = {
   /**
    * 初始化文件
    * @param wfu 要操作的对象
@@ -657,12 +679,12 @@ let WpFileUploadFileList = {
   "flushRememberFile": function(fileList, wfu) {
     if (wfu.rememberUpload) {
       // 记住文件是否为空
-      let rememberFileIsEmpty = wfu.rememberFile == null || wfu.rememberFile === "" || wfu.rememberFile.length === 0;
+      var rememberFileIsEmpty = wfu.rememberFile == null || wfu.rememberFile === "" || wfu.rememberFile.length === 0;
       if (rememberFileIsEmpty) {
         wfu.rememberFile = wfu.fileList;
       } else {
-        let rememberFileArray = wfu.rememberFile;
-        for (let i = 0; i < fileList.length; i++) {
+        var rememberFileArray = wfu.rememberFile;
+        for (var i = 0; i < fileList.length; i++) {
           rememberFileArray[rememberFileArray.length] = fileList[i];
         }
         wfu.rememberFile = rememberFileArray;
@@ -675,10 +697,10 @@ let WpFileUploadFileList = {
    * @returns {number} 返回文件上传总大小
    */
   "getFilesDataAmount": function(wfu) {
-    let fileList = WpFileUploadFileList.getFileList(wfu);
-    let summer = 0;
-    for (let i = 0; i < fileList.length; i++) {
-      let fileItem = fileList[i];
+    var fileList = WpFileUploadFileList.getFileList(wfu);
+    var summer = 0;
+    for (var i = 0; i < fileList.length; i++) {
+      var fileItem = fileList[i];
       if (fileItem != null) {
         summer = parseFloat(summer) + fileItem.size;
       }
@@ -690,9 +712,9 @@ let WpFileUploadFileList = {
    * @param wfu 操作的对象
    */
   "getFileNumber": function(wfu) {
-    let number = 0;
-    let fileList = WpFileUploadFileList.getFileList(wfu);
-    for (let i = 0; i < fileList.length; i++) {
+    var number = 0;
+    var fileList = WpFileUploadFileList.getFileList(wfu);
+    for (var i = 0; i < fileList.length; i++) {
       if (fileList[i] != null) {
         number++;
       }
@@ -706,10 +728,10 @@ let WpFileUploadFileList = {
    * @returns {boolean} true:文件已经在上传的列表中了，false：文件不存在上传列表中
    * */
   "fileIsExit": function(file, wfu) {
-    let fileList = WpFileUploadFileList.getFileList(wfu);
-    let ishave = false;
-    for (let i = 0; i < fileList.length; i++) {
-      let fileItem = fileList[i];
+    var fileList = WpFileUploadFileList.getFileList(wfu);
+    var ishave = false;
+    for (var i = 0; i < fileList.length; i++) {
+      var fileItem = fileList[i];
       // 文件名相同，文件大小相同
       if (null != fileItem && fileItem.name === file.name && fileItem.size === file.size) {
         ishave = true;
@@ -724,11 +746,11 @@ let WpFileUploadFileList = {
    * @returns {boolean} true:文件已经上传过了，false：文件没有上传过
    */
   "fileIsHaveUpload": function(file, wfu) {
-    let fileList = wfu.rememberFile;
-    let ishave = false;
+    var fileList = wfu.rememberFile;
+    var ishave = false;
     if (fileList != null) {
-      for (let i = 0; i < fileList.length; i++) {
-        let fileItem = fileList[i];
+      for (var i = 0; i < fileList.length; i++) {
+        var fileItem = fileList[i];
         // 文件名相同，文件大小相同
         if (null != fileItem && fileItem.name === file.name && fileItem.size === file.size) {
           ishave = true;
@@ -742,10 +764,10 @@ let WpFileUploadFileList = {
    * @param wfu 操作的对象
    */
   "getFileTotalSize": function(wfu) {
-    let fileList = WpFileUploadFileList.getFileList(wfu);
-    let totalSize = 0;
-    for (let i = 0; i < fileList.length; i++) {
-      let fileItem = fileList[i];
+    var fileList = WpFileUploadFileList.getFileList(wfu);
+    var totalSize = 0;
+    for (var i = 0; i < fileList.length; i++) {
+      var fileItem = fileList[i];
       if (null != fileItem) {
         totalSize += parseInt(fileItem.size);
       }
@@ -756,7 +778,7 @@ let WpFileUploadFileList = {
 /**
  * 文件上传其它工具
  */
-let WpFileUploadTools = {
+var WpFileUploadTools = {
   "imgArray": ['jpg', 'png', 'jpeg', 'bmp', 'gif', 'webp'],
   /**
    * 设置进度条的显示
@@ -764,8 +786,8 @@ let WpFileUploadTools = {
    * @param isShow 是否显示
    */
   "setProgressShow": function(uploadId, isShow) {
-    let subberProgressParent = $("#" + uploadId + " .subberProgress");
-    let display = isShow ? "block" : "none";
+    var subberProgressParent = $("#" + uploadId + " .subberProgress");
+    var display = isShow ? "block" : "none";
     subberProgressParent.css("display", display);
   },
   /**
@@ -774,8 +796,8 @@ let WpFileUploadTools = {
    * @param percentNum 进度百分比，如：60% 这里填写的值为60
    */
   "setProgressNumber": function(wfu, percentNum) {
-    let uploadId = wfu.uploadId;
-    let subberProgress = $("#" + uploadId + " .subberProgress .progress>div");
+    var uploadId = wfu.uploadId;
+    var subberProgress = $("#" + uploadId + " .subberProgress .progress>div");
     // 格式化数据
     percentNum = percentNum + "%";
     // 设置长度
@@ -791,28 +813,28 @@ let WpFileUploadTools = {
    * @param wfu 要操作的对象
    */
   "addFileList": function(fileList, wfu) {
-    let uploadId = wfu.uploadId;
-    let boxJsObj = $("#" + uploadId + " .box").get(0);
+    var uploadId = wfu.uploadId;
+    var boxJsObj = $("#" + uploadId + " .box").get(0);
     // 获取文件队列
-    let fileListArray = WpFileUploadFileList.getFileList(wfu);
+    var fileListArray = WpFileUploadFileList.getFileList(wfu);
     // 获取文件数量，不能直接fileListArray获取length,因为里面包含了null
-    let fileNumber = WpFileUploadFileList.getFileNumber(wfu);
+    var fileNumber = WpFileUploadFileList.getFileNumber(wfu);
     // 是否超出文件数量限制
-    let isOutOfFileNumber = wfu.maxFileNumber !== "-1" && ((parseInt(fileNumber) + fileList.length) > parseInt(wfu.maxFileNumber));
+    var isOutOfFileNumber = wfu.maxFileNumber !== "-1" && ((parseInt(fileNumber) + fileList.length) > parseInt(wfu.maxFileNumber));
     if (isOutOfFileNumber) {
       WpFileUploadMessage.error(WpFileUploadMessageModel.outMaxFileNumber(wfu.maxFileNumber));
       return;
     }
     // 图片文件测试
-    let imgtest = /image\/(\w)*/;
+    var imgtest = /image\/(\w)*/;
     // 文件类型集合
-    let fileTypeArray = wfu.fileType;
+    var fileTypeArray = wfu.fileType;
     // 文件大小限制
-    let fileSizeLimit = wfu.size;
+    var fileSizeLimit = wfu.size;
     // 文件总大小限制
-    let fileTotalSizeLimit = wfu.totalSize;
-    for (let i = 0; i < fileList.length; i++) {
-      let fileItem = fileList[i];
+    var fileTotalSizeLimit = wfu.totalSize;
+    for (var i = 0; i < fileList.length; i++) {
+      var fileItem = fileList[i];
 
       // 判断文件是否存在
       if (WpFileUploadFileList.fileIsExit(fileItem, wfu)) {
@@ -828,28 +850,28 @@ let WpFileUploadTools = {
         }
       }
       // 文件总大小判断
-      let isOutOfTotalSize = fileTotalSizeLimit !== '-1' && (WpFileUploadFileList.getFileTotalSize(wfu) + fileItem.size > (fileTotalSizeLimit * 1000));
+      var isOutOfTotalSize = fileTotalSizeLimit !== '-1' && (WpFileUploadFileList.getFileTotalSize(wfu) + fileItem.size > (fileTotalSizeLimit * 1000));
       if (isOutOfTotalSize) {
         WpFileUploadMessage.error(WpFileUploadMessageModel.outOfTotalSize(fileTotalSizeLimit));
         continue;
       }
       // 单个文件大小显示判断
-      let isOutOfSize = fileSizeLimit !== '-1' && fileItem.size > (fileSizeLimit * 1000);
+      var isOutOfSize = fileSizeLimit !== '-1' && fileItem.size > (fileSizeLimit * 1000);
       if (isOutOfSize) {
         WpFileUploadMessage.error(WpFileUploadMessageModel.outOfSize(fileItem.name, fileSizeLimit));
         continue;
       }
       // 获取文件后缀
-      let fileTypeStr = WpFileUploadTools.getSuffixNameByFileName(fileItem.name);
+      var fileTypeStr = WpFileUploadTools.getSuffixNameByFileName(fileItem.name);
       // 文件是否在限定类型内
-      let fileIsInType = fileTypeArray === "*" || WpFileUploadTools.isInArray(fileTypeStr, fileTypeArray);
+      var fileIsInType = fileTypeArray === "*" || WpFileUploadTools.isInArray(fileTypeStr, fileTypeArray);
       if (fileIsInType) {
         // 文件名大写
-        let fileTypeUpcaseStr = fileTypeStr.toUpperCase();
-        let fileModel = "";
+        var fileTypeUpcaseStr = fileTypeStr.toUpperCase();
+        var fileModel = "";
         if (imgtest.test(fileItem.type)) {
           // 获取图片文件路径
-          let imgUrlStr = WpFileUploadTools.getImgUrlOfLocal(fileItem);
+          var imgUrlStr = WpFileUploadTools.getImgUrlOfLocal(fileItem);
           fileModel = WpFileUploadViewsModel.getFileItemModel(true, fileTypeUpcaseStr, fileItem.name, imgUrlStr, fileListArray.length);
         } else {
           fileModel = WpFileUploadViewsModel.getFileItemModel(false, fileTypeUpcaseStr, fileItem.name, null, fileListArray.length);
@@ -871,7 +893,7 @@ let WpFileUploadTools = {
    * @param wfu 操作的对象
    */
   "cleanFilInputWithSelectFile": function(wfu) {
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
     $("#" + uploadId + "_file").remove();
   },
   /**
@@ -888,7 +910,7 @@ let WpFileUploadTools = {
    * wfu调用的上传事件
    */
   "uploadFileOfWfuEvent": function() {
-    let wfu = this;
+    var wfu = this;
     WpFileUploadTools.uploadFileEvent(wfu);
   },
   /**
@@ -905,20 +927,20 @@ let WpFileUploadTools = {
    * @param fileName 文件名全名
    * */
   "getSuffixNameByFileName": function(fileName) {
-    let str = fileName;
-    let index = str.lastIndexOf(".");
+    var str = fileName;
+    var index = str.lastIndexOf(".");
     if (index < 0) {
       return "未知";
     }
-    let pos = index + 1;
+    var pos = index + 1;
     return str.substring(pos, str.length);
   },
   /**
    * 判断某个值是否在这个数组内
    * */
   "isInArray": function(strFound, arrays) {
-    let ishave = false;
-    for (let i = 0; i < arrays.length; i++) {
+    var ishave = false;
+    for (var i = 0; i < arrays.length; i++) {
       if (strFound === arrays[i] || strFound.toLowerCase() === arrays[i]) {
         ishave = true;
         break;
@@ -932,7 +954,7 @@ let WpFileUploadTools = {
    */
   "getImgUrlOfLocal": function(fileItem) {
     // 获取文件路径
-    let imgUrlStr = "";
+    var imgUrlStr = "";
     if (window.createObjectURL !== undefined) { //  basic
       imgUrlStr = window.createObjectURL(fileItem);
     } else if (window.URL !== undefined) { // mozilla(firefox)
@@ -950,14 +972,14 @@ let WpFileUploadTools = {
    */
   "addUploadFileToFormData": function(wfu, formData, rememberFile) {
     // 获取所有要上传的文件列表
-    let fileList = WpFileUploadFileList.getFileList(wfu);
+    var fileList = WpFileUploadFileList.getFileList(wfu);
     // 参数迭代数字,file0,file1,file2.....
-    let paramNum = 0;
-    for (let i = 0; i < fileList.length; i++) {
+    var paramNum = 0;
+    for (var i = 0; i < fileList.length; i++) {
       if (fileList[i] == null) {
         continue;
       }
-      let fileItem = fileList[i];
+      var fileItem = fileList[i];
       // 如果参数不是迭代
       if (!wfu.uploadFileParamIteration) {
         formData.append(wfu.uploadFileParam, fileItem);
@@ -987,7 +1009,7 @@ let WpFileUploadTools = {
    */
   "addUploadParamToFormData": function(wfu, formData) {
     if (null != wfu.otherData && wfu.otherData != "") {
-      for (let j = 0; j < wfu.otherData.length; j++) {
+      for (var j = 0; j < wfu.otherData.length; j++) {
         formData.append(wfu.otherData[j].name, wfu.otherData[j].value);
       }
     }
@@ -998,13 +1020,13 @@ let WpFileUploadTools = {
    */
   "uploadFile": function(wfu) {
     WpFileUploadEvent.startUpload(wfu);
-    let uploadUrl = wfu.uploadUrl;
+    var uploadUrl = wfu.uploadUrl;
 
     // 记住我文件数组
-    let rememberFile = [];
+    var rememberFile = [];
     // 数据封装对象
-    let formData = new FormData();
-    let fileNumber = WpFileUploadFileList.getFileNumber(wfu);
+    var formData = new FormData();
+    var fileNumber = WpFileUploadFileList.getFileNumber(wfu);
     if (fileNumber <= 0) {
       // 没有要上传的文件
       WpFileUploadMessage.info(WpFileUploadMessageModel.noFileUpload);
@@ -1015,13 +1037,11 @@ let WpFileUploadTools = {
     // 添加上传的其他参数到formData
     WpFileUploadTools.addUploadParamToFormData(wfu, formData);
     // ajax
-    // WpFileUploadAjax.startUploadFile(wfu, formData, rememberFile);
-
     if (uploadUrl !== "#" && uploadUrl != "") {
       // 禁用影响上传的按钮
       WpFileUploadTools.changeUploadButtonsStatus(wfu, 0);
       // 开始上传文件
-      WpFileUploadAjax.startUploadFile(wfu, formData, rememberFile);
+      WpFileUploadAjax.startUploadFile(wfu, rememberFile);
 
     } else if (wfu.scheduleStandard) {
       // 提示警告信息,并且开始模拟上传
@@ -1040,8 +1060,8 @@ let WpFileUploadTools = {
    * @param wfu
    */
   "getFileUploadProgressMsg": function(wfu) {
-    let uploadId = wfu.uploadId;
-    let progressUrl = wfu.progressUrl;
+    var uploadId = wfu.uploadId;
+    var progressUrl = wfu.progressUrl;
 
     if (wfu.showSummerProgress) {
       $("#" + uploadId + " .subberProgress").css("display", "block");
@@ -1049,18 +1069,18 @@ let WpFileUploadTools = {
       //如果主进度条不显示，单文件进度不显示，则不进行模拟进度，模拟进度设置将无效
       return;
     }
-    let fileItemView = WpFileItemTools.getNeedUploadItemArray(uploadId);
+    var fileItemView = WpFileItemTools.getNeedUploadItemArray(uploadId);
     WpFileItemTools.getFileViewStatus(fileItemView).removeClass();
     // 开始真实获取进度信息
     if (!wfu.scheduleStandard && progressUrl !== "#" && progressUrl != null && progressUrl !== "") {
       // 获取进度为O的情况多余30次的时候，就显示错误
-      let getCount = 20;
+      var getCount = 20;
       // 设置定时器
-      let intervalId = setInterval(function() {
+      var intervalId = setInterval(function() {
         $.get(progressUrl, {}, function(data, status) {
-          let percent = data.percent;
-          let bytesRead = data.bytesRead;
-          let items = data.items;
+          var percent = data.percent;
+          var bytesRead = data.bytesRead;
+          var items = data.items;
           if (percent >= 100) {
             clearInterval(intervalId);
             percent = 100; // 不能大于100
@@ -1082,18 +1102,18 @@ let WpFileUploadTools = {
     } else {
       // 进行模拟进度上传
       // 获取文件上传总大小
-      let filesDataAmount = WpFileUploadFileList.getFilesDataAmount(wfu);
+      var filesDataAmount = WpFileUploadFileList.getFilesDataAmount(wfu);
       // 所占百分比
-      let percent = 0;
+      var percent = 0;
       // 已度数据大小
-      let bytesRead = 0;
+      var bytesRead = 0;
 
       // 如果进行模拟进度上传
       if (wfu.scheduleStandard) {
         // 创建一个模拟上传速度,5秒能传完的速度,500微妙执行一次，也就是计算10次
-        let speedSchedule = WpFileUploadComputer.div(filesDataAmount, 10);
+        var speedSchedule = WpFileUploadComputer.div(filesDataAmount, 10);
         // 创建定时器，进行模拟进度演示
-        let intervalId = setInterval(function() {
+        var intervalId = setInterval(function() {
           bytesRead = WpFileUploadComputer.add(bytesRead, speedSchedule);
           percent = WpFileUploadComputer.div(bytesRead, filesDataAmount) * 100;
           //取两位小数
@@ -1124,7 +1144,7 @@ let WpFileUploadTools = {
    * @param items 当前是第几个文件
    */
   "showUploadProgress": function(wfu, bytesRead, percent, items) {
-    let fileListArray = WpFileUploadFileList.getFileList(wfu);
+    var fileListArray = WpFileUploadFileList.getFileList(wfu);
     // 如果显示主进度条
     if (wfu.showSummerProgress) {
       // 设置主进度条比例
@@ -1146,18 +1166,15 @@ let WpFileUploadTools = {
         WpFileUploadTools.showProgramWithItem(wfu, bytesRead, percent, fileListArray, items);
       }
     } else {
-      let uploadId = wfu.uploadId;
-      let fileItemView = WpFileItemTools.getNeedUploadItemArray(uploadId);
+      var uploadId = wfu.uploadId;
+      var fileItemView = WpFileItemTools.getNeedUploadItemArray(uploadId);
       // 文件状态
-      let fileItemStatus = WpFileItemTools.getFileViewStatus(fileItemView);
+      var fileItemStatus = WpFileItemTools.getFileViewStatus(fileItemView);
       fileItemStatus.off();
       // 设置单个文件状态
       fileItemStatus.addClass("iconfont icon-gou");
       WpFileUploadTools.changeUploadButtonsStatus(wfu, 1);
     }
-
-
-
   },
   /**
    * 显示进度在不知道当前第几个文件的时候
@@ -1167,12 +1184,12 @@ let WpFileUploadTools = {
    * @param fileListArray 文件列表
    */
   "showProgramWithNoItem": function(wfu, bytesRead, percent, fileListArray) {
-    for (let i = 0; i < fileListArray.length; i++) {
+    for (var i = 0; i < fileListArray.length; i++) {
       if (fileListArray[i] == null) {
         continue;
       }
       // 总上传数减去当前文件的大小，剩余的总数
-      let testbytesRead = bytesRead - fileListArray[i].size;
+      var testbytesRead = bytesRead - fileListArray[i].size;
       if (testbytesRead < 0) {
         // 如果已经完成任务100%
         if (percent == 100) {
@@ -1181,7 +1198,7 @@ let WpFileUploadTools = {
           bytesRead = bytesRead - fileListArray[i].size;
         } else {
           //设置比例
-          let fileItemPercent = bytesRead / fileListArray[i].size * 100;
+          var fileItemPercent = bytesRead / fileListArray[i].size * 100;
           //设置成功相应的比例
           WpFileUploadTools.setFileItemProgress(wfu, i, fileItemPercent, 0);
           break;
@@ -1200,8 +1217,8 @@ let WpFileUploadTools = {
    * @param fileListArray 文件列表
    */
   "showProgramWithItem": function(wfu, bytesRead, percent, fileListArray, items) {
-    let itemTemp = 1;
-    for (let i = 0; i < fileListArray.length; i++) {
+    var itemTemp = 1;
+    for (var i = 0; i < fileListArray.length; i++) {
       if ((i + 1) > items) {
         break;
       }
@@ -1218,7 +1235,7 @@ let WpFileUploadTools = {
         bytesRead = bytesRead - fileListArray[i].size;
         WpFileUploadTools.setFileItemProgress(wfu, i, 100, 0);
       } else if (itemTemp == items) {
-        let fileItemPercent = WpFileUploadComputer.mul(WpFileUploadComputer.div(bytesRead, fileListArray[i].size), 100);
+        var fileItemPercent = WpFileUploadComputer.mul(WpFileUploadComputer.div(bytesRead, fileListArray[i].size), 100);
         if (fileItemPercent == 100) {
           itemTemp++;
           bytesRead = bytesRead - fileListArray[i].size;
@@ -1240,13 +1257,13 @@ let WpFileUploadTools = {
     if (!wfu.showFileItemProgress) {
       return;
     }
-    let uploadId = wfu.uploadId;
+    var uploadId = wfu.uploadId;
 
-    let fileItemView = WpFileItemTools.getNeedUploadItem(uploadId, fileCodeId);
+    var fileItemView = WpFileItemTools.getNeedUploadItem(uploadId, fileCodeId);
     // 文件进度
-    let fileItemProgress = WpFileItemTools.getFileViewProgress(fileItemView);
+    var fileItemProgress = WpFileItemTools.getFileViewProgress(fileItemView);
     // 文件状态
-    let fileItemStatus = WpFileItemTools.getFileViewStatus(fileItemView);
+    var fileItemStatus = WpFileItemTools.getFileViewStatus(fileItemView);
     if (status == 1) {
       if (wfu.showFileItemProgress) {
         fileItemProgress.addClass("error");
@@ -1268,17 +1285,17 @@ let WpFileUploadTools = {
    * 上传文件失败集体显示
    */
   "uploadError": function() {
-    let wfu = this;
-    let uploadId = wfu.uploadId;
+    var wfu = this;
+    var uploadId = wfu.uploadId;
     // 是否显示单个文件进度条
     if (wfu.showFileItemProgress) {
-      let progressObj = WpFileItemTools.getNeedUploadItemArray(uploadId).find(".progress>div");
+      var progressObj = WpFileItemTools.getNeedUploadItemArray(uploadId).find(".progress>div");
       progressObj.addClass("error");
       progressObj.css("width", "100%");
     } else {
       WpFileUploadTools.changeUploadButtonsStatus(wfu, 2);
     }
-    let fileItemView = WpFileItemTools.getNeedUploadItemArray(uploadId);
+    var fileItemView = WpFileItemTools.getNeedUploadItemArray(uploadId);
     // 设置单个文件状态
     WpFileItemTools.getFileViewStatus(fileItemView).addClass("iconfont icon-cha");
     // 设置总进度条状态
@@ -1288,7 +1305,7 @@ let WpFileUploadTools = {
    * 上传成功
    */
   "uploadSuccess": function() {
-    let wfu = this;
+    var wfu = this;
     WpFileUploadTools.setSuccessOfSubmit(wfu);
   },
   /**
@@ -1329,10 +1346,13 @@ let WpFileUploadTools = {
    * @param wfu 操作的对象
    */
   "disableFileSelect": function(wfu) {
-    let uploadId = wfu.uploadId;
-    let selectFileBt = $("#" + uploadId + " .uploadBts .selectFileBt");
-    selectFileBt.css("background-color", "#DDDDDD");
+    var selectFileBt = $(".selectFileBt");
+    selectFileBt.css({ "background-color": "#a0cfff", 'cursor': 'not-allowed' });
     selectFileBt.off();
+
+    var saveFileBt = $('.saveFileBt')
+    saveFileBt.css({ "background-color": "#a0cfff", 'cursor': 'not-allowed' });
+    saveFileBt.off();
   },
   /**
    * 禁用文件上传
@@ -1341,9 +1361,9 @@ let WpFileUploadTools = {
   "disableFileUpload": function(wfu) {
     setTimeout(function() {
       if (!wfu.isHiddenUploadBt) {
-        let uploadId = wfu.uploadId;
-        let uploadFileBt = $(".saveFile");
-        let uploadFileBtIcon = $(".saveFile");
+        var uploadId = wfu.uploadId;
+        var uploadFileBt = $(".saveFile");
+        var uploadFileBtIcon = $(".saveFile");
         uploadFileBt.off();
         uploadFileBtIcon.css("color", "#DDDDDD");
       }
@@ -1356,9 +1376,9 @@ let WpFileUploadTools = {
    */
   "disableCleanFile": function(wfu) {
     if (!wfu.isHiddenCleanBt) {
-      let uploadId = wfu.uploadId;
-      let cleanFileBt = $("#" + uploadId + " .uploadBts .cleanFileBt");
-      let cleanFileBtIcon = $("#" + uploadId + " .uploadBts .cleanFileBt i");
+      var uploadId = wfu.uploadId;
+      var cleanFileBt = $("#" + uploadId + " .uploadBts .cleanFileBt");
+      var cleanFileBtIcon = $("#" + uploadId + " .uploadBts .cleanFileBt i");
       cleanFileBt.off();
       cleanFileBtIcon.css("color", "#DDDDDD");
     }
@@ -1369,9 +1389,9 @@ let WpFileUploadTools = {
    * @param wfu 操作的对象
    */
   "setSuccessOfSubmit": function(wfu) {
-    let progressUrl = wfu.progressUrl;
+    var progressUrl = wfu.progressUrl;
     if (!wfu.scheduleStandard && (progressUrl == null || progressUrl == "" || progressUrl === "#")) {
-      let bytesRead = WpFileUploadFileList.getFilesDataAmount(wfu);
+      var bytesRead = WpFileUploadFileList.getFilesDataAmount(wfu);
       WpFileUploadTools.showUploadProgress(wfu, bytesRead, 100);
     }
   },
@@ -1380,12 +1400,12 @@ let WpFileUploadTools = {
    * @param fileUrl 文件地址Url
    */
   "getFileNameWithUrl": function(fileUrl) {
-    let index = fileUrl.lastIndexOf("/");
+    var index = fileUrl.lastIndexOf("/");
     if (index <= 0) {
       index = fileUrl.lastIndexOf("\\");
     }
     index = index + 1;
-    let fileName = fileUrl.substring(index, fileUrl.length);
+    var fileName = fileUrl.substring(index, fileUrl.length);
     return fileName;
   }
 };
@@ -1393,7 +1413,7 @@ let WpFileUploadTools = {
  * 信息提示
  * @type {{}}
  */
-let WpFileUploadMessage = {
+var WpFileUploadMessage = {
   /**
    * 错误提示
    * @param message 提示信息
@@ -1421,7 +1441,7 @@ let WpFileUploadMessage = {
  * 信息提示模板
  * @type {{}}
  */
-let WpFileUploadMessageModel = {
+var WpFileUploadMessageModel = {
   /**
    * 容器Id不存在
    */
@@ -1487,14 +1507,14 @@ let WpFileUploadMessageModel = {
 /**
  * 解决浮点计算精度问题
  */
-let WpFileUploadComputer = {
+var WpFileUploadComputer = {
   /**
    * 加法运算
    * @param a 参数
    * @param b 参数
    */
   "add": function(a, b) {
-    let c, d, e;
+    var c, d, e;
     try {
       c = a.toString().split(".")[1].length;
     } catch (f) {
@@ -1513,7 +1533,7 @@ let WpFileUploadComputer = {
    * @param b 参数
    */
   "sub": function(a, b) {
-    let c, d, e;
+    var c, d, e;
     try {
       c = a.toString().split(".")[1].length;
     } catch (f) {
@@ -1549,7 +1569,7 @@ let WpFileUploadComputer = {
    * @param b 参数
    */
   "div": function(a, b) {
-    let c, d, e = 0,
+    var c, d, e = 0,
       f = 0;
     try {
       e = a.toString().split(".")[1].length;
@@ -1564,19 +1584,19 @@ let WpFileUploadComputer = {
  * 文件上传工具
  * @type {{getDataWithUploadFile: (function(*): Array), getData: (function(*))}}
  */
-let WpFileUploadFormTools = {
+var WpFileUploadFormTools = {
   /**
    * 获取表单json数据
    * @param formId 表单ID
    */
   "getFormData": function(formId) {
-    let formData = {};
-    let $form = $("#" + formId);
-    let input_doms = $form.find("input[name][ignore!='true'],textarea[name][ignore!='true']");
-    let select_doms = $form.find("select[name][ignore!='true']");
-    for (let i = 0; i < input_doms.length; i++) {
-      let inputItem = input_doms.eq(i);
-      let inputName = "";
+    var formData = {};
+    var $form = $("#" + formId);
+    var input_doms = $form.find("input[name][ignore!='true'],textarea[name][ignore!='true']");
+    var select_doms = $form.find("select[name][ignore!='true']");
+    for (var i = 0; i < input_doms.length; i++) {
+      var inputItem = input_doms.eq(i);
+      var inputName = "";
       if (inputItem.attr("type") == "radio") {
         if (inputItem.is(":checked")) {
           inputName = inputItem.attr("name");
@@ -1588,9 +1608,9 @@ let WpFileUploadFormTools = {
       }
 
     }
-    for (let j = 0; j < select_doms.length; j++) {
-      let selectItem = select_doms.eq(j);
-      let selectName = selectItem.attr("name");
+    for (var j = 0; j < select_doms.length; j++) {
+      var selectItem = select_doms.eq(j);
+      var selectName = selectItem.attr("name");
       formData[selectName] = $.trim(selectItem.val());
     }
     return formData;
@@ -1601,13 +1621,13 @@ let WpFileUploadFormTools = {
    * @returns {Array} 表单数据
    */
   "getFormDataOfUploadFile": function(formId) {
-    let formData = [];
-    let $form = $("#" + formId);
-    let input_doms = $form.find("input[name][ignore!='true'],textarea[name][ignore!='true']");
-    let select_doms = $form.find("select[name][ignore!='true']");
-    for (let i = 0; i < input_doms.length; i++) {
-      let inputItem = input_doms.eq(i);
-      let inputName = "";
+    var formData = [];
+    var $form = $("#" + formId);
+    var input_doms = $form.find("input[name][ignore!='true'],textarea[name][ignore!='true']");
+    var select_doms = $form.find("select[name][ignore!='true']");
+    for (var i = 0; i < input_doms.length; i++) {
+      var inputItem = input_doms.eq(i);
+      var inputName = "";
       if (inputItem.attr("type") == "radio") {
         if (inputItem.is(":checked")) {
           inputName = inputItem.attr("name");
@@ -1618,9 +1638,9 @@ let WpFileUploadFormTools = {
         formData[formData.length] = { "name": inputName, "value": $.trim(inputItem.val()) }
       }
     }
-    for (let j = 0; j < select_doms.length; j++) {
-      let selectItem = select_doms.eq(j);
-      let selectName = selectItem.attr("name");
+    for (var j = 0; j < select_doms.length; j++) {
+      var selectItem = select_doms.eq(j);
+      var selectName = selectItem.attr("name");
       formData[formData.length] = { "name": selectName, "value": $.trim(selectItem.val()) }
     }
     return formData;
@@ -1630,7 +1650,7 @@ let WpFileUploadFormTools = {
  * 获取文件视图对象工具
  * @type {{getNeedUploadItemArray: WpFileItemTools.getNeedUploadItemArray, getIsUploadItemArray: WpFileItemTools.getIsUploadItemArray, getNeedUploadItem: WpFileItemTools.getNeedUploadItem, getIsUploadItem: WpFileItemTools.getIsUploadItem}}
  */
-let WpFileItemTools = {
+var WpFileItemTools = {
   /**
    * 获取需要上传的文件对象数组
    * @param uploadId 文件上传Id

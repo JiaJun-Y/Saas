@@ -65,14 +65,21 @@
 </body>
 
 <script src="./common/js/layer/layer.js"></script>
-<script src="./common/js/cut/bluebird.js"></script>
 <script type="text/javascript" src="./common/js/cut/html2canvas.js"></script>
 <script src="./common/js/cut/cropper/cropper.js"></script>
 <script>
   // 截屏
   function handleCutScreen() {
+    var userAgent = navigator.userAgent;
+    if (-1 !== userAgent.indexOf("Trident")) {
+      var script = document.createElement("script");
+      script.src = "./common/js/cut/bluebird.js";
+      document.getElementsByTagName("head").item(0).appendChild(script);
+    }
+
     var _dom = $('#sessionIframe').contents().find("body")[0]
     $('.img-container').empty()
+
     html2canvas(_dom, {
       width: $(document.body).width(),
       height: $(document.body).height(),

@@ -13,11 +13,6 @@
   <link rel="stylesheet" href="./common/css/reponse.css">
   <link rel="stylesheet" href="./common/css/datepicker.css">
   <link rel="stylesheet" href="./common/css/print.css">
-  <link rel="stylesheet" href="./common/css/fileUpload.css">
-  <link rel="stylesheet" href="./common/css/iconfont.css">
-
-  <!-- <link rel="stylesheet" href="./common/css/pdf.css"> -->
-  <!-- <link rel="stylesheet" href="./common/js/viewer/viewer.css"> -->
 
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="./common/js/jquery-migrate-1.2.1.min.js"></script>
@@ -102,11 +97,6 @@
       </ul>
 
       <div class='bottom-opt'>
-        <!-- <div class='opt-left' onclick='help()'>
-          <img src='./images/help.png' />
-          <span>帮助</span>
-        </div> -->
-
         <div class='opt-right' id="setting">
           <img src='./images/config.png' />
           <span>设置</span>
@@ -139,13 +129,21 @@
     <!-- 设置tooltip -->
     <div class='config-wapper'>
       <div class='tooltip'>
-        <!-- 
-          保存文件 调接口
-          导入文件 选择文件，文件类型.fg-->
         <p onclick='handleUpload()'>许可证录入</p>
         <p onclick='goAdmin()'>后台设置</p>
         <p onclick="downPlug()">录入端下载</p>
         <span class='triangle'></span>
+      </div>
+    </div>
+
+    <!-- 上传文件 -->
+    <div class='upload-wapper'>
+      <div id='popLayer'></div>
+      <div id='upload'>
+        <div class='title'>许可证录入</div>
+        <div class='plug-content'>
+          <div id="fileUploadContent" class="fileUploadContent"></div>
+        </div>
       </div>
     </div>
 
@@ -748,20 +746,6 @@
   <!-- 查看PDF -->
   <div id="PDF" class="pdf-wapper"></div>
 
-  <!-- 上传文件 -->
-  <div class='upload-wapper'>
-    <div id='popLayer'></div>
-    <div id='upload'>
-      <div class='title'>许可证录入</div>
-      <div class='plug-content'>
-        <div id="fileUploadContent" class="fileUploadContent"></div>
-        <!-- <div onclick="getFile()">选取文件</div> -->
-        <!-- <span>院内采集端</span>
-        <a href=''>下载</a> -->
-      </div>
-    </div>
-  </div>
-
   <!-- app.html内容结束 -->
   <div class="index-bottom">
     <ul>
@@ -777,7 +761,6 @@
 <script src="./common/js/utils.js"></script>
 <script src="./common/js/layer/layer.js"></script>
 <script src="./common/js/clipboard.min.js"></script>
-<script src="./common/js/fileUpload.js"></script>
 <script>
   var tablePage = 1
   var tableParams = {}
@@ -788,25 +771,6 @@
   var isWearPopShow = false
   var isShowSearchInput = false
   var checkPerson = []
-
-  // 上传文件
-  function handleUpload() {
-    $('#popLayer').show()
-    $('#upload').show()
-    let wfu = new WpFileUpload("fileUploadContent");
-
-    wfu.initUpload({
-      "uploadUrl": "http://192.199.198.22:8005/license_yf/import_lic",
-      "progressUrl": "#",
-      "scheduleStandard": false,
-      "showSummerProgress": false,
-      "maxFileNumber": 1,
-      "ismultiple": false,
-      "autoCommit": true,
-      "showProgressNum": true,
-      "fileType": ['fg']
-    });
-  }
 
   // 左1
   $('.adorn').on('click', 'p', function() {

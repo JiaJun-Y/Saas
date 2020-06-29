@@ -155,7 +155,6 @@ function genderFormat(val) {
   return val == 0 ? '男' : '女'
 }
 
-
 //显示Loading
 var _LoadingHtml = '<div id="loadingDiv"><div id="over"></div><div id="layout"><img src="/ui/images/loading.png" /></div></div>';
 //呈现loading效果

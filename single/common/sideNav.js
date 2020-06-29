@@ -6,6 +6,8 @@ $(function() {
     $("#msg-pop").hide()
     $('#wx-code-box').hide()
     $('#plugIn').hide()
+    $('#fileUploadContent').empty()
+    $('#upload').hide()
     e.stopPropagation();
   })
 
@@ -87,6 +89,102 @@ function downPlug() {
   $('#plugIn').show()
 }
 
+// 上传文件
+function handleUpload() {
+  $('#popLayer').show()
+  $('#upload').show()
+  initWithLayout()
+}
+
+// 布局
+function initWithLayout() {
+  var fileContanObj = $("#fileUploadContent");
+  var btsStr = '';
+  btsStr += '<div class="uploadBts">';
+  btsStr += '<div>';
+  btsStr += '<div class="saveFileBt" onclick="saveFileEvent()">' + '保存文件' + '</div>';
+  btsStr += '<div class="selectFileBt" onclick="selectFileEvent()">' + '导入许可' + '</div>';
+  btsStr += '</div>';
+  btsStr += '</div>';
+  fileContanObj.append(btsStr)
+}
+
+// 保存文件
+function saveFileEvent() {
+  disableFileUpload()
+  $.get('http://192.199.198.22:8005/license_yf/generate_req', function(res) {
+    if (!res) return
+    console.log(res)
+
+    setTimeout(function() {
+      $('#popLayer').hide()
+      $('#upload').hide()
+    }, 800);
+  })
+}
+
+// 选择文件
+function selectFileEvent() {
+  var inputObj = document.createElement('input');
+  inputObj.setAttribute('accept', '.fg')
+  inputObj.setAttribute('id', 'fileUploadContent_file');
+  inputObj.setAttribute('type', 'file');
+  inputObj.setAttribute("style", 'visibility:hidden');
+
+  $(inputObj).on("change", function() {
+    uploadFile(this.files[0])
+  });
+  document.body.appendChild(inputObj);
+  inputObj.click();
+}
+
+// 上传文件
+function uploadFile(file) {
+  disableFileUpload()
+  var formData = new FormData();
+  formData.append('file', file)
+  $.ajax({
+    type: "post",
+    url: 'http://192.199.198.22:8005/license_yf/import_lic',
+    data: formData,
+    dataType: "json",
+    processData: false,
+    contentType: false,
+    success: function(data) {
+      layer.msg(data.RepMsg)
+      setTimeout(function() {
+        $('#popLayer').hide()
+        $('#upload').hide()
+        $('#fileUploadContent').empty()
+      }, 800);
+    },
+    error: function(e) {
+      console.log(e)
+      setTimeout(function() {
+        $('#popLayer').hide()
+        $('#upload').hide()
+        $('#fileUploadContent').empty()
+      }, 800);
+    }
+  });
+}
+
+// 禁用按钮
+function disableFileUpload() {
+  var selectFileBt = $(".selectFileBt");
+  selectFileBt.css({
+    "background-color": "#a0cfff",
+    'cursor': 'not-allowed'
+  });
+  selectFileBt.off();
+
+  var saveFileBt = $('.saveFileBt')
+  saveFileBt.css({
+    "background-color": "#a0cfff",
+    'cursor': 'not-allowed'
+  });
+  saveFileBt.off();
+}
 
 // 获取用户修改信息
 function getPopMsg() {
@@ -143,5 +241,4 @@ function getPopMsg() {
       return false;
     }
   });
-
 }

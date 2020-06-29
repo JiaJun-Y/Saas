@@ -429,3 +429,74 @@
   margin-left: 30px;
   margin-right: 90px;
 }
+
+.fileUploadContent .box {
+  max-height: 30px;
+  min-width: 200px;
+  margin-top: 30px;
+}
+
+.fileUploadContent .fileItem {
+  width: 100%;
+  display: inline-block;
+  line-height: 30px;
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.saveFile {
+  display: none;
+  border: none;
+  color: #0099FF;
+  padding: 0px 3px;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+}
+
+.fileUploadContent .fileItem .fileName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 2px 2px;
+}
+
+.fileUploadContent .uploadBts {
+  text-align: left;
+  height: 40px
+}
+
+.fileUploadContent .uploadBts>div .selectFileBt {
+  float: right;
+}
+
+.fileUploadContent .uploadBts>div .saveFileBt {
+  float: left;
+}
+
+.fileUploadContent .uploadBts>div .saveFileBt,
+.fileUploadContent .uploadBts>div .selectFileBt {
+  border: none;
+  background-color: #0099FF;
+  color: #FFFFFF;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fileUploadContent .uploadBts>div .saveFileBt:hover,
+.fileUploadContent .uploadBts>div .selectFileBt:hover {
+  color: #FFFFFF;
+  background-color: #66b1ff;
+  cursor: pointer;
+}
+
+.fileUploadContent .uploadBts>div i {
+  font-size: 35px;
+  color: #0099FF;
+  cursor: pointer;
+}

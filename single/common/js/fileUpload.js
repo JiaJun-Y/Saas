@@ -139,8 +139,6 @@ var WpFileUploadEvent = {
     }
     // 初始化布局
     WpFileUploadEvent.initWithLayout(wfu);
-    // 初始化拖拽
-    WpFileUploadEvent.initWithDrag(wfu);
     // 初始化选择文件
     WpFileUploadEvent.initWithSelectFile(wfu);
     // 初始化清除文件
@@ -163,64 +161,6 @@ var WpFileUploadEvent = {
     fileContanObj.append(WpFileUploadViewsModel.getSummerProgress(wfu));
     // 添加文件上传的显示容器
     fileContanObj.append(WpFileUploadViewsModel.getFileContainBox());
-  },
-  /**
-   * 初始化拖拽
-   * @param wfu 初始化操作的对象
-   */
-  "initWithDrag": function(wfu) {
-    var canDrag = wfu.canDrag;
-    var uploadId = wfu.uploadId;
-    // 文件上传容器
-    var containObj = $("#" + uploadId);
-    // 文件存放的容器
-    var containBoxObj = containObj.find(".box").get(0);
-    if (canDrag) {
-      $(document).on({
-        dragleave: function(e) { // 拖离 
-          e.preventDefault();
-        },
-        drop: function(e) { // 拖后放 
-          e.preventDefault();
-        },
-        dragenter: function(e) { // 拖进 
-          e.preventDefault();
-        },
-        dragover: function(e) { // 拖来拖去 
-          e.preventDefault();
-        }
-      });
-      if (containBoxObj != null) {
-        // 验证图片格式，大小，是否存在
-        containBoxObj.addEventListener("drop", function(e) {
-          if (containObj.attr("isUpload") === "true") {
-            e.preventDefault();
-          } else {
-            WpFileUploadEvent.dragListingEvent(e, wfu);
-          }
-        });
-      }
-    }
-  },
-  /**
-   * 初始化选择文件按钮
-   * @param wfu 初始化操作的对象
-   */
-  "initWithSelectFile": function(wfu) {
-    var selectFileBtObj = $(".selectFileBt");
-    selectFileBtObj.off();
-    selectFileBtObj.on("click", function() {
-      if (wfu.autoCommit) {
-        WpFileUploadEvent.cleanFileEvent(wfu);
-      }
-      WpFileUploadEvent.selectFileEvent(wfu);
-    });
-
-    var saveFileBtObj = $('.saveFileBt');
-    saveFileBtObj.off();
-    saveFileBtObj.on("click", function() {
-      WpFileUploadEvent.saveFileEvent(wfu);
-    });
   },
   /**
    * 初始化清除文件

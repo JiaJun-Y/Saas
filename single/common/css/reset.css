@@ -35,6 +35,7 @@ body {
   height: 100%;
   font-size: 14px;
   font-family: 'Droid Sans Fallback Roboto PingFangSC-Regular';
+  overflow: hidden;
 }
 
 html {

@@ -265,7 +265,10 @@ var WpFileUploadEvent = {
    * @param wfu 初始化操作的对象
    */
   "saveFileEvent": function(wfu) {
-    console.log(wfu)
+    $.get('http://192.199.198.22:8005/license_yf/generate_req', function(res) {
+      if (!res) return
+      console.log(res)
+    })
   },
 
   /**

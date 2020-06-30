@@ -162,13 +162,20 @@ function uploadFile(file) {
     processData: false,
     contentType: false,
     success: function(data) {
-      layer.msg(data.RepMsg);
-      setTimeout(function() {
-        location.reload();
-      }, 1000);
+      if (data.RepCode == 0) {
+        layer.msg(data.RepMsg);
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
+      } else {
+        layer.msg(data.RepMsg);
+        resetfileUpload();
+      }
+
     },
     error: function(e) {
-      resetfileUpload()
+      layer.msg("网络错误");
+      resetfileUpload();
     }
   });
 }

@@ -112,15 +112,26 @@ function initWithLayout() {
 // 保存文件
 function saveFileEvent() {
   disableFileUpload()
-  $.get('http://192.199.198.22:8005/license_yf/generate_req', function(res) {
-    if (!res) return
-    console.log(res)
+  downFileByIframe();
 
-    setTimeout(function() {
-      $('#popLayer').hide()
-      $('#upload').hide()
-    }, 800);
-  })
+  setTimeout(function() {
+    $('#fileUploadContent').empty()
+    $('#popLayer').hide()
+    $('#upload').hide()
+  }, 800);
+}
+
+function downFileByIframe() {
+  var haveIframe = $("#down-iframe");
+  if (haveIframe) {
+    haveIframe.remove();
+  }
+  var downloadURL = '/license/generate_req';
+  var iframe = document.createElement("iframe");
+  iframe.src = downloadURL;
+  iframe.id = "down-iframe";
+  iframe.style.display = "none";
+  document.body.appendChild(iframe);
 }
 
 // 选择文件
@@ -145,26 +156,19 @@ function uploadFile(file) {
   formData.append('file', file)
   $.ajax({
     type: "post",
-    url: 'http://192.199.198.22:8005/license_yf/import_lic',
+    url: '/license/import_lic',
     data: formData,
     dataType: "json",
     processData: false,
     contentType: false,
     success: function(data) {
-      layer.msg(data.RepMsg)
+      layer.msg(data.RepMsg);
       setTimeout(function() {
-        $('#popLayer').hide()
-        $('#upload').hide()
-        $('#fileUploadContent').empty()
-      }, 800);
+        location.reload();
+      }, 1000);
     },
     error: function(e) {
-      console.log(e)
-      setTimeout(function() {
-        $('#popLayer').hide()
-        $('#upload').hide()
-        $('#fileUploadContent').empty()
-      }, 800);
+      resetfileUpload()
     }
   });
 }
@@ -174,16 +178,33 @@ function disableFileUpload() {
   var selectFileBt = $(".selectFileBt");
   selectFileBt.css({
     "background-color": "#a0cfff",
-    'cursor': 'not-allowed'
+    'cursor': 'not-allowed',
+    "pointer-events": 'none'
   });
-  selectFileBt.off();
 
   var saveFileBt = $('.saveFileBt')
   saveFileBt.css({
     "background-color": "#a0cfff",
-    'cursor': 'not-allowed'
+    'cursor': 'not-allowed',
+    "pointer-events": 'none'
   });
-  saveFileBt.off();
+}
+
+// 启动按钮
+function resetfileUpload() {
+  var selectFileBt = $(".selectFileBt");
+  selectFileBt.css({
+    "background-color": "#0099FF",
+    "cursor": "pointer",
+    "pointer-events": "all"
+  });
+
+  var saveFileBt = $('.saveFileBt')
+  saveFileBt.css({
+    "background-color": "#0099FF",
+    "cursor": "pointer",
+    "pointer-events": "all"
+  });
 }
 
 // 获取用户修改信息

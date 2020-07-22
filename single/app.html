@@ -63,7 +63,7 @@
 
         </li>
 
-        <li onclick='jump(this)' id="analysis">
+        <li onclick='jump(this);analysisInterval()' id="analysis">
           <div class='img-box'>
             <div class="circle">22</div>
           </div>
@@ -235,21 +235,21 @@
             </div>
           </div>
           <div class="dashboard-right">
-            <div class="count" id="analysisNum">118</div>
+            <div class="count" id="analysisNum">0</div>
             <div class="progress">
               <div class="progress-left"></div>
 
               <div class="progress-right">
                 <div class="progress-item wear">
-                  <strong id="wear" style="width:10%;"></strong>
+                  <strong id="wear" style="width:0%;"></strong>
                   <div class="child-0"></div>
                 </div>
                 <div class="progress-item import">
-                  <strong id="import" style="width:100%;"></strong>
+                  <strong id="import" style="width:0%;"></strong>
                   <div class="child-1"></div>
                 </div>
                 <div class="progress-item panalysis">
-                  <strong id="panalysis" style="width:10%;"></strong>
+                  <strong id="panalysis" style="width:0%;"></strong>
                   <div class="child-2"></div>
                 </div>
               </div>
@@ -316,7 +316,6 @@
 </body>
 
 <script>
-  var AnalyticalDiagnosisPath = ''
   $('#indexBox').on('click', function(e) {
     var _id = $(e.target).attr('id');
     if (_id && _id.indexOf('crisis') > -1) {
@@ -326,7 +325,6 @@
     }
   })
 
-  getPathUrl()
   getPanelData()
   lineCharts()
   currentDate() // 获取表格数据
@@ -346,25 +344,6 @@
 
     var url = protocol + "//" + hostname + ":9023";
     window.open(url, "_blank");
-  }
-
-  function getPathUrl() {
-    $.get('http://192.199.198.73:8005/ryservice/load_ry_app_list?token=NhGLmIwVe1l5%2FsS3VzM0ANyaV%2FnGAOmowD9Ac%2FfcnKiznWUJD%2Fxh5HpnYuDXwqyOZjQEyG20KO%2F5JH4seZVyvLXJOblussBySOplc0QvX2moZsUf8sOhFX7TQE1glDCzEym1AmVK8pSbIzL%2Fiu8mTHcj5XU1ekZN%2F717viDWB80%3D', function(res) {
-      console.log(res)
-      if (!res) return
-      var _appList = res.AppList
-      var _Holter = []
-      _Holter = _.filter(_appList, function(o) {
-        return o.AppDescription === 'Holter'
-      })
-
-      if (_Holter.length > 0 && _Holter[0].URL.length > 0) {
-        AnalyticalDiagnosisPath = _Holter[0].URL
-        console.log(AnalyticalDiagnosisPath)
-      } else {
-        console.log('a')
-      }
-    })
   }
 
   // 展示危机

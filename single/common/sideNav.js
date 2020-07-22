@@ -1,6 +1,9 @@
 window.onload = currentPath
 
 $(function() {
+  var AnalyticalDiagnosisPath = ''
+  getPathUrl()
+
   $("#popLayer").click(function(e) {
     $("#popLayer").hide();
     $("#msg-pop").hide()
@@ -34,6 +37,24 @@ $(function() {
   })
 })
 
+function getPathUrl() {
+  $.get('http://192.199.198.134:8005/ryservice/load_ry_app_list?token=NhGLmIwVe1l5%2FsS3VzM0ANyaV%2FnGAOmowD9Ac%2FfcnKiznWUJD%2Fxh5HpnYuDXwqyOZjQEyG20KO%2F5JH4seZVyvLXJOblussBySOplc0QvX2moZsUf8sOhFX7TQE1glDCzEym1AmVK8pSbIzL%2Fiu8mTHcj5XU1ekZN%2F717viDWB80%3D', function(res) {
+    if (!res) return
+    var _appList = res.AppList
+    var _Holter = []
+    _Holter = _.filter(_appList, function(o) {
+      return o.AppDescription === 'Holter'
+    })
+
+    if (_Holter.length > 0 && _Holter[0].URL.length > 0) {
+      AnalyticalDiagnosisPath = _Holter[0].URL
+      console.log(AnalyticalDiagnosisPath)
+    } else {
+      console.log('a')
+    }
+  })
+}
+
 function currentPath() {
   var _href = window.location.href
   if (_href.indexOf('app') > -1) {
@@ -54,17 +75,17 @@ function jump(a) {
     switch ($(a).attr('id')) {
       case 'app':
         //  代码块
-        window.open('/Saas/single/app.html', '_self')
+        window.open('/single/app.html', '_self')
         break;
       case 'analysis':
-        window.open('/Saas/single/analysis.html', '_blank')
+        window.open('/single/analysis.html', '_blank')
         break;
       case 'book':
         //  代码块
         if (AnalyticalDiagnosisPath && AnalyticalDiagnosisPath.length > 0) {
           window.open(AnalyticalDiagnosisPath, '_self')
         } else {
-          window.open('/Saas/single/book.html', '_self')
+          window.open('/single/book.html', '_self')
         }
         break;
       default:
@@ -154,9 +175,11 @@ function uploadFile(file) {
   disableFileUpload()
   var formData = new FormData();
   formData.append('file', file)
+
+  console.log(formData)
   $.ajax({
     type: "post",
-    url: '/license/import_lic',
+    url: 'http://192.199.198.134:8005/book/import_lic',
     data: formData,
     dataType: "json",
     processData: false,
@@ -269,4 +292,28 @@ function getPopMsg() {
       return false;
     }
   });
+}
+
+// 点击分析诊断
+function analysisInterval() {
+  var localStorage = window.localStorage
+  var _t = 0
+  if (localStorage.getItem('clickAnalysisTime')) {
+    _t = compareTime()
+    localStorage.setItem('clickAnalysisTime', moment().format("YYYY-MM-DD HH:mm:ss"))
+  } else {
+    var clickAnalysisTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    localStorage.setItem('clickAnalysisTime', clickAnalysisTime)
+  }
+
+  console.log(_t)
+  return _t
+}
+
+// 比较时间
+function compareTime() {
+  var clickAnalysisTime = localStorage.getItem('clickAnalysisTime')
+  var currentTime = moment().format("YYYY-MM-DD HH:mm:ss");
+  let diffTime = moment(currentTime).diff(clickAnalysisTime);
+  return diffTime / 1000 // 单位秒
 }

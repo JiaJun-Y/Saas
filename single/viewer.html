@@ -20,12 +20,6 @@
     <!-- 顶部导航条 -->
     <div id="topNav">
       <div class='top-nav'>
-        <!-- <div class='time'>
-          <div class='img-box'>
-            <img src='./images/calendar.png' />
-          </div>
-          <div id='time'></div>
-        </div> -->
         <div class="header-box">
           <img src="./images/header-title.png" alt="">
         </div>
@@ -187,6 +181,7 @@
                 <img src="./images/bar-print.png" alt="">
                 <span>打印</span>
               </div>
+
 
               <div class="bar-pint-line"></div>
 
@@ -445,10 +440,58 @@
   </div>
   <!-- outerContainer -->
   <div id="printContainer"></div>
+
+  <div id="menu">
+    <div id="printId">
+      打印
+    </div>
+  </div>
 </body>
 
 <script src="./common/js/viewer/viewer.js"></script>
 <script>
+  function bindMouseEvent(el) {
+    var args = [].slice.call(arguments),
+      el = el || document;
+    args[0] = function() {},
+      args[1] = args[1] || args[0],
+      args[2] = args[2] || args[0],
+      args[3] = args[3] || args[0],
+      el.onmousedown = function(e) {
+        e = e || window.event;
+        var button = e.button;
+        if (!e.which && isFinite(button)) {
+          e.which = [0, 1, 3, 0, 2, 0, 0, 0][button];
+        }
+        args[e.which](e);
+      }
+  }
+
+  var el = document.getElementById("outerContainer");
+  var menu = document.getElementById("menu");
+
+  var left = function() {
+    menu.style.display = 'none';
+  }
+
+  var middle = function() {
+    menu.style.display = 'none';
+  }
+
+  var right = function(ev) {
+    var ev = ev || event;
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    menu.style.left = ev.clientX + scrollTop + 'px';
+    menu.style.top = ev.clientY + scrollTop + 'px';
+    menu.style.display = 'block';
+  }
+
+  bindMouseEvent(el, left, middle, right);
+
+  document.oncontextmenu = function(ev) {
+    return false
+  }
+
   function goBack() {
     $(window.parent.document).find('#PDF').hide()
   }

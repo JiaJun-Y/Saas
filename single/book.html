@@ -204,123 +204,126 @@
 
   <div class="order-content" id="noPrint">
     <!-- 筛选框部分 -->
-    <div class="adorn">
-      <div class="time">
-        <div id="time"></div>
+    <div class="top-box-wapper">
+      <div class="adorn">
+        <div class="time">
+          <div id="time"></div>
+        </div>
+        <div class="adorn-content">
+          <div class="adorn-item">
+            <p data-index="1">今日已登记</p>
+            <i>0人</i>
+          </div>
+          <div class="adorn-item">
+            <p data-index="3">今日已戴机</p>
+            <i>0人</i>
+          </div>
+          <div class="adorn-item">
+            <p data-index="5">昨日已戴机</p>
+            <i>0人</i>
+          </div>
+          <div class="adorn-item">
+            <p data-index="7">今日未录入</p>
+            <i>0人</i>
+          </div>
+
+          <div class="adorn-item">
+            <p data-index="2">今日应戴机</p>
+            <i>0人</i>
+          </div>
+          <div class="adorn-item">
+            <p data-index="4">今日未戴机</p>
+            <i>0人</i>
+          </div>
+          <div class="adorn-item">
+            <p data-index="6">今日已录入</p>
+            <i>0人</i>
+          </div>
+          <div class="adorn-item">
+            <p data-index="8">今日已分析</p>
+            <i>0人</i>
+          </div>
+        </div>
       </div>
-      <div class="adorn-content">
-        <div class="adorn-item">
-          <p data-index="1">今日已登记</p>
-          <i>0人</i>
-        </div>
-        <div class="adorn-item">
-          <p data-index="3">今日已戴机</p>
-          <i>0人</i>
-        </div>
-        <div class="adorn-item">
-          <p data-index="5">昨日已戴机</p>
-          <i>0人</i>
-        </div>
-        <div class="adorn-item">
-          <p data-index="7">今日未录入</p>
-          <i>0人</i>
+
+      <div class="search-wapper">
+        <!-- input -->
+        <div class="search-top-wapper base-info">
+          <p><span>检查号</span><input type="text" id="StudyID" /></p>
+          <p><span>申请号</span><input type="text" id="applyNumber" /></p>
+          <div class="time-input">
+            <span style="margin-right: 13px;">检查时间</span>
+            <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+              <input type="text" autocomplete="off" name="check-start-time" class="c-datepicker-data-input only-date" value="">
+            </div>
+            <span class="time-margin">~</span>
+            <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+              <input type="text" autocomplete="off" name="check-end-time" class="c-datepicker-data-input only-date" value="">
+            </div>
+          </div>
+          <p><span>姓<span style="visibility: hidden;">占</span>名</span><input type="text" id="Name" /></p>
+          <p>
+            <span>状<span style="visibility: hidden;">占</span>态</span>
+            <select name="status" id="Status">
+              <option value="0">不限</option>
+              <option value="1">已预约</option>
+              <option value="2">已佩戴</option>
+              <option value="3">已录入</option>
+              <option value="4">已审核</option>
+              <option value="5">已打印</option>
+          </select>
+          </p>
+          <div class="time-input">
+            <span style="margin-right: 13px;">戴机时间</span>
+            <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+              <input type="text" autocomplete="off" name="wear-start-time" class="c-datepicker-data-input only-date" value="">
+            </div>
+            <span class="time-margin">~</span>
+            <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+              <input type="text" autocomplete="off" name="wear-end-time" class="c-datepicker-data-input only-date" value="">
+            </div>
+          </div>
         </div>
 
-        <div class="adorn-item">
-          <p data-index="2">今日应戴机</p>
-          <i>0人</i>
+        <!-- select -->
+        <div class="select-date">
+          <div class="record-date">
+            <span>登记日期：</span>
+            <input type="radio" name="date" value="1" /><i class="m-r-18">今天</i>
+            <input type="radio" name="date" value="2" /><i class="m-r-18">昨天</i>
+            <input type="radio" name="date" value="3" /><i>前天</i>
+          </div>
+
+          <div class="examine">
+            <span>检查待机：</span>
+            <input type="radio" name="date" value="4" /><i class="m-r-18">今天</i>
+            <input type="radio" name="date" value="5" /><i class="m-r-18">昨天</i>
+            <input type="radio" name="date" value="6" /><i>明天</i>
+          </div>
         </div>
-        <div class="adorn-item">
-          <p data-index="4">今日未戴机</p>
-          <i>0人</i>
-        </div>
-        <div class="adorn-item">
-          <p data-index="6">今日已录入</p>
-          <i>0人</i>
-        </div>
-        <div class="adorn-item">
-          <p data-index="8">今日已分析</p>
-          <i>0人</i>
+
+        <!-- search\reset...button -->
+        <div class="search-buttons">
+          <div class="img-box search" onclick="handleSearch()">
+            <img src="./images/order-search.png" alt="">
+            <span>查询</span>
+          </div>
+
+          <div class="img-box reset" onclick="handleReset(true)">
+            <img src="./images/order-reset.png" alt="">
+            <span>重置</span>
+          </div>
+
+          <div class="check-in " onclick="checkD()">
+            <div class="img-box">
+              <img src="./images/search-import.png" alt="">
+              <span>登记</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="search-wapper">
-      <!-- input -->
-      <div class="search-top-wapper base-info">
-        <p><span>检查号</span><input type="text" id="StudyID" /></p>
-        <p><span>申请号</span><input type="text" id="applyNumber" /></p>
-        <div class="time-input">
-          <span style="margin-right: 13px;">检查时间</span>
-          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
-            <input type="text" autocomplete="off" name="check-start-time" class="c-datepicker-data-input only-date" value="">
-          </div>
-          <span class="time-margin">~</span>
-          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
-            <input type="text" autocomplete="off" name="check-end-time" class="c-datepicker-data-input only-date" value="">
-          </div>
-        </div>
-        <p><span>姓<span style="visibility: hidden;">占</span>名</span><input type="text" id="Name" /></p>
-        <p>
-          <span>状<span style="visibility: hidden;">占</span>态</span>
-          <select name="status" id="Status">
-            <option value="0">不限</option>
-            <option value="1">已预约</option>
-            <option value="2">已佩戴</option>
-            <option value="3">已录入</option>
-            <option value="4">已审核</option>
-            <option value="5">已打印</option>
-        </select>
-        </p>
-        <div class="time-input">
-          <span style="margin-right: 13px;">戴机时间</span>
-          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
-            <input type="text" autocomplete="off" name="wear-start-time" class="c-datepicker-data-input only-date" value="">
-          </div>
-          <span class="time-margin">~</span>
-          <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
-            <input type="text" autocomplete="off" name="wear-end-time" class="c-datepicker-data-input only-date" value="">
-          </div>
-        </div>
-      </div>
-
-      <!-- select -->
-      <div class="select-date">
-        <div class="record-date">
-          <span>登记日期：</span>
-          <input type="radio" name="date" value="1" /><i class="m-r-18">今天</i>
-          <input type="radio" name="date" value="2" /><i class="m-r-18">昨天</i>
-          <input type="radio" name="date" value="3" /><i>前天</i>
-        </div>
-
-        <div class="examine">
-          <span>检查待机：</span>
-          <input type="radio" name="date" value="4" /><i class="m-r-18">今天</i>
-          <input type="radio" name="date" value="5" /><i class="m-r-18">昨天</i>
-          <input type="radio" name="date" value="6" /><i>明天</i>
-        </div>
-      </div>
-
-      <!-- search\reset...button -->
-      <div class="search-buttons">
-        <div class="img-box search" onclick="handleSearch()">
-          <img src="./images/order-search.png" alt="">
-          <span>查询</span>
-        </div>
-
-        <div class="img-box reset" onclick="handleReset(true)">
-          <img src="./images/order-reset.png" alt="">
-          <span>重置</span>
-        </div>
-
-        <div class="check-in " onclick="checkD()">
-          <div class="img-box">
-            <img src="./images/search-import.png" alt="">
-            <span>检查登记</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- 表格 -->
 
@@ -757,7 +760,7 @@
 </body>
 <script src="./common/js/moment.min.js"></script>
 <script src="./common/js/datepicker.all.js"></script>
-<script src="./common/js/datepicker.en.js"></script>
+<!-- <script src="./common/js/datepicker.en.js"></script> -->
 <script src="./common/js/utils.js"></script>
 <script src="./common/js/layer/layer.js"></script>
 <script src="./common/js/clipboard.min.js"></script>
@@ -935,7 +938,7 @@
       $('.readonly-left-box').scrollTop(0)
     })
 
-    getTableList(1, true) // 获取表格数据
+    // getTableList(1, true) // 获取表格数据
 
     // getUntreatedCount() // 获取未分析病例数
 
@@ -974,82 +977,82 @@
     $('.base-info select').val(0).trigger('change');
     // 519结束
 
-    // goPage(1, 15, 68, 5)
+    goPage(1, 15, 68, 5)
 
-    // $("#table").reponsetable({
-    //   "id": "table",
-    //   "operation": "editer",
-    //   "type": "numbers",
-    //   "colum": [{
-    //     "field": "Name",
-    //     "title": "姓名"
-    //   }, {
-    //     "field": "Age",
-    //     "title": "年龄"
-    //   }, {
-    //     "field": "Gender",
-    //     "title": "性别"
-    //   }, {
-    //     "field": "RUID",
-    //     "title": "预约号"
-    //   }, {
-    //     "field": "Phone",
-    //     "title": "手机"
-    //   }, {
-    //     "field": "CreateTime",
-    //     "title": "预约时间"
-    //   }, {
-    //     "field": "WearTime",
-    //     "title": "戴机时间"
-    //   }, {
-    //     "field": "DevID",
-    //     "title": "设备编号"
-    //   }, {
-    //     "field": "cash",
-    //     "title": "担保方式"
-    //   }, {
-    //     "field": "Status",
-    //     "title": "状态"
-    //   }, {
-    //     "field": "Info",
-    //     "title": "备注"
-    //   }, {
-    //     "field": "ID"
-    //   }, {
-    //     "field": "ReqID"
-    //   }, {
-    //     "field": "PID"
-    //   }, {
-    //     "field": "WardID"
-    //   }, {
-    //     "field": "InHospitalID"
-    //   }, {
-    //     "field": "IDCard"
-    //   }, {
-    //     "field": "ReqDepartment"
-    //   }, {
-    //     "field": "ReqDoctorPhone"
-    //   }, {
-    //     "field": "Symptom"
-    //   }, {
-    //     "field": "TreatMethod"
-    //   }, {
-    //     "field": "PM"
-    //   }],
-    //   "data": data()
-    // });
-    // tableStatus()
-    // setTimeout(function() {
-    //   initDropDown()
+    $("#table").reponsetable({
+      "id": "table",
+      "operation": "editer",
+      "type": "numbers",
+      "colum": [{
+        "field": "Name",
+        "title": "姓名"
+      }, {
+        "field": "Age",
+        "title": "年龄"
+      }, {
+        "field": "Gender",
+        "title": "性别"
+      }, {
+        "field": "RUID",
+        "title": "预约号"
+      }, {
+        "field": "Phone",
+        "title": "手机"
+      }, {
+        "field": "CreateTime",
+        "title": "预约时间"
+      }, {
+        "field": "WearTime",
+        "title": "戴机时间"
+      }, {
+        "field": "DevID",
+        "title": "设备编号"
+      }, {
+        "field": "cash",
+        "title": "担保方式"
+      }, {
+        "field": "Status",
+        "title": "状态"
+      }, {
+        "field": "Info",
+        "title": "备注"
+      }, {
+        "field": "ID"
+      }, {
+        "field": "ReqID"
+      }, {
+        "field": "PID"
+      }, {
+        "field": "WardID"
+      }, {
+        "field": "InHospitalID"
+      }, {
+        "field": "IDCard"
+      }, {
+        "field": "ReqDepartment"
+      }, {
+        "field": "ReqDoctorPhone"
+      }, {
+        "field": "Symptom"
+      }, {
+        "field": "TreatMethod"
+      }, {
+        "field": "PM"
+      }],
+      "data": data()
+    });
+    tableStatus()
+    setTimeout(function() {
+      initDropDown()
 
-    //   $("tbody").scrollTop(1);
-    //   if ($("tbody").scrollTop() > 0) {
-    //     console.log("有滚动条");
-    //     $('#page table thead').css('width', 'calc(100% - 5px)')
-    //   } else {
-    //     console.log("没有滚动条");
-    //   }
-    // }, 100)
+      $("tbody").scrollTop(1);
+      if ($("tbody").scrollTop() > 0) {
+        console.log("有滚动条");
+        $('#page table thead').css('width', 'calc(100% - 5px)')
+      } else {
+        console.log("没有滚动条");
+      }
+    }, 100)
   })
 
   // 表格操作判断   521 tag
@@ -1156,10 +1159,10 @@
 
 
   function goPage(pno, psize, count, totalPage, isOnce) {
-    if (!isOnce) {
-      tableParams.pg = pno
-      getTableList(pno, false, tableParams)
-    }
+    // if (!isOnce) {
+    //   tableParams.pg = pno
+    //   getTableList(pno, false, tableParams)
+    // }
 
     var num = count; // 表格所有行数(所有记录数)
     var totalPage = totalPage; // 总页数
@@ -1184,10 +1187,10 @@
   // 获取table数据
   function getTableList(page, isOnce, params) {
     // 第二次之后移除table
-    if (!isOnce) {
-      $("#table").children('thead').first().remove()
-      $("#table").children('tbody').first().remove()
-    }
+    // if (!isOnce) {
+    //   $("#table").children('thead').first().remove()
+    //   $("#table").children('tbody').first().remove()
+    // }
 
     showLoading()
 
@@ -1747,7 +1750,7 @@
     $('#PDF').show()
     $('#PDF').css('overflow', 'hidden')
     var _localPath = 'http://127.0.0.1:5500/single/viewer.html'
-    var _getPdfPath = encodeURIComponent('http://192.199.198.149:8005/file/getReport?ExamUID=2006111142226866')
+    var _getPdfPath = encodeURIComponent('http://192.199.198.136:8005/file/getReport?ExamUID=2007141818052545')
     var url = _localPath + '?file=' + _getPdfPath
     $('#PDF').append('<iframe src="' + url + '" frameborder="0" width="100%" height="100%"></iframe>')
   }

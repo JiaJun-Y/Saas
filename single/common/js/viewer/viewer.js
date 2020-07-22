@@ -195,6 +195,7 @@
           viewFind: document.getElementById('viewFind'),
           openFile: document.getElementById('openFile'),
           print: document.getElementById('print'),
+          outerPrint: document.getElementById('printId'),
           presentationModeButton: document.getElementById('presentationMode'),
           download: document.getElementById('download'),
           viewBookmark: document.getElementById('viewBookmark')
@@ -1721,7 +1722,8 @@
         eventBus.on('presentationmode', webViewerPresentationMode);
         eventBus.on('openfile', webViewerOpenFile);
         eventBus.on('print', webViewerPrint);
-        eventBus.on('download', webViewerDownload);
+        eventBus.on('outerPrint', webViewerPrint),
+          eventBus.on('download', webViewerDownload);
         eventBus.on('firstpage', webViewerFirstPage);
         eventBus.on('lastpage', webViewerLastPage);
         eventBus.on('nextpage', webViewerNextPage);
@@ -1804,6 +1806,7 @@
         eventBus.off('presentationmode', webViewerPresentationMode);
         eventBus.off('openfile', webViewerOpenFile);
         eventBus.off('print', webViewerPrint);
+        eventBus.off('outerPrint', webViewerPrint);
         eventBus.off('download', webViewerDownload);
         eventBus.off('firstpage', webViewerFirstPage);
         eventBus.off('lastpage', webViewerLastPage);
@@ -13823,6 +13826,12 @@
             });
             items.openFile.addEventListener('click', function() {
               eventBus.dispatch('openfile', {
+                source: self
+              });
+            });
+            items.outerPrint.addEventListener('click', function() {
+              $('#menu').hide();
+              eventBus.dispatch('print', {
                 source: self
               });
             });

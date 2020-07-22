@@ -2580,3 +2580,18 @@ screen and (min-resolution: 1.1dppx) {
     display: none;
   }
 }
+
+#menu {
+  display: none;
+  position: absolute;
+  color: #000;
+  background: rgb(243, 243, 243);
+  cursor: pointer;
+  width: 300px;
+  padding: 10px 0px;
+}
+
+#menu div {
+  padding: 6px 25px;
+  width: 100%;
+}

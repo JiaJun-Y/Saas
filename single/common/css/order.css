@@ -17,11 +17,16 @@
   background: #f5f5f5;
 }
 
+.top-box-wapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 /* 左1 */
 
 .adorn {
-  width: 894px;
+  width: 98%;
   height: 208px;
   border: 1px solid rgb(214, 214, 214);
   float: left;
@@ -29,6 +34,7 @@
   cursor: pointer;
   border-radius: 5px;
   box-shadow: -2px 1px 12px 0px rgba(0, 0, 0, 0.3);
+  margin-right: 2%;
 }
 
 .adorn .time {
@@ -47,16 +53,15 @@
 .adorn .adorn-content {
   width: 100%;
   height: calc(100% - 52px);
-  padding: 7px 10px 37px 56px;
+  padding: 10px 30px 10px 60px;
   background: #fff;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
 .adorn-content .adorn-item {
-  width: 158px;
+  width: 25%;
   height: 34px;
-  margin-right: 42px;
   margin-top: 26px;
   float: left;
 }
@@ -68,7 +73,7 @@
   text-align: center;
   border: 1px solid rgb(198, 204, 202);
   font-size: 18px;
-  margin-right: 15px;
+  margin-right: -1px;
   display: inline-block;
 }
 
@@ -90,7 +95,7 @@
 /* 右1 */
 
 .search-wapper {
-  width: 870px;
+  width: 100%;
   height: 208px;
   float: right;
 }
@@ -99,43 +104,51 @@
   width: 100%;
   height: 128px;
   border: 1px solid rgb(199, 199, 199);
-  /* padding: 19px 9px 33px 54px; */
   padding: 15px 5px;
   background: #fff;
   border-radius: 5px;
   box-shadow: -2px 1px 12px 0px rgba(0, 0, 0, 0.3);
+  padding-left: 4%;
 }
 
-.search-wapper .search-top-wapper .time-input,
 .search-wapper .search-top-wapper p {
   font-size: 18px;
   height: 22px;
   line-height: 22px;
   margin-top: 18px;
-  margin-left: 30px;
   float: left;
+  width: 30%;
+}
+
+.search-wapper .search-top-wapper .time-input {
+  font-size: 18px;
+  height: 22px;
+  line-height: 22px;
+  margin-top: 18px;
+  float: left;
+  width: 40%;
 }
 
 .search-wapper .search-top-wapper p input {
-  width: 162px;
+  width: 152px;
   height: 100%;
   background: rgb(221, 221, 221);
   padding-left: 15px;
-  margin-left: 13px;
+  margin-left: 3px;
 }
 
 .search-wapper .search-top-wapper p select {
   background: rgb(221, 221, 221);
   border: 1px solid rgb(221, 221, 221);
-  margin-left: 10px;
-  width: 162px;
+  margin-left: 1px;
+  width: 149px;
   border-radius: 0px;
   outline: none;
   height: 22px;
 }
 
 .search-wapper .select-date {
-  /* width: 600px; */
+  width: 72%;
   height: 58px;
   line-height: 58px;
   border: 1px solid rgb(199, 199, 199);
@@ -143,18 +156,19 @@
   font-size: 14px;
   float: left;
   background: #fff;
-  padding-right: 15px;
   border-radius: 5px;
   box-shadow: -2px 1px 12px 0px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-around;
 }
 
 .search-wapper .search-buttons {
-  width: 240px;
+  width: 27%;
   height: 58px;
   line-height: 58px;
   border: 1px solid rgb(199, 199, 199);
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 16px;
   float: right;
   background: #fff;
   border-radius: 5px;
@@ -170,7 +184,7 @@
 
 .search-wapper .select-date .record-date {
   float: left;
-  margin-left: 17px;
+  /* margin-left: 17px; */
 }
 
 .search-wapper .select-date .examine input,
@@ -192,21 +206,21 @@
 
 .search-wapper .select-date .examine {
   float: left;
-  margin-left: 27px;
   font-size: 18px;
+  margin-left: 3%;
 }
 
 .search-wapper .search-buttons .reset,
 .search-wapper .search-buttons .search {
-  /* width: 50px; */
-  margin-left: 10px;
   float: left;
   cursor: pointer;
   overflow: hidden;
+  width: 25%;
+  margin-left: 7%;
 }
 
 .search-wapper .search-buttons .reset {
-  margin: 0px 10px;
+  margin: 0px 5%;
 }
 
 .search-wapper .search-buttons .img-box img {
@@ -227,7 +241,7 @@
 
 .m-r-18 {
   display: inline-block;
-  margin-right: 11px;
+  /* margin-right: 11px; */
 }
 
 .m-r-10 {

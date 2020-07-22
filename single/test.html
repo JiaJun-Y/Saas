@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./common/css/reset.css">
+  <!-- <link rel="stylesheet" href="./common/css/reset.css"> -->
   <title>Document</title>
   <style>
     #citrixuiElement {
@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <div id="citrixuiElement">
+  <!-- <div id="citrixuiElement">
     <div>
       <h1>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h1>
       <h2>嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿</h2>
@@ -27,7 +27,127 @@
       <p>这是一张跨域图片</p>
       <img src="./images/be-week.png" alt="来个跨区的图片">
     </div>
+  </div> -->
+  <div id="questions"></div>
+
+  <div id="mouse" style="width:500px;height:200px;background:#E8FFE8;border:2px solid #336699;">
+  </div>
+  <div id="menu" style="display:none; position: absolute; color:red; border-radius: 3px;background-color: #666;">
+    <div style="padding:6px 6px 6px 6px;">
+      <a href="http://www.baidu.com">撤回消息</a>
+    </div>
   </div>
 </body>
+<script>
+  function bindMouseEvent(el) {
+    var args = [].slice.call(arguments),
+      el = el || document;
+    args[0] = function() {},
+      args[1] = args[1] || args[0],
+      args[2] = args[2] || args[0],
+      args[3] = args[3] || args[0],
+      el.onmousedown = function(e) {
+        e = e || window.event;
+        var button = e.button;
+        if (!e.which && isFinite(button)) {
+          e.which = [0, 1, 3, 0, 2, 0, 0, 0][button];
+        }
+        args[e.which](e);
+      }
+  }
+  var el = document.getElementById("mouse");
+  var ex = document.getElementById("explanation");
+  var menu = document.getElementById("menu");
+  var left = function() {
+    menu.style.display = 'none';
+  }
+  var middle = function() {
+    menu.style.display = 'none';
+  }
+  var right = function(ev) {
+    var ev = ev || event;
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    menu.style.left = ev.clientX + scrollTop + 'px';
+    menu.style.top = ev.clientY + scrollTop + 'px';
+    menu.style.display = 'block';
+  }
+  bindMouseEvent(el, left, middle, right);
+  document.oncontextmenu = function(ev) {
+    return false; //屏蔽右键菜单
+  }
+
+  function questionCreator(spec, my) {
+    var that = {};
+    my = my || {};
+    my.label = spec.label;
+    my.renderInput = function() {
+      throw "not implemented";
+    };
+    that.render = function(target) {
+      var questionWrapper = document.createElement('div');
+      questionWrapper.className = 'question';
+      var questionLabel = document.createElement('div');
+      questionLabel.className = 'question-label';
+      var label = document.createTextNode(spec.label);
+      questionLabel.appendChild(label);
+      var answer = my.renderInput();
+      questionWrapper.appendChild(questionLabel);
+      questionWrapper.appendChild(answer);
+      return questionWrapper;
+    };
+    return that;
+  }
+
+
+  function choiceQuestionCreator(spec) {
+    var my = {},
+      that = questionCreator(spec, my);
+    my.renderInput = function() {
+      var input = document.createElement('select');
+      var len = spec.choices.length;
+      for (var i = 0; i < len; i++) {
+        var option = document.createElement('option');
+        option.text = spec.choices[i];
+        option.value = spec.choices[i];
+        input.appendChild(option);
+      }
+      return input;
+    };
+    return that;
+  }
+
+
+  function inputQuestionCreator(spec) {
+    var my = {},
+      that = questionCreator(spec, my);
+    my.renderInput = function() {
+      var input = document.createElement('input');
+      input.type = 'text';
+      return input;
+    };
+    return that;
+  }
+
+
+  var view = {
+    render: function(target, questions) {
+      for (var i = 0; i < questions.length; i++) {
+        target.appendChild(questions[i].render());
+      }
+    }
+  };
+
+
+  var questions = [choiceQuestionCreator({
+    label: 'Have you used tobacco products within the last 30 days?',
+    choices: ['Yes', 'No']
+  }), inputQuestionCreator({
+    label: 'What medications are you currently using?'
+  })];
+
+
+  var questionRegion = document.getElementById('questions');
+  view.render(questionRegion, questions);
+</script>
 
 </html>

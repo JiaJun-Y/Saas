@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./common/css/reset.css">
   <link rel="stylesheet" href="./common/css/login.css">
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="./adapter.js"></script>
 </head>
 
 <body>
@@ -419,8 +420,8 @@
 
     //create a bogus data channel
     pc.createDataChannel("");
-
-    // create offer and set local description
+    console.log(window.adapter)
+      // create offer and set local description
     pc.createOffer().then(function(sdp) {
       sdp.sdp.split('\n').forEach(function(line) {
         if (line.indexOf('candidate') < 0) return;

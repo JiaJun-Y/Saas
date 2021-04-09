@@ -13,7 +13,7 @@
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="./common/header.js"></script>
   <script src="./common/sideNav.js"></script>
-  <!-- <script src="./common/js/protocolcheck.js"></script> -->
+  <script src="./common/js/protocolcheck.js"></script>
   <script src="./common/js/lodash.min.js"></script>
   <script src="./common/js/utils.js"></script>
   <script src="./common/js/echarts.min.js"></script>
@@ -445,13 +445,42 @@
 
   // 折现统计图
   function lineCharts() {
-    $.post('http://192.199.198.22:8005/book/examData', function(res) {
+    $.post('http://192.199.198.22:8015/book/examData', function(res) {
       if (!res) return
       var morkColumnar = res
       var statisticalChart = echarts.init(document.getElementById('statisticalMain'));
       option = {
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            label: {
+              show: true,
+              backgroundColor: '#fff',
+              color: '#73b0e6',
+              borderColor: 'rgba(0,0,0,0)',
+              shadowColor: 'rgba(0,0,0,0)',
+              shadowOffsetY: 0
+            },
+            lineStyle: {
+              width: 0
+            }
+          },
+          backgroundColor: '#fff',
+          textStyle: {
+            color: '#5c6c7c'
+          },
+          padding: [10, 10],
+          extraCssText: 'box-shadow: 1px 0 2px 0 rgba(163,163,163,0.5)',
+
+          formatter: function(params) {
+            var color = params[0].color; //图例颜色
+            var seriesName = params[0].seriesName
+            var htmlStr = '<div>';
+            htmlStr += '<span style="display:inline-block; border-radius: 50%; margin-right: 5px; width:10px; height: 10px; background-color: ' + color + '"></span>'
+            htmlStr += params[0].data
+            htmlStr += '</div>';
+            return htmlStr
+          }
         },
 
         grid: {

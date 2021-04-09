@@ -44,6 +44,7 @@
   width: 32px;
   height: 32px;
   float: left;
+  border: none;
 }
 
 .cropper-tool .img-box:first-child {

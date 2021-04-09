@@ -495,7 +495,7 @@
 }
 
 #pageBottom {
-  width: 820px;
+  width: 100%;
   height: 69px;
   position: absolute;
   right: 20px;
@@ -506,6 +506,7 @@
   line-height: 72px;
   cursor: pointer;
   font-size: 14px;
+  margin-left: 35%;
 }
 
 .bottom-config .img-box {

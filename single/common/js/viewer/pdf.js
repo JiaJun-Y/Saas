@@ -18858,6 +18858,7 @@
             _createClass(PDFDataTransportStream, [{
               key: "_onReceiveData",
               value: function _onReceiveData(args) {
+                console.log(args)
                 var buffer = new Uint8Array(args.chunk).buffer;
 
                 if (args.begin === undefined) {
